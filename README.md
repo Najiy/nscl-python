@@ -1,11 +1,14 @@
 Motivational scenario
+
 Contribution
 
 Input to Spiketrain Encoding (Input datatype transformations):
+
     1. Booleans values to spiketrains
     2. Integers and Floating values to class-range spiketrains (k-ranges encoding)
 
 Follow algorithm process flow:
+
     1. Structural - Generate inputs 🗸
     2. Feedinputs 🗸
     3. Propagate (update potentials t+=1)
@@ -18,10 +21,12 @@ Follow algorithm process flow:
 SaveStates and ResumeStates 🗸
 
 Evluation:
+
     1. Running times
     2. O-Complexity
 
 Hyperparameters:
+
     1. neurone potential decay coefficient (G1)
         0.8 if len(n.fsynapses) == 0 else 0.5 + 1 / len(n.fsynapses) * 0.4
     2. neurone activation threshold (G2)
@@ -29,13 +34,13 @@ Hyperparameters:
     3. on-new-neurone potential reduction coefficient for pre-neurones (G3)
         neurones[a].potential *= 0.5
     4. generate neurones with full potential (G4)
-        
     5. reinforce formula (G5)
         wgt += (1 - wgt) * 0.5
     6. max propagation heirarchy (G6)
         for l in range(6):
 
 Parallel Compute:
+
     1. Parallel potentials decay (taus)
     2. Parallel decay
     3. Compare heatmaps (results determines the approach to manifolds)
