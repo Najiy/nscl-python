@@ -1,0 +1,34 @@
+Neurones:
+    (str) name
+    (int) counter
+    (float) potential
+    (synapse) fsynapses
+    (synapse) rsynapses
+    (int) lastspike
+    (int) occurs
+    (array<int>) heirarcs
+
+Synapses:
+    (str) fref
+    (str) rref
+    (float) wgt
+    (int) counter
+    (int) lastspike
+
+Network:
+    (dict) neurones
+    (dict) synapses
+    (dict) params
+
+
+Predictor:
+    static
+    static_threshold
+    temporal
+    temporal_threshold
+
+
+
+https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#get-started-get-esp-idf
+https://www.studiopieters.nl/esp-homekit-sdk-revised-installation/
+https://github.com/UncleRus/esp-idf-lib
