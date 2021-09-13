@@ -52,11 +52,11 @@ Forward and Backwards Prediction:
     3. conditional pathway limiter for SP and TP
     4. descriptive (explainable-ai) sequences into words
 
-Temporal Manifolds: 
-    Paper 3
 
 
 BFS CRF BNet
 
-Chapter on Joint Probability Distribution
-Chapter on Temporally-induced Context
+Chapters:
+    
+    1. Joint Probability Distribution
+    2. Temporally-induced Context
