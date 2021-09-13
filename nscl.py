@@ -29,7 +29,7 @@ class NSCL:
         "DecayCoefficient": [0.2],
     }
 
-    class SNeurone:
+    class NSymbol:
         def __init__(self, name, counter=0, potential=0, lastspike="") -> None:
             self.name = name
             self.counter = counter
@@ -91,6 +91,12 @@ class NSCL:
             self.ncounts = []
             self.nmask = []
             self.tick = 0
+
+        def clear_traces(self) -> None:
+            self.traces = []
+            self.ntime = []
+            self.ncounts = []
+            self.nmask = []
 
         def params(self) -> dict:
             return self.network.params
@@ -197,7 +203,7 @@ class NSCL:
                 )
 
             # tt = str(datetime.now().replace(microsecond=0)).replace(":", "_")
-            rpath = r"states%s%s" % (pathdiv,fname)
+            rpath = r"states%s%s" % (pathdiv, fname)
 
             if not os.path.exists("states"):
                 os.mkdir("states")
@@ -306,3 +312,30 @@ class NSCL:
 
         def set_tick(self, tick):
             self.tick = tick
+
+        def potsyns(eng):
+            now = str(datetime.now().replace(microsecond=0)).replace(":", "_")
+            synapses = eng.network.synapses
+            neurones = eng.network.neurones
+            # inp_neurones = eng.ineurones()
+
+            ns = [n for n in neurones.values()]
+            ns.sort(reverse=True, key=lambda n: n.level)
+
+            print(f"\nPotSyn() at {now}")
+            print("Nsymbols Potentials:")
+
+            for n in ns:
+                print(
+                    f"  {n.name:^20}   pot: {n.potential: .4f}   lvl: {n.level: ^4}   occ: {n.occurs}   fsyn: {len(n.fsynapses)}   rsyn: {len(n.rsynapses)}"
+                )
+
+            syn = [s for s in synapses.values()]
+            syn.sort(reverse=True, key=lambda s : s.wgt)
+
+            print("Synapses Weightings:")
+
+            for s in syn:
+                print(
+                    f"  {s.name():^20}   wgt: {s.wgt}   cnt: {s.counter}   lspk: {s.lastspike}"
+                )

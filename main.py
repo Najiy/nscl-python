@@ -2,6 +2,8 @@
 
 from datetime import date, datetime
 from inspect import trace
+# from nscl_algo import NSCLAlgo
+# from nscl_algo import NSCLAlgo
 
 # from nscl_algo import NSCLAlgo
 import pprint
@@ -65,18 +67,17 @@ def flatten(traces) -> list:
 
 
 def heatmap(
-        result_path,
-        traces,
-        neurones,
-        figsize=(24, 12),
-        save=False,
-        ax=None,
-        theme="viridis",
+    result_path,
+    traces,
+    neurones,
+    figsize=(24, 12),
+    save=False,
+    ax=None,
+    theme="viridis",
 ):
     print(" -heatplot")
 
-    my_colors = [(0.2, 0.3, 0.3), (0.4, 0.5, 0.4), (0.1, 0.7, 0),
-                 (0.1, 0.7, 0)]
+    my_colors = [(0.2, 0.3, 0.3), (0.4, 0.5, 0.4), (0.1, 0.7, 0), (0.1, 0.7, 0)]
 
     tlength = len(traces)
     arr_t = np.array(traces).T
@@ -119,21 +120,16 @@ def heatmap(
     return heatplot
 
 
-def lineplot(result_path,
-             data_plot,
-             figsize=(15, 8),
-             save=False,
-             ax=None,
-             theme="flare"):
+def lineplot(
+    result_path, data_plot, figsize=(15, 8), save=False, ax=None, theme="flare"
+):
     print(" -lineplot")
     if save == True:
         plt.figure(figsize=figsize)
 
-    lplot = sns.lineplot(x="time",
-                         y="ncounts",
-                         data=data_plot,
-                         hue="ntype",
-                         ax=ax)  # , palette=theme)
+    lplot = sns.lineplot(
+        x="time", y="ncounts", data=data_plot, hue="ntype", ax=ax
+    )  # , palette=theme)
 
     # for i in data_plot:
     #     input(data_plot[i])
@@ -148,19 +144,17 @@ def lineplot(result_path,
     return lplot
 
 
-def networkx(result_path,
-             synapses,
-             figsize=(24, 12),
-             save=False,
-             ncolor="skyblue"):
+def networkx(result_path, synapses, figsize=(24, 12), save=False, ncolor="skyblue"):
     print(" -networkplot")
     plt.figure(figsize=figsize)
     # Build a dataframe with your connections
-    df = pd.DataFrame({
-        "from": [synapses[s].rref for s in synapses],
-        "to": [synapses[s].fref for s in synapses],
-        "value": [synapses[s].wgt for s in synapses],
-    })
+    df = pd.DataFrame(
+        {
+            "from": [synapses[s].rref for s in synapses],
+            "to": [synapses[s].fref for s in synapses],
+            "value": [synapses[s].wgt for s in synapses],
+        }
+    )
 
     # Build your graph
     G = nx.from_pandas_edgelist(df, "from", "to", create_using=nx.DiGraph())
@@ -195,10 +189,11 @@ def jsondump(result_path, fnameext, jdata):
         json.dump(jdata, outfile)
 
 
-def graphout(eng):
+def graphout(eng, flush = True):
     tt = str(datetime.now().replace(microsecond=0)).replace(":", "_")
     rpath = r"results%s%s" % (pathdiv, tt)
-    if os.name != 'nt':
+
+    if os.name != "nt":
         rpath = "results%s%s" % (pathdiv, tt)
     eng.traces = reshape_trace(eng)
 
@@ -211,11 +206,7 @@ def graphout(eng):
         os.mkdir(rpath)
 
     fig, ax = plt.subplots(2, 1, figsize=(24, 12))
-    df = pd.DataFrame({
-        "time": eng.ntime,
-        "ncounts": eng.ncounts,
-        "ntype": eng.nmask
-    })
+    df = pd.DataFrame({"time": eng.ntime, "ncounts": eng.ncounts, "ntype": eng.nmask})
     sns.set_theme()
     heatmap(rpath, eng.traces, eng.network.neurones, ax=ax[0])
     lineplot(rpath, df, ax=ax[1])
@@ -224,6 +215,9 @@ def graphout(eng):
     heatmap(rpath, eng.traces, eng.network.neurones, save=True)
     lineplot(rpath, df, save=True)
     networkx(rpath, eng.network.synapses, save=True)
+
+    if flush == True:
+        eng.clear_traces()
 
     # npredict.forward_predict(eng, [])
 
@@ -236,14 +230,17 @@ def stream(streamfile):
     #     inputs[i] = [v]
     # input(inputs)
 
-    filecontent = json.loads(
-        open(f"dataset{pathdiv}{streamfile}.json", 'r').read())
+    filecontent = json.loads(open(f"dataset{pathdiv}{streamfile}.json", "r").read())
 
     interv = filecontent["interval"]
     inputs = filecontent["activity_stream"]
 
+    temp = eng.tick
+    eng.tick = 0
+
     maxit = min(len(inputs) - 1, interv)
     running = True
+
     while running and eng.tick <= maxit:
         try:
             clear()
@@ -254,34 +251,35 @@ def stream(streamfile):
             print(" ###########################")
             print()
 
-            r = eng.algo(inputs[eng.tick], True)
+            eng.algo(inputs[eng.tick], True)
 
             if eng.tick == maxit:
                 graphout(eng)
 
         except KeyboardInterrupt:
             running = False
+    
+    eng.tick += temp
 
-    print()
-    print(" exited.")
+    print("\n\n streaming done.")
     print()
 
 
 args = sys.argv[1:]
 
-print(' '.join(args))
+# print(" ".join(args))
 
 init = False
-while (True):
+while True:
     if init == False:
         print(
             "\n\n########### NSCL (experimental - not optimised) ########### -- najiy\n"
         )
-        print("os.name: %s\n\n" % os.name)
+        print(" os.name: %s\n\n" % os.name)
 
     try:
         if init == True:
-            command = input('NSCL> ').split(' ')
+            command = input(f"NSCL [{eng.tick}]> ").split(" ")
         else:
             init = True
             command = args
@@ -289,48 +287,65 @@ while (True):
         if len(command) == 0:
             continue
 
-        if command[0] == 'stream':
-            print(' streaming test dataset as input - %s' % command[1])
+        if command[0] in ["clear", "cls", "clr"]:
+            clear()
+
+        if command[0] == "stream":
+            print(" streaming test dataset as input - %s" % command[1])
             stream(command[1])
 
-        if command[0] == 'tracepaths':
-            inp = command[1].split(',')
-            print(' tracing all paths')
+        if command[0] == "tracepaths":
+            inp = command[1].split(",")
+            print(" tracing all paths")
             print(inp)
-            print(npredict.trace_synapses(eng, inp))
+            print(npredict.trace_synapses(eng, inp, False))
 
-        if command[0] == 'spredict':
-            inp = command[1].split(',')
-            print(' predicting statically')
+        if command[0] == "spredict":
+            inp = command[1].split(",")
+            print(" predicting statically")
             print(inp)
-            print(npredict.static_prediction(eng, inp))
+            print(npredict.static_prediction(eng, inp, verbose=False))
 
-        if command[0] == 'tpredict':
-            inp = command[1].split(',')
-            print(' predicting temporally')
-            print(npredict.temporal_prediction(eng, inp))
+        if command[0] == "tpredict":
+            inp = command[1].split(",")
+            print(" predicting temporally")
+            print(npredict.temporal_prediction(eng, inp, verbose=False))
 
-        elif command[0] == 'new':
+        if command[0] in ["potsyn" , "ptsyn", "struct", "network"]:
+            eng.potsyns()
+            print()
+
+        if command[0] == "new":
             confirm = input
-            if input("new network? (y/n)") == "y":
+            if input(" new network? (y/n)") == "y":
                 del eng
                 eng = NSCL.Engine()
-                print('new net')
-        elif command[0] == 'gout':
-            print(' exporting graphs')
+                print("new net")
+
+        if command[0] == "graphout":
+            print(" exporting graphs")
             graphout(eng)
-        elif command[0] == 'save':
-            print(' saving state')
+
+        if command[0] == "save":
+            print(" saving state")
             eng.save_state(command[1])
-        elif command[0] == 'load':
-            print(' loading state')
+
+        if command[0] == "load":
+            print(" loading state")
             del eng
             eng = NSCL.Engine()
             print(eng.load_state(command[1]))
-        elif command[0] == 'size':
-            print(' size of network')
-            print(eng.size())
-        elif command[0] == 'exit':
+
+        if command[0] == "memsize":
+            print(" memsize of network")
+            print(eng.size_stat())
+
+        if command[0] == "tick":
+            r = eng.algo([], False)
+            print(" reinf %s " % r["rsynapse"])
+
+        if command[0] == "exit":
             sys.exit(0)
+
     except Exception as e:
         print(e)

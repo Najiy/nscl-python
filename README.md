@@ -54,3 +54,9 @@ Forward and Backwards Prediction:
 
 Temporal Manifolds: 
     Paper 3
+
+
+BFS CRF BNet
+
+Chapter on Joint Probability Distribution
+Chapter on Temporally-induced Context
