@@ -2,6 +2,7 @@
 
 from datetime import date, datetime
 from inspect import trace
+
 # from nscl_algo import NSCLAlgo
 # from nscl_algo import NSCLAlgo
 
@@ -11,6 +12,9 @@ import os
 import time
 import sys
 import json
+import pprint
+import subprocess
+# from subprocess import Popen
 from typing import NewType
 
 from networkx.algorithms.planarity import Interval
@@ -189,7 +193,7 @@ def jsondump(result_path, fnameext, jdata):
         json.dump(jdata, outfile)
 
 
-def graphout(eng, flush = True):
+def graphout(eng, flush=True):
     tt = str(datetime.now().replace(microsecond=0)).replace(":", "_")
     rpath = r"results%s%s" % (pathdiv, tt)
 
@@ -258,28 +262,48 @@ def stream(streamfile):
 
         except KeyboardInterrupt:
             running = False
-    
+
     eng.tick += temp
 
     print("\n\n streaming done.")
     print()
 
 
+# def loading():
+#     print("Loading...")
+#     for i in range(0, 100):
+#         time.sleep(0.1)
+#         width = (i + 1) / 4
+#         bar = "[" + "#" * width + " " * (25 - width) + "]"
+#         sys.stdout.write(u"\u001b[1000D" +  bar)
+#         sys.stdout.flush()
+#     print("")
+    
+
+
 args = sys.argv[1:]
 
 # print(" ".join(args))
+
+pp = pprint.PrettyPrinter(indent=4)
 
 init = False
 while True:
     if init == False:
         print(
-            "\n\n########### NSCL (experimental - not optimised) ########### -- najiy\n"
+            "\n\n########### NSCL (Python) ###########\n"
         )
-        print(" os.name: %s\n\n" % os.name)
+        print(f" version: experimental/non-optimised")
+        print(f" os.name: {os.name}")
+        print(f" os.pid: {os.getpid()}")
+        print("")
+        # subprocess.call(f'top -p {os.getpid()}', shell=True)
+        # os.system(f"top -p {os.getpid()}")
+        # Popen('bash')
 
     try:
         if init == True:
-            command = input(f"NSCL [{eng.tick}]> ").split(" ")
+            command = input(f"\033[1m\033[96m {os.getpid()}: NSCL [{eng.tick}]> \u001b[0m\033[1m").split(" ")
         else:
             init = True
             command = args
@@ -294,24 +318,33 @@ while True:
             print(" streaming test dataset as input - %s" % command[1])
             stream(command[1])
 
-        if command[0] == "tracepaths":
-            inp = command[1].split(",")
-            print(" tracing all paths")
+        if command[0] in ["tracepaths", "trace", "traces"]:
+            limits = float(command[1])
+            inp = command[2].split(",")
+            print(f" NSCL.trace(limits={limits})")
             print(inp)
-            print(npredict.trace_synapses(eng, inp, False))
+            pp.pprint(npredict.trace_synapses(eng, inp, limits, verbose=False))
 
         if command[0] == "spredict":
-            inp = command[1].split(",")
-            print(" predicting statically")
+            limits = float(command[1])
+            inp = command[2].split(",")
+            print(f" NSCL.static_predict(limits={limits})")
             print(inp)
-            print(npredict.static_prediction(eng, inp, verbose=False))
+            pp.pprint(
+                npredict.static_prediction(eng, inp, limits, verbose=False)
+            )
 
         if command[0] == "tpredict":
-            inp = command[1].split(",")
-            print(" predicting temporally")
-            print(npredict.temporal_prediction(eng, inp, verbose=False))
+            limits = float(command[1])
+            inp = command[2].split(",")
+            print(f" NSCL.temporal_predict(limits={limits})")
+            pp.pprint(
+                npredict.temporal_prediction(
+                    eng, inp, limits, verbose=False
+                )
+            )
 
-        if command[0] in ["potsyn" , "ptsyn", "struct", "network"]:
+        if command[0] in ["potsyn", "ptsyn", "struct", "network"]:
             eng.potsyns()
             print()
 
@@ -327,20 +360,20 @@ while True:
             graphout(eng)
 
         if command[0] == "save":
-            print(" saving state")
+            print(f" Savestate({command[1]})")
             eng.save_state(command[1])
 
         if command[0] == "load":
-            print(" loading state")
+            print(f" Loadstate({command[1]})")
             del eng
             eng = NSCL.Engine()
-            print(eng.load_state(command[1]))
+            print(f" memsize={eng.load_state(command[1])}")
 
         if command[0] == "memsize":
-            print(" memsize of network")
-            print(eng.size_stat())
+            print(f" memsize={eng.size_stat()}")
+            # print(eng.size_stat())
 
-        if command[0] == "tick":
+        if command[0] in ["tick", "pass", "next"]:
             r = eng.algo([], False)
             print(" reinf %s " % r["rsynapse"])
 

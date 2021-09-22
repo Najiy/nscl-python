@@ -26,21 +26,21 @@ class NSCLPredict:
         # outfile = open((rpath + "\\traces.json"), "w+")
         # json.dump(otraces, outfile, indent=4)
 
-    def trace_synapses(eng, inputs, syn_limiter=0, verbose=True):
+    def trace_synapses(eng, inputs, limits=0, verbose=True):
         neurones = eng.network.neurones
         synapses = eng.network.synapses
         # inp_neurones = eng.ineurones()
 
         temp = {}
 
-        def trace(n, level, limits=0):
+        def trace(n, level, limits_thr=0):
             if verbose == True:
                 input(neurones[n].rsynapses)
 
             for i, r in enumerate(neurones[n].rsynapses):
                 syn_name = NSCLAlgo.sname(r, n)
 
-                if synapses[syn_name].wgt < limits:
+                if synapses[syn_name].wgt < limits_thr:
                     continue
 
                 if verbose == True:
@@ -56,11 +56,11 @@ class NSCLPredict:
                     else:
                         temp[key].append(r)
 
-        def forward(n, level=0, limits=0):
+        def forward(n, level=0, limits_thr=0):
             for f in neurones[n].fsynapses:
                 syn_name = NSCLAlgo.sname(n, f)
 
-                if synapses[syn_name].wgt < limits:
+                if synapses[syn_name].wgt < limits_thr:
                     continue
 
                 if verbose == True:
@@ -70,9 +70,9 @@ class NSCLPredict:
                     )
 
                 # conditional limiter
-                trace(f, level, limits=syn_limiter)
+                trace(f, level, limits_thr=limits)
                 # conditional limiter
-                forward(f, level=level + 1, limits=syn_limiter)
+                forward(f, level=level + 1, limits_thr=limits)
 
         for n in inputs:
             forward(n)
@@ -82,16 +82,14 @@ class NSCLPredict:
         for e in temp:
             result[e] = dict(Counter(temp[e]))
 
-        result["prediction_time"] = str(datetime.now().replace(microsecond=0)).replace(
-            ":", "_"
-        )
+        result["prediction_time"] = str(datetime.now().replace(microsecond=0)).replace(":", "_")
 
         return result
 
-    def static_prediction(eng, inputs, syn_limiter=0, verbose=True):
-        result = NSCLPredict.trace_synapses(eng, inputs, syn_limiter, verbose)
-        pass
+    def static_prediction(eng, inputs, limits=0, verbose=True):
+        result = NSCLPredict.trace_synapses(eng, inputs, limits, verbose)
+        return result
 
-    def temporal_prediction(eng, inputs, syn_limiter=0, verbose=True):
-        result = NSCLPredict.trace_synapses(eng, inputs, syn_limiter, verbose)
-        pass
+    def temporal_prediction(eng, inputs, limits=0, verbose=True):
+        result = NSCLPredict.trace_synapses(eng, inputs, limits, verbose)
+        return result

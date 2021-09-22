@@ -1,0 +1,694 @@
+{
+    "neurones": [
+        {
+            "name": "A",
+            "counter": 0,
+            "potential": 0.015374207973845169,
+            "fsynapses": [
+                "CMP(A,B)",
+                "CMP(A,D)",
+                "CMP(A,B,C,D)",
+                "CMP(A,E,F)",
+                "CMP(A,CMP(A,D))",
+                "CMP(A,D,CMP(A,D))"
+            ],
+            "rsynapses": [],
+            "lastspike": "2021-09-20T15:37:10.813490",
+            "occurs": 6,
+            "heirarcs": []
+        },
+        {
+            "name": "B",
+            "counter": 0,
+            "potential": 0.031541011252591004,
+            "fsynapses": [
+                "CMP(A,B)",
+                "CMP(A,B,C,D)",
+                "CMP(B,C)",
+                "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+                "CMP(B,C,CMP(A,D),CMP(B,C))"
+            ],
+            "rsynapses": [],
+            "lastspike": "2021-09-20T15:37:10.823139",
+            "occurs": 6,
+            "heirarcs": []
+        },
+        {
+            "name": "CMP(A,B)",
+            "counter": 0,
+            "potential": 0.01752498616282423,
+            "fsynapses": [],
+            "rsynapses": [
+                "A",
+                "B"
+            ],
+            "lastspike": "2021-09-20T15:37:01.307155",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1
+            ]
+        },
+        {
+            "name": "C",
+            "counter": 0,
+            "potential": 0.041012230683255706,
+            "fsynapses": [
+                "CMP(C,D)",
+                "CMP(A,B,C,D)",
+                "CMP(B,C)",
+                "CMP(B,C,CMP(A,D),CMP(B,C))"
+            ],
+            "rsynapses": [],
+            "lastspike": "2021-09-20T15:37:10.823139",
+            "occurs": 6,
+            "heirarcs": []
+        },
+        {
+            "name": "D",
+            "counter": 0,
+            "potential": 0.01947396809683409,
+            "fsynapses": [
+                "CMP(C,D)",
+                "CMP(A,D)",
+                "CMP(A,B,C,D)",
+                "CMP(D,CMP(B,C))",
+                "CMP(A,D,CMP(A,D))"
+            ],
+            "rsynapses": [],
+            "lastspike": "2021-09-20T15:37:10.813490",
+            "occurs": 6,
+            "heirarcs": []
+        },
+        {
+            "name": "CMP(C,D)",
+            "counter": 0,
+            "potential": 0.02336773635256672,
+            "fsynapses": [],
+            "rsynapses": [
+                "C",
+                "D"
+            ],
+            "lastspike": "2021-09-20T15:37:01.375998",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1
+            ]
+        },
+        {
+            "name": "CMP(A,D)",
+            "counter": 0,
+            "potential": 0.12242753218068844,
+            "fsynapses": [
+                "CMP(A,CMP(A,D))",
+                "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+                "CMP(A,D,CMP(A,D))",
+                "CMP(B,C,CMP(A,D),CMP(B,C))",
+                "CMP(CMP(A,D),CMP(B,C))"
+            ],
+            "rsynapses": [
+                "A",
+                "D"
+            ],
+            "lastspike": "2021-09-20T15:37:01.420223",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1
+            ]
+        },
+        {
+            "name": "CMP(A,B,C,D)",
+            "counter": 0,
+            "potential": 0.0408882219860295,
+            "fsynapses": [],
+            "rsynapses": [
+                "A",
+                "B",
+                "C",
+                "D"
+            ],
+            "lastspike": "2021-09-20T15:37:01.430213",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "name": "CMP(B,C)",
+            "counter": 0,
+            "potential": 0.2059051304854111,
+            "fsynapses": [
+                "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+                "CMP(CMP(B,C),CMP(E,F))",
+                "CMP(D,CMP(B,C))",
+                "CMP(B,C,CMP(A,D),CMP(B,C))",
+                "CMP(CMP(A,D),CMP(B,C))"
+            ],
+            "rsynapses": [
+                "B",
+                "C"
+            ],
+            "lastspike": "2021-09-20T15:37:01.439172",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1
+            ]
+        },
+        {
+            "name": "E",
+            "counter": 0,
+            "potential": 0.5603577375883592,
+            "fsynapses": [
+                "CMP(E,F)",
+                "CMP(A,E,F)",
+                "CMP(E,F,CMP(E,F))"
+            ],
+            "rsynapses": [],
+            "lastspike": "2021-09-20T15:37:12.769237",
+            "occurs": 3,
+            "heirarcs": []
+        },
+        {
+            "name": "F",
+            "counter": 0,
+            "potential": 0.5603577375883592,
+            "fsynapses": [
+                "CMP(E,F)",
+                "CMP(A,E,F)",
+                "CMP(E,F,CMP(E,F))"
+            ],
+            "rsynapses": [],
+            "lastspike": "2021-09-20T15:37:12.769237",
+            "occurs": 3,
+            "heirarcs": []
+        },
+        {
+            "name": "CMP(E,F)",
+            "counter": 0,
+            "potential": 0.49735338453506617,
+            "fsynapses": [
+                "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+                "CMP(CMP(B,C),CMP(E,F))",
+                "CMP(E,F,CMP(E,F))"
+            ],
+            "rsynapses": [
+                "E",
+                "F"
+            ],
+            "lastspike": "2021-09-20T15:37:03.387962",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1
+            ]
+        },
+        {
+            "name": "CMP(A,E,F)",
+            "counter": 0,
+            "potential": 0.029184803078806703,
+            "fsynapses": [],
+            "rsynapses": [
+                "A",
+                "E",
+                "F"
+            ],
+            "lastspike": "2021-09-20T15:37:05.848547",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "name": "CMP(A,CMP(A,D))",
+            "counter": 0,
+            "potential": 0.024058787571809223,
+            "fsynapses": [],
+            "rsynapses": [
+                "A",
+                "CMP(A,D)"
+            ],
+            "lastspike": "2021-09-20T15:37:10.687243",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "name": "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+            "counter": 0,
+            "potential": 0.04724793997201844,
+            "fsynapses": [],
+            "rsynapses": [
+                "B",
+                "CMP(A,D)",
+                "CMP(B,C)",
+                "CMP(E,F)"
+            ],
+            "lastspike": "2021-09-20T15:37:10.695111",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2
+            ]
+        },
+        {
+            "name": "CMP(CMP(B,C),CMP(E,F))",
+            "counter": 0,
+            "potential": 0.021103788295667343,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(B,C)",
+                "CMP(E,F)"
+            ],
+            "lastspike": "2021-09-20T15:37:10.705087",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                2,
+                2
+            ]
+        },
+        {
+            "name": "CMP(D,CMP(B,C))",
+            "counter": 0,
+            "potential": 0.026789193793171923,
+            "fsynapses": [],
+            "rsynapses": [
+                "D",
+                "CMP(B,C)"
+            ],
+            "lastspike": "2021-09-20T15:37:10.763707",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "name": "CMP(A,D,CMP(A,D))",
+            "counter": 0,
+            "potential": 0.022355442331792954,
+            "fsynapses": [],
+            "rsynapses": [
+                "A",
+                "D",
+                "CMP(A,D)"
+            ],
+            "lastspike": "2021-09-20T15:37:10.813490",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "name": "CMP(B,C,CMP(A,D),CMP(B,C))",
+            "counter": 0,
+            "potential": 0.03692295281214106,
+            "fsynapses": [],
+            "rsynapses": [
+                "B",
+                "C",
+                "CMP(A,D)",
+                "CMP(B,C)"
+            ],
+            "lastspike": "2021-09-20T15:37:10.823139",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2
+            ]
+        },
+        {
+            "name": "CMP(CMP(A,D),CMP(B,C))",
+            "counter": 0,
+            "potential": 0.019902930027683435,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(A,D)",
+                "CMP(B,C)"
+            ],
+            "lastspike": "2021-09-20T15:37:10.834112",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                2,
+                2
+            ]
+        },
+        {
+            "name": "CMP(E,F,CMP(E,F))",
+            "counter": 0,
+            "potential": 0,
+            "fsynapses": [],
+            "rsynapses": [
+                "E",
+                "F",
+                "CMP(E,F)"
+            ],
+            "lastspike": "2021-09-20T15:37:12.769237",
+            "occurs": 1,
+            "heirarcs": [
+                1,
+                1,
+                1,
+                2
+            ]
+        }
+    ],
+    "synapses": [
+        {
+            "fref": "CMP(A,B)",
+            "rref": "A",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,B)",
+            "rref": "B",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(C,D)",
+            "rref": "C",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(C,D)",
+            "rref": "D",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,D)",
+            "rref": "A",
+            "wgt": 0.307,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,D)",
+            "rref": "D",
+            "wgt": 0.307,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,B,C,D)",
+            "rref": "A",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,B,C,D)",
+            "rref": "B",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,B,C,D)",
+            "rref": "C",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,B,C,D)",
+            "rref": "D",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,C)",
+            "rref": "B",
+            "wgt": 0.307,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,C)",
+            "rref": "C",
+            "wgt": 0.307,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(E,F)",
+            "rref": "E",
+            "wgt": 0.307,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(E,F)",
+            "rref": "F",
+            "wgt": 0.307,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,E,F)",
+            "rref": "A",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,E,F)",
+            "rref": "E",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,E,F)",
+            "rref": "F",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,CMP(A,D))",
+            "rref": "A",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,CMP(A,D))",
+            "rref": "CMP(A,D)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+            "rref": "B",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+            "rref": "CMP(A,D)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+            "rref": "CMP(B,C)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,CMP(A,D),CMP(B,C),CMP(E,F))",
+            "rref": "CMP(E,F)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(B,C),CMP(E,F))",
+            "rref": "CMP(B,C)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(B,C),CMP(E,F))",
+            "rref": "CMP(E,F)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(D,CMP(B,C))",
+            "rref": "D",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(D,CMP(B,C))",
+            "rref": "CMP(B,C)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,D,CMP(A,D))",
+            "rref": "A",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,D,CMP(A,D))",
+            "rref": "D",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(A,D,CMP(A,D))",
+            "rref": "CMP(A,D)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,C,CMP(A,D),CMP(B,C))",
+            "rref": "B",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,C,CMP(A,D),CMP(B,C))",
+            "rref": "C",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,C,CMP(A,D),CMP(B,C))",
+            "rref": "CMP(A,D)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(B,C,CMP(A,D),CMP(B,C))",
+            "rref": "CMP(B,C)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(A,D),CMP(B,C))",
+            "rref": "CMP(A,D)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(A,D),CMP(B,C))",
+            "rref": "CMP(B,C)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(E,F,CMP(E,F))",
+            "rref": "E",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(E,F,CMP(E,F))",
+            "rref": "F",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(E,F,CMP(E,F))",
+            "rref": "CMP(E,F)",
+            "wgt": 0.01,
+            "counter": 0,
+            "lastspike": ""
+        }
+    ],
+    "params": {
+        "F1": [
+            0.8,
+            1.0
+        ],
+        "F2": [
+            0.12,
+            6.0
+        ],
+        "A": [
+            0.01,
+            140
+        ],
+        "PTP": [
+            0.01,
+            600
+        ],
+        "LTP": [
+            0.01,
+            30000
+        ],
+        "TraceLength": 60,
+        "TimeConstant": [
+            3
+        ],
+        "FiringThreshold": [
+            0.5
+        ],
+        "MaxPropagation": [
+            6
+        ],
+        "DecayCoefficient": [
+            0.2
+        ]
+    },
+    "tick": 60
+}

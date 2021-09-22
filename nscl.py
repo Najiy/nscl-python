@@ -4,7 +4,7 @@ from inspect import trace
 from nscl_algo import NSCLAlgo
 from datetime import date, datetime
 import json
-import os, sys
+import os, sys, psutil
 
 pathdiv = ""
 
@@ -147,7 +147,7 @@ class NSCL:
             return self.network.net_struct()
 
         def new_sneurone(self, name) -> object:
-            return NSCLAlgo.new_sneurone(self, name)
+            return NSCLAlgo.new_NSymbol(self, name)
 
         def new_ssynapse(
             self, pre_sneurone, post_sneurone, wgt=0.01, counter=0, lastspike=""
@@ -203,7 +203,7 @@ class NSCL:
                 )
 
             # tt = str(datetime.now().replace(microsecond=0)).replace(":", "_")
-            rpath = r"states%s%s" % (pathdiv, fname)
+            rpath = f"states{pathdiv}{fname}"
 
             if not os.path.exists("states"):
                 os.mkdir("states")
@@ -211,10 +211,10 @@ class NSCL:
             if not os.path.exists(rpath):
                 os.mkdir(rpath)
 
-            outfile = open(rpath + f"{pathdiv}state.json" % pathdiv, "w+")
+            outfile = open(rpath + f"{pathdiv}state.json", "w+")
             json.dump(content, outfile, indent=4)
 
-            outfile = open((rpath + f"{pathdiv}traces.json"), "w+")
+            outfile = open(rpath + f"{pathdiv}traces.json", "w+")
             json.dump(otraces, outfile, indent=4)
 
         def load_state(self, fname) -> None:
@@ -225,17 +225,17 @@ class NSCL:
             cont = infile.read()
             cont = cont.replace("\t", "")
             cont = cont.replace("\n", "")
-            content = json.loads(cont)
+            load_state = json.loads(cont)
 
             infile = open(rpath + f"{pathdiv}traces.json", "r")
             cont = infile.read()
             cont = cont.replace("\t", "")
             cont = cont.replace("\n", "")
-            traces = json.loads(cont)
+            load_traces = json.loads(cont)
 
             # self = NSCL.Engine()
 
-            for nprop in content["neurones"]:
+            for nprop in load_state["neurones"]:
                 self.new_sneurone(nprop["name"])
 
                 n = self.network.neurones[nprop["name"]]
@@ -247,7 +247,7 @@ class NSCL:
                 n.occurs = nprop["occurs"]
                 n.heirarcs = nprop["heirarcs"]
 
-            for sprop in content["synapses"]:
+            for sprop in load_state["synapses"]:
                 pre = sprop["rref"]
                 post = sprop["fref"]
                 self.new_ssynapse(
@@ -259,11 +259,13 @@ class NSCL:
                 # self.network.synapses = content["synapses"]
                 # self.network.params = content["params"]
 
-            self.tick = content["tick"]
-            self.traces = traces["traces"]
-            self.ncounts = traces["ncounts"]
-            self.nmask = traces["nmask"]
-            self.ntime = traces["ntime"]
+            self.tick = load_state["tick"]
+            self.traces = load_traces["traces"]
+            self.ncounts = load_traces["ncounts"]
+            self.nmask = load_traces["nmask"]
+            self.ntime = load_traces["ntime"]
+
+            NSCLAlgo.relevel(self)
 
             return self.size_stat()
 
@@ -307,8 +309,14 @@ class NSCL:
                 sys.getsizeof(self.traces),
                 get_size(self.traces),
             )
+            process_rss = (
+                f"process_rss={ int(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().rss}b"
+            )
+            process_vms = (
+                f"process_vms={int(psutil.Process(os.getpid()).memory_info().vms / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().vms}b"
+            )
             all = "all=%db|%db" % (sys.getsizeof(self), get_size(self))
-            return (n_size, s_size, p_size, traces, all)
+            return (n_size, s_size, p_size, traces, process_rss, process_vms, all)
 
         def set_tick(self, tick):
             self.tick = tick
@@ -331,7 +339,7 @@ class NSCL:
                 )
 
             syn = [s for s in synapses.values()]
-            syn.sort(reverse=True, key=lambda s : s.wgt)
+            syn.sort(reverse=True, key=lambda s: s.wgt)
 
             print("Synapses Weightings:")
 

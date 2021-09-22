@@ -60,3 +60,6 @@ Chapters:
     
     1. Joint Probability Distribution
     2. Temporally-induced Context
+
+
+    Content: bayesian networks, conditional random fields, joint-probability distribution, temporally-induced context, dependency-pathway tracing, spiking neural networks, etc.
