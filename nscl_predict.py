@@ -69,6 +69,8 @@ class NSCLPredict:
                         % (n, f, synapses[syn_name].wgt, level)
                     )
 
+                
+
                 # conditional limiter
                 trace(f, level, limits_thr=limits)
                 # conditional limiter

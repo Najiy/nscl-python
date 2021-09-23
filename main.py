@@ -288,6 +288,7 @@ args = sys.argv[1:]
 pp = pprint.PrettyPrinter(indent=4)
 
 init = False
+verbose = False
 while True:
     if init == False:
         print(
@@ -297,6 +298,7 @@ while True:
         print(f" os.name: {os.name}")
         print(f" os.pid: {os.getpid()}")
         print("")
+
         # subprocess.call(f'top -p {os.getpid()}', shell=True)
         # os.system(f"top -p {os.getpid()}")
         # Popen('bash')
@@ -314,16 +316,21 @@ while True:
         if command[0] in ["clear", "cls", "clr"]:
             clear()
 
+        if command[0] in ["param", "set"]:
+            if command[1] in ["verb", "verbose"]:
+                verbose = bool(command[2])
+                print(f"verbose={verbose}") 
+
         if command[0] == "stream":
             print(" streaming test dataset as input - %s" % command[1])
             stream(command[1])
 
-        if command[0] in ["tracepaths", "trace", "traces"]:
+        if command[0] in ["tracepaths", "trace", "traces", "paths"]:
             limits = float(command[1])
             inp = command[2].split(",")
             print(f" NSCL.trace(limits={limits})")
             print(inp)
-            pp.pprint(npredict.trace_synapses(eng, inp, limits, verbose=False))
+            pp.pprint(npredict.trace_synapses(eng, inp, limits, verbose=True))
 
         if command[0] == "spredict":
             limits = float(command[1])
