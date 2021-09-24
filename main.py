@@ -325,7 +325,7 @@ while True:
             print(" streaming test dataset as input - %s" % command[1])
             stream(command[1])
 
-        if command[0] in ["tracepaths", "trace", "traces", "paths"]:
+        if command[0] in ["tracepaths", "trace", "traces", "paths", "path"]:
             limits = float(command[1])
             inp = command[2].split(",")
             print(f" NSCL.trace(limits={limits})")
@@ -351,7 +351,7 @@ while True:
                 )
             )
 
-        if command[0] in ["potsyn", "ptsyn", "struct", "network"]:
+        if command[0] in ["potsyn", "ptsyn", "struct", "network", "ls"]:
             eng.potsyns()
             print()
 
