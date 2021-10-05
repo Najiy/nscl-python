@@ -1,7 +1,3 @@
-Motivational scenario
-
-Contribution
-
 Input to Spiketrain Encoding (Input datatype transformations):
 
     1. Booleans values to spiketrains
@@ -53,6 +49,41 @@ Forward and Backwards Prediction:
     4. descriptive (explainable-ai) sequences into words
 
 
+###################################################################################
+
+
+Paper (Argument):
+
+1. Introduction
+    This project leverages the use of temporal properties naturally inherent in spiking neural networks to make structured predictions with temporally-induced contexts.
+
+    Explain the use of 
+
+2. Related Work
+    2.1 Spiking Neural Network
+        explains the spiking 
+    2.2 Conditional Random Fields
+    2.3 Pattern Discovery
+
+3. NSCL
+    3.1 Algorithm Theory
+    3.1.1 CRF and Spiking Neurones
+    3.2 Proposed Algorithm
+    3.2.1 Algorithm Complexities
+    3.2.2 Pre-processing Sensors
+    3.3 Dataset
+
+4. Experimental Results
+    4.1 Generated Symbolic Fields
+    4.2 Algorithm Sequence Prediction
+    4.3 Computational Complexities
+
+5. Conclusion
+    5.1 Benefits
+    5.2 Drawbacks
+
+###################################################################################
+
 
 BFS CRF BNet
 
@@ -63,3 +94,16 @@ Chapters:
 
 
     Content: bayesian networks, conditional random fields, joint-probability distribution, temporally-induced context, dependency-pathway tracing, spiking neural networks, etc.
+
+    Logistic Regression, Bayesian Network, Joint-Probability Distribution
+    
+
+
+    Conditional Random Fields, Temporally-Induced Context, Spiking Neural Networks
+
+
+
+    Dependency-Pathway Tracing
+
+
+###################################################################################

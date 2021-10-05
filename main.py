@@ -14,6 +14,7 @@ import sys
 import json
 import pprint
 import subprocess
+
 # from subprocess import Popen
 from typing import NewType
 
@@ -278,7 +279,6 @@ def stream(streamfile):
 #         sys.stdout.write(u"\u001b[1000D" +  bar)
 #         sys.stdout.flush()
 #     print("")
-    
 
 
 args = sys.argv[1:]
@@ -291,9 +291,7 @@ init = False
 verbose = False
 while True:
     if init == False:
-        print(
-            "\n\n########### NSCL (Python) ###########\n"
-        )
+        print("\n\n########### NSCL (Python) ###########\n")
         print(f" version: experimental/non-optimised")
         print(f" os.name: {os.name}")
         print(f" os.pid: {os.getpid()}")
@@ -305,7 +303,12 @@ while True:
 
     try:
         if init == True:
-            command = input(f"\033[1m\033[96m {os.getpid()}: NSCL [{eng.tick}]> \u001b[0m\033[1m").split(" ")
+            if os.name == "posix":
+                command = input(
+                    f"\033[1m\033[96m {os.getpid()}: NSCL [{eng.tick}]> \u001b[0m\033[1m"
+                ).split(" ")
+            else:
+                command = input(f" {os.getpid()}: NSCL [{eng.tick}]> ").split(" ")
         else:
             init = True
             command = args
@@ -319,7 +322,7 @@ while True:
         if command[0] in ["param", "set"]:
             if command[1] in ["verb", "verbose"]:
                 verbose = bool(command[2])
-                print(f"verbose={verbose}") 
+                print(f"verbose={verbose}")
 
         if command[0] == "stream":
             print(" streaming test dataset as input - %s" % command[1])
@@ -330,26 +333,20 @@ while True:
             inp = command[2].split(",")
             print(f" NSCL.trace(limits={limits})")
             print(inp)
-            pp.pprint(npredict.trace_synapses(eng, inp, limits, verbose=True))
+            pp.pprint(npredict.trace_paths(eng, inp, limits, verbose=True))
 
         if command[0] == "spredict":
             limits = float(command[1])
             inp = command[2].split(",")
             print(f" NSCL.static_predict(limits={limits})")
             print(inp)
-            pp.pprint(
-                npredict.static_prediction(eng, inp, limits, verbose=False)
-            )
+            pp.pprint(npredict.static_prediction(eng, inp, limits, verbose=False))
 
         if command[0] == "tpredict":
             limits = float(command[1])
             inp = command[2].split(",")
             print(f" NSCL.temporal_predict(limits={limits})")
-            pp.pprint(
-                npredict.temporal_prediction(
-                    eng, inp, limits, verbose=False
-                )
-            )
+            pp.pprint(npredict.temporal_prediction(eng, inp, limits, verbose=False))
 
         if command[0] in ["potsyn", "ptsyn", "struct", "network", "ls"]:
             eng.potsyns()

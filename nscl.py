@@ -22,6 +22,7 @@ class NSCL:
         "A": [0.01, 140],
         "PTP": [0.01, 600],
         "LTP": [0.01, 30000],
+        "Binds": 0,
         "TraceLength": 60,
         "TimeConstant": [3],
         "FiringThreshold": [0.5],

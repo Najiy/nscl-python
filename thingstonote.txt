@@ -32,3 +32,23 @@ Predictor:
 https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#get-started-get-esp-idf
 https://www.studiopieters.nl/esp-homekit-sdk-revised-installation/
 https://github.com/UncleRus/esp-idf-lib
+
+
+
+Prediction result structure:
+
+{
+    paths: {
+
+    },
+    inputs: {
+        lvl : [
+            ( name: name, recurs: recurs, prob: prob ),
+            ( name: name, recurs: recurs, prob: prob )
+        ],
+        lvl : [
+            ( name: name, recurs: recurs, prob: prob ),
+            ( name: name, recurs: recurs, prob: prob )
+        ]
+    }
+}
