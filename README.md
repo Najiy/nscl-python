@@ -29,7 +29,7 @@ Hyperparameters:
         if neurones[n].potential > 0.5
     3. on-new-neurone potential reduction coefficient for pre-neurones (G3)
         neurones[a].potential *= 0.5
-    4. generate neurones with full potential (G4)
+    4. generate neurone with defined maximium number of priori neurones/connections (G4)
     5. reinforce formula (G5)
         wgt += (1 - wgt) * 0.5
     6. max propagation heirarchy (G6)
@@ -57,13 +57,14 @@ Paper (Argument):
 1. Introduction
     This project leverages the use of temporal properties naturally inherent in spiking neural networks to make structured predictions with temporally-induced contexts.
 
-    Explain the use of 
+    Explain the relevance of structured predictions with temporally induced context (mentioning time-series forecasting). Cite examples of the use case and potential.
+
+    In order to achieve prediction based on context-based prediction, requires constant observations of relevant dependant variables.
 
 2. Related Work
-    2.1 Spiking Neural Network
-        explains the spiking 
+    2.1 Pattern Discovery
     2.2 Conditional Random Fields
-    2.3 Pattern Discovery
+    2.3 Spiking Neural Network
 
 3. NSCL
     3.1 Algorithm Theory

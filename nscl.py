@@ -1,6 +1,7 @@
 # from main import networkx
 from genericpath import getsize
 from inspect import trace
+from pickle import NONE
 from nscl_algo import NSCLAlgo
 from datetime import date, datetime
 import json
@@ -22,12 +23,14 @@ class NSCL:
         "A": [0.01, 140],
         "PTP": [0.01, 600],
         "LTP": [0.01, 30000],
-        "Binds": 0,
+        "Bindings": 3,
+        "Levels": 3,
         "TraceLength": 60,
         "TimeConstant": [3],
         "FiringThreshold": [0.5],
         "MaxPropagation": [6],
         "DecayCoefficient": [0.2],
+        "PruneInterval": [2 * 604800],
     }
 
     class NSymbol:
@@ -87,11 +90,13 @@ class NSCL:
         def __init__(self, network=None, algorithm=None) -> None:
             self.network = NSCL.Network() if network == None else network
             self._algo = algorithm if algorithm else NSCLAlgo.algo1
+            self.defparams = NSCL.defparams
             self.traces = []
             self.ntime = []
             self.ncounts = []
             self.nmask = []
             self.tick = 0
+            self.prune = NSCL.defparams["PruneInterval"]
 
         def clear_traces(self) -> None:
             self.traces = []
@@ -102,8 +107,9 @@ class NSCL:
         def params(self) -> dict:
             return self.network.params
 
-        def algo(self, input, trace) -> list:
-            r = self._algo(self, input)
+        def algo(self, input, trace, now=None) -> list:
+            prune = True if self.prune == 0 else False
+            r = self._algo(self, input, now=now, prune=prune)
             it = self.tick
 
             if trace:
@@ -128,6 +134,15 @@ class NSCL:
                 self.ncounts.append(len(self.synapses()))
                 self.nmask.append("synapses")
 
+                while len(self.traces) > NSCL.defparams["TraceLength"]:
+                    self.traces.pop(0)
+                while len(self.ntime) * 5 > NSCL.defparams["TraceLength"] * 5:
+                    self.ntime.pop(0)
+                while len(self.ncounts) * 5 > NSCL.defparams["TraceLength"] * 5:
+                    self.ncounts.pop(0)
+                while len(self.nmask) * 5 > NSCL.defparams["TraceLength"] * 5:
+                    self.nmask.pop(0)
+
             self.tick += 1
             return r
 
@@ -149,6 +164,16 @@ class NSCL:
 
         def new_sneurone(self, name) -> object:
             return NSCLAlgo.new_NSymbol(self, name)
+
+        def remove_neurone(self, name) -> None:
+            try:
+                n = self.neurones[name]
+                for f in n.fsynapses:
+                    nf = self.neurones[f.fref]
+                    nf.rsynapses = [x for x in nf.rsynapses if x.rref == name]
+                del self.neurones[name]
+            except:
+                input('remove failed')
 
         def new_ssynapse(
             self, pre_sneurone, post_sneurone, wgt=0.01, counter=0, lastspike=""
@@ -259,6 +284,8 @@ class NSCL:
                 # self.network.neurones = content["neurones"]
                 # self.network.synapses = content["synapses"]
                 # self.network.params = content["params"]
+            
+            self.defparams = load_state["params"]
 
             self.tick = load_state["tick"]
             self.traces = load_traces["traces"]
@@ -310,12 +337,8 @@ class NSCL:
                 sys.getsizeof(self.traces),
                 get_size(self.traces),
             )
-            process_rss = (
-                f"process_rss={ int(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().rss}b"
-            )
-            process_vms = (
-                f"process_vms={int(psutil.Process(os.getpid()).memory_info().vms / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().vms}b"
-            )
+            process_rss = f"process_rss={ int(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().rss}b"
+            process_vms = f"process_vms={int(psutil.Process(os.getpid()).memory_info().vms / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().vms}b"
             all = "all=%db|%db" % (sys.getsizeof(self), get_size(self))
             return (n_size, s_size, p_size, traces, process_rss, process_vms, all)
 

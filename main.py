@@ -9,6 +9,7 @@ from inspect import trace
 # from nscl_algo import NSCLAlgo
 import pprint
 import os
+from re import split, template
 import time
 import sys
 import json
@@ -17,8 +18,11 @@ import subprocess
 
 # from subprocess import Popen
 from typing import NewType
+from jinja2.defaults import NEWLINE_SEQUENCE
 
 from networkx.algorithms.planarity import Interval
+from networkx.generators.geometric import random_geometric_graph
+from pandas.core.algorithms import take
 from nscl import NSCL
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -26,6 +30,10 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 from nscl_predict import NSCLPredict as npredict
+from pyvis.network import Network
+
+import itertools
+from itertools import islice
 
 # from networkx.drawing.nx_agraph import graphviz_layout
 
@@ -189,6 +197,56 @@ def networkx(result_path, synapses, figsize=(24, 12), save=False, ncolor="skyblu
     return G
 
 
+def networkx_pyvis(
+    result_path, synapses, figsize=(24, 12), save=False, ncolor="skyblue"
+):
+    print(" -networkplot")
+    plt.figure(figsize=figsize)
+    # Build a dataframe with your connections
+    df = pd.DataFrame(
+        {
+            "from": [synapses[s].rref for s in synapses],
+            "to": [synapses[s].fref for s in synapses],
+            "value": [synapses[s].wgt for s in synapses],
+        }
+    )
+
+    # Build your graph
+    G = nx.from_pandas_edgelist(df, "from", "to", create_using=nx.DiGraph())
+
+    # pos = graphviz_layout(G, prog='dot')
+
+    # Custom the nodes:
+    nx.draw(
+        G,
+        # pos,
+        with_labels=True,
+        node_color=ncolor,
+        node_size=1200,
+        edge_color=df["value"],
+        width=5.0,
+        alpha=0.9,
+        edge_cmap=plt.cm.Blues,
+        arrows=True,
+        # pos=nx.layout.planar_layout(G)
+    )
+    # plt.show()
+    # plt.figure(figsize=figsize)
+    if save == True:
+        plt.savefig(result_path + pathdiv + r"Figure_3.png", dpi=120)
+        plt.clf()
+
+    #####################
+
+    net = Network(notebook=False, width=1600, height=900)
+    net.toggle_hide_edges_on_drag(False)
+    net.barnes_hut()
+    net.from_nx(nx.davis_southern_women_graph())
+    net.show("ex.html")
+
+    return G
+
+
 def jsondump(result_path, fnameext, jdata):
     with open(result_path + pathdiv + fnameext, "w") as outfile:
         json.dump(jdata, outfile)
@@ -220,6 +278,7 @@ def graphout(eng, flush=True):
     heatmap(rpath, eng.traces, eng.network.neurones, save=True)
     lineplot(rpath, df, save=True)
     networkx(rpath, eng.network.synapses, save=True)
+    networkx_pyvis(rpath, eng.network.synapses, save=True)
 
     if flush == True:
         eng.clear_traces()
@@ -227,7 +286,7 @@ def graphout(eng, flush=True):
     # npredict.forward_predict(eng, [])
 
 
-def stream(streamfile):
+def stream(streamfile, trace = True):
 
     # text = "Top Cat! The most effectual Top Cat! Who’s intellectual close friends get to call him T.C., providing it’s with dignity. Top Cat! The indisputable leader of the gang. He’s the boss, he’s a pip, he’s the championship. He’s the most tip top, Top Cat."
     # txt_arr = text.lower().split(' ')
@@ -256,7 +315,7 @@ def stream(streamfile):
             print(" ###########################")
             print()
 
-            eng.algo(inputs[eng.tick], True)
+            eng.algo(inputs[eng.tick], trace)
 
             if eng.tick == maxit:
                 graphout(eng)
@@ -264,6 +323,93 @@ def stream(streamfile):
         except KeyboardInterrupt:
             running = False
 
+    eng.tick += temp
+
+    print("\n\n streaming done.")
+    print()
+
+
+def csvstream(streamfile, trace=False, fname='default'):
+    def take(n, iterable):
+        # "Return first n items of the iterable as a list"
+        return list(islice(iterable, n))
+
+    data = {}
+
+    file = open(streamfile, "r")
+    sensors = file.readline().split(",")[1:]
+    rawdata = file.readlines()
+
+    for line in rawdata:
+        sline = line.replace("\n", "").split(",")
+        for i in range(1, 1 + len(sensors)):
+            if sline[i] != "":
+                if float(sline[i]) != 0.0 and float(sline[i]) != 1.0 and float(sline[i]) != -1.0:
+                    sline[i] = ""
+                else:
+                    sline[i] = f"{i}~{sline[i]}"
+        data[int(sline[0])] = [x for x in sline[1:] if x != ""]
+
+    start = int(rawdata[0].split(",")[0])
+    end = int(rawdata[-1].split(",")[0])
+
+    del rawdata
+
+    print(start, end)
+    # print(take(3, data.items()))
+    input("loaded, now processing [enter] ")
+
+    temp = eng.tick
+    eng.tick = start
+    maxit = end
+
+    saveit = 0
+    saveat = 604800
+
+    # maxit = min(len(inputs) - 1, interv)
+    running = True
+
+    starttime = datetime.now().isoformat(timespec='minutes')
+
+    while running and eng.tick <= maxit:
+        try:
+            saveit += 1
+
+            if eng.tick % 5000 == 0 or eng.tick == maxit:
+                clear()
+
+                print()
+                print(" ###########################")
+                print(f"     NSCL_python \n time = {starttime} ")
+                print(f"tick = {eng.tick}")
+                print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
+                print(f"neurones = {len(eng.network.neurones)}")
+                print(f"synapses = {len(eng.network.synapses)}")
+                print(f"bindings = {eng.defparams['Bindings']}")
+                print(f"levels = {eng.defparams['Levels']}")
+                print(" ###########################")
+                print()
+
+            if eng.tick not in data:
+                eng.algo([], trace, now=eng.tick)
+            else:
+                eng.algo(data[eng.tick], trace, now=eng.tick)
+
+            if eng.tick == maxit and trace == True:
+                graphout(eng)
+
+            if saveit == saveat or eng.tick == maxit:
+                saveit = 0
+                # os.mkdir(f'state{pathdiv}{fname}')
+                # eng.save_state(f'{fname}{pathdiv}{eng.tick}')
+                eng.save_state(f'{fname}_{eng.tick}')
+
+            if eng.tick == maxit:
+                input('csv stream done! [enter]')
+
+        except KeyboardInterrupt:
+            running = False
+ 
     eng.tick += temp
 
     print("\n\n streaming done.")
@@ -328,6 +474,14 @@ while True:
             print(" streaming test dataset as input - %s" % command[1])
             stream(command[1])
 
+        if command[0] == "csvstream_traced":
+            print(" streaming csv dataset as input - %s" % command[1])
+            csvstream(command[1], True, command[2])
+
+        if command[0] == "csvstream":
+            print(" streaming csv dataset as input - %s" % command[1])
+            csvstream(command[1], False, command[2])
+
         if command[0] in ["tracepaths", "trace", "traces", "paths", "path"]:
             limits = float(command[1])
             inp = command[2].split(",")
@@ -376,6 +530,21 @@ while True:
         if command[0] == "memsize":
             print(f" memsize={eng.size_stat()}")
             # print(eng.size_stat())
+
+        if command[0] == "info":
+                clear()
+
+                print()
+                print(" ###########################")
+                print(f"     NSCL_python ")
+                print(f"tick = {eng.tick}")
+                # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
+                print(f"neurones = {len(eng.network.neurones)}")
+                print(f"synapses = {len(eng.network.synapses)}")
+                print(f"bindings = {eng.defparams['Bindings']}")
+                print(f"levels = {eng.defparams['Levels']}")
+                print(" ###########################")
+                print()
 
         if command[0] in ["tick", "pass", "next"]:
             r = eng.algo([], False)
