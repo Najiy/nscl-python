@@ -23,14 +23,14 @@ class NSCL:
         "A": [0.01, 140],
         "PTP": [0.01, 600],
         "LTP": [0.01, 30000],
-        "Bindings": 3,
-        "Levels": 3,
+        "Bindings": 2,
+        "Levels": 2,
         "TraceLength": 60,
         "TimeConstant": [3],
         "FiringThreshold": [0.5],
         "MaxPropagation": [6],
         "DecayCoefficient": [0.2],
-        "PruneInterval": [2 * 604800],
+        "PruneInterval": [60*60*24*30],
     }
 
     class NSymbol:
@@ -89,6 +89,8 @@ class NSCL:
     class Engine:
         def __init__(self, network=None, algorithm=None) -> None:
             self.network = NSCL.Network() if network == None else network
+            self.npruned = {}
+            self.spruned = {}
             self._algo = algorithm if algorithm else NSCLAlgo.algo1
             self.defparams = NSCL.defparams
             self.traces = []
@@ -96,7 +98,7 @@ class NSCL:
             self.ncounts = []
             self.nmask = []
             self.tick = 0
-            self.prune = NSCL.defparams["PruneInterval"]
+            self.prune = NSCL.defparams["PruneInterval"][0]
 
         def clear_traces(self) -> None:
             self.traces = []
@@ -107,8 +109,7 @@ class NSCL:
         def params(self) -> dict:
             return self.network.params
 
-        def algo(self, input, trace, now=None) -> list:
-            prune = True if self.prune == 0 else False
+        def algo(self, input, trace, now=None, prune=False) -> list:
             r = self._algo(self, input, now=now, prune=prune)
             it = self.tick
 
@@ -170,10 +171,18 @@ class NSCL:
                 n = self.neurones[name]
                 for f in n.fsynapses:
                     nf = self.neurones[f.fref]
-                    nf.rsynapses = [x for x in nf.rsynapses if x.rref == name]
-                del self.neurones[name]
+                    if name in nf.rsynapses:
+                        sn = NSCLAlgo.sname(name, f.fref)
+                        self.spruned[sn] = self.synapses.pop(sn)
+                for r in n.rsynapses:
+                    nr = self.neurones[r.rref]
+                    if name in nr.rsynapses:
+                        sn = NSCLAlgo.sname(r.rref, name)
+                        self.spruned[sn] = self.synapses.pop(sn)
+                delneurone = self.neurones.pop(name)
+                self.npruned[delneurone.name] = delneurone
             except:
-                input('remove failed')
+                input("remove failed")
 
         def new_ssynapse(
             self, pre_sneurone, post_sneurone, wgt=0.01, counter=0, lastspike=""
@@ -187,6 +196,8 @@ class NSCL:
             neurones = network.neurones
             synapses = network.synapses
             params = network.params
+            npruned = self.npruned
+            spruned = self.spruned
 
             content = {
                 "neurones": [],
@@ -219,6 +230,33 @@ class NSCL:
             for k in synapses:
                 s = synapses[k]
                 content["synapses"].append(
+                    {
+                        "fref": s.fref,
+                        "rref": s.rref,
+                        "wgt": s.wgt,
+                        "counter": s.counter,
+                        "lastspike": s.lastspike,
+                    }
+                )
+
+            for k in npruned:
+                n = npruned[k]
+                content["npruned"].append(
+                    {
+                        "name": n.name,
+                        "counter": n.counter,
+                        "potential": n.potential,
+                        "fsynapses": n.fsynapses,
+                        "rsynapses": n.rsynapses,
+                        "lastspike": n.lastspike,
+                        "occurs": n.occurs,
+                        "heirarcs": n.heirarcs,
+                    }
+                )
+
+            for k in spruned:
+                s = spruned[k]
+                content["spruned"].append(
                     {
                         "fref": s.fref,
                         "rref": s.rref,
@@ -280,11 +318,14 @@ class NSCL:
                     pre, post, sprop["wgt"], sprop["counter"], sprop["lastspike"]
                 )
 
+            self.npruned = load_state["npruned"]
+            self.spruned = load_state["spruned"]            
+
                 # s = eng.network.synapses[NSCLAlgo.sname(pre, post)]
                 # self.network.neurones = content["neurones"]
                 # self.network.synapses = content["synapses"]
                 # self.network.params = content["params"]
-            
+
             self.defparams = load_state["params"]
 
             self.tick = load_state["tick"]

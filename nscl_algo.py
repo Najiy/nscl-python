@@ -216,6 +216,7 @@ class NSCLAlgo:
 
         # print("}")
 
+        # PRUNING
         if prune:
             for n in neurones:
                 if n.occurs == 1:

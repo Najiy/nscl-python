@@ -286,7 +286,7 @@ def graphout(eng, flush=True):
     # npredict.forward_predict(eng, [])
 
 
-def stream(streamfile, trace = True):
+def stream(streamfile, trace=True):
 
     # text = "Top Cat! The most effectual Top Cat! Who’s intellectual close friends get to call him T.C., providing it’s with dignity. Top Cat! The indisputable leader of the gang. He’s the boss, he’s a pip, he’s the championship. He’s the most tip top, Top Cat."
     # txt_arr = text.lower().split(' ')
@@ -329,7 +329,7 @@ def stream(streamfile, trace = True):
     print()
 
 
-def csvstream(streamfile, trace=False, fname='default'):
+def csvstream(streamfile, trace=False, fname="default"):
     def take(n, iterable):
         # "Return first n items of the iterable as a list"
         return list(islice(iterable, n))
@@ -344,7 +344,11 @@ def csvstream(streamfile, trace=False, fname='default'):
         sline = line.replace("\n", "").split(",")
         for i in range(1, 1 + len(sensors)):
             if sline[i] != "":
-                if float(sline[i]) != 0.0 and float(sline[i]) != 1.0 and float(sline[i]) != -1.0:
+                if (
+                    float(sline[i]) != 0.0
+                    and float(sline[i]) != 1.0
+                    and float(sline[i]) != -1.0
+                ):
                     sline[i] = ""
                 else:
                     sline[i] = f"{i}~{sline[i]}"
@@ -369,13 +373,16 @@ def csvstream(streamfile, trace=False, fname='default'):
     # maxit = min(len(inputs) - 1, interv)
     running = True
 
-    starttime = datetime.now().isoformat(timespec='minutes')
+    starttime = datetime.now().isoformat(timespec="minutes")
 
     while running and eng.tick <= maxit:
         try:
+            if eng.prune == 0:
+                eng.prune = eng.params["PruneInterval"][0]
+            eng.prune -= 1
             saveit += 1
 
-            if eng.tick % 5000 == 0 or eng.tick == maxit:
+            if eng.tick % 5000 == 0 or eng.tick == maxit or eng.prune == 0:
                 clear()
 
                 print()
@@ -387,13 +394,16 @@ def csvstream(streamfile, trace=False, fname='default'):
                 print(f"synapses = {len(eng.network.synapses)}")
                 print(f"bindings = {eng.defparams['Bindings']}")
                 print(f"levels = {eng.defparams['Levels']}")
+                print(f"npruned = {len(eng.npruned)}")
+                print(f"spruned = {len(eng.spruned)}")
+                print(f"prune_ctick = {eng.prune}")
                 print(" ###########################")
                 print()
 
             if eng.tick not in data:
-                eng.algo([], trace, now=eng.tick)
+                eng.algo([], trace, now=eng.tick, prune=eng.prune == 0)
             else:
-                eng.algo(data[eng.tick], trace, now=eng.tick)
+                eng.algo(data[eng.tick], trace, now=eng.tick, prune=eng.prune == 0)
 
             if eng.tick == maxit and trace == True:
                 graphout(eng)
@@ -402,14 +412,14 @@ def csvstream(streamfile, trace=False, fname='default'):
                 saveit = 0
                 # os.mkdir(f'state{pathdiv}{fname}')
                 # eng.save_state(f'{fname}{pathdiv}{eng.tick}')
-                eng.save_state(f'{fname}_{eng.tick}')
+                eng.save_state(f"{fname}_{eng.tick}")
 
             if eng.tick == maxit:
-                input('csv stream done! [enter]')
+                input("csv stream done! [enter]")
 
         except KeyboardInterrupt:
             running = False
- 
+
     eng.tick += temp
 
     print("\n\n streaming done.")
@@ -532,19 +542,19 @@ while True:
             # print(eng.size_stat())
 
         if command[0] == "info":
-                clear()
+            clear()
 
-                print()
-                print(" ###########################")
-                print(f"     NSCL_python ")
-                print(f"tick = {eng.tick}")
-                # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
-                print(f"neurones = {len(eng.network.neurones)}")
-                print(f"synapses = {len(eng.network.synapses)}")
-                print(f"bindings = {eng.defparams['Bindings']}")
-                print(f"levels = {eng.defparams['Levels']}")
-                print(" ###########################")
-                print()
+            print()
+            print(" ###########################")
+            print(f"     NSCL_python ")
+            print(f"tick = {eng.tick}")
+            # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
+            print(f"neurones = {len(eng.network.neurones)}")
+            print(f"synapses = {len(eng.network.synapses)}")
+            print(f"bindings = {eng.defparams['Bindings']}")
+            print(f"levels = {eng.defparams['Levels']}")
+            print(" ###########################")
+            print()
 
         if command[0] in ["tick", "pass", "next"]:
             r = eng.algo([], False)
