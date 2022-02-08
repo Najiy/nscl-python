@@ -1,0 +1,16 @@
+{
+    "Bindings": 2,
+    "Levels": 3,
+    "TraceLength": 60,
+    "FiringThreshold": 0.8,
+    "ZeroingThreshold": 0.1,
+    "DecayCoefficient": 0.7,
+    "InitialPotential": 0.2,
+    "ReinforceRate": 0.3,
+    "PruneInterval": 2592000,
+    "F1": [0.8, 1.0],
+    "F2": [0.12, 6.0],
+    "A": [0.01, 140],
+    "PTP": [0.01, 600],
+    "LTP": [0.01, 30000]
+}

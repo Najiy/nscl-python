@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from re import M
 import sys, csv, os, shutil, time
 from pathlib import Path
 from datetime import datetime
@@ -73,6 +74,10 @@ def compile_sensor(sensor, t):
         unixtime = 0
         minimum = 0
         maximum = 0
+        max2 = 0
+        max3 = 0
+        min2 = 0
+        min3 = 0
         prev = 0
 
         for line in reader:
@@ -120,9 +125,17 @@ def compile_sensor(sensor, t):
                 if records == 1:
                     minimum = value
                     maximum = value
+                    min2 = value
+                    max2 = value
+                    min3 = value
+                    max3 = value
                 elif value < minimum:
+                    min3 = min2
+                    min2 = minimum
                     minimum = value
                 elif value > maximum:
+                    max3 = max2
+                    max2 = maximum
                     maximum = value
 
                 if unixtime < unixoldest and unixtime != 0:
@@ -145,7 +158,11 @@ def compile_sensor(sensor, t):
                         oldest,
                         newest,
                         minimum,
+                        min2,
+                        min3,
                         maximum,
+                        max2,
+                        max3,
                     )
                 # info(sensor, line)
 
@@ -154,17 +171,23 @@ def compile_sensor(sensor, t):
         meta_file = open(sensor_compile_directory + r"\metadata.csv", "a")
 
         meta_file.write(
-            "%s,%s,%s,%s,%s,%s,%s,%s,%s\r"
+            "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r"
             % (
                 sensor[3],
                 records,
                 elapsed,
                 unixoldest,
                 unixnewest,
+
                 oldest,
                 newest,
                 minimum,
+                min2,
+                min3,
+
                 maximum,
+                max2,
+                max3,
             )
         )
 
@@ -191,7 +214,7 @@ with open(sensor_list, "r", newline="") as fhand:
 
         meta_file = open(sensor_compile_directory + r"\metadata.csv", "w")
         meta_file.write(
-            "sensor, records, elapsed, unix_oldest, unix_newest, oldest, newest, minimum, maximum\r"
+            "sensor, records, elapsed, unix_oldest, unix_newest, oldest, newest, minimum, maximum, min2, max2, min3, max3\r"
         )
         meta_file.close()
 
@@ -232,6 +255,11 @@ with open(sensor_list, "r", newline="") as fhand:
         print("min", unix_time_min)
         print("max", unix_time_max)
 
+        # print("min2", )
+        # print("max2", )
+        # print("min3",)
+        # print("max3", )
+
         sensordirs = [
             d
             for d in os.listdir(sensor_compile_directory)
@@ -271,15 +299,15 @@ with open(sensor_list, "r", newline="") as fhand:
             if i not in contents:
                 continue
 
-            line = f'{i},'
+            line = f"{i},"
 
             for s in sensordirs:
                 if s in contents[i]:
-                    line += '%s,' % contents[i][s]
+                    line += "%s," % contents[i][s]
                 else:
-                    line += ','
+                    line += ","
 
-            line += '\r'
+            line += "\r"
             mergedfile.write(line)
 
         mergedfile.close()

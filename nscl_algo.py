@@ -107,12 +107,11 @@ class NSCLAlgo:
         )
 
         reinforce_synapse = []  # enchancement list for if neurones already exists
-        neurones_down_potentials = []
+        # neurones_down_potentials = []
 
         if len(active) > 1:
             for a_set in active:
                 if len(a_set) > 1:
-                    # t = secrets.token_hex(nbytes=16)
                     post_new = f"CMP({','.join(a_set)})"
                     if post_new not in neurones.keys():
                         n = NSCLAlgo.new_NSymbol(eng, name=post_new, lastspike=time)
@@ -125,18 +124,19 @@ class NSCLAlgo:
                         # neurones_down_potentials.append(pre_active)
                         # neurones[pre_active].potential *= 0.3  # G3
 
-        return (reinforce_synapse, neurones_down_potentials)
+        return reinforce_synapse
 
     def functional_plasticity(eng, reinforces, time) -> None:
         # print(" FunctionalPlasticity()")
 
         synapses = eng.network.synapses
+        reinforce_rate = eng.network.params["ReinforceRate"]
         reinforce_synapse = []
 
         for s in reinforces:
             sname = NSCLAlgo.sname(s[0], s[1])
             wgt = synapses[sname].wgt
-            wgt += (1 - wgt) * 0.3  # G5
+            wgt += (1 - wgt) * reinforce_rate  # G5
             synapses[sname].wgt = wgt
             reinforce_synapse.append(f"reinforcing  {sname} {wgt: .4f}")
 
@@ -148,24 +148,19 @@ class NSCLAlgo:
         #     now = datetime.now().isoformat()
         synapses = eng.network.synapses
         neurones = eng.network.neurones
+        params = eng.network.params
         inp_neurones = eng.ineurones()
 
         gen_nsymbol = []
 
-        # generate new input neurones
-        # # GenerateInputNeurones() & FeedInputs()
-        # print(" GenerateInputNeurones() & FeedInputs()")
-
         for i in inputs:
             if i not in neurones.keys():
                 n = NSCLAlgo.new_NSymbol(eng, i)
-                n.potential = 0.2
-                # neurones[i].occurs += 1
+                n.potential = params["InitialPotential"]
                 n.lastspike = eng.tick  # now
                 gen_nsymbol.append(gen_nsymbol)
             elif i in inp_neurones:
                 neurones[i].potential = 1.0
-                # neurones[i].counter = 31
                 neurones[i].occurs += 1
                 neurones[i].lastspike = eng.tick  # now
 
@@ -179,7 +174,7 @@ class NSCLAlgo:
         for n in ns:
             for l in range(eng.network.params["Levels"]):  # G6
                 if n.level == l:
-                    if n.potential > 0.8:
+                    if n.potential >= params["FiringThreshold"]:
                         n.potential = 1.0
                         n.occurs += 1
                         for s in n.fsynapses:
@@ -187,14 +182,17 @@ class NSCLAlgo:
                             neurones[s].potential += (
                                 n.potential * synapses[NSCLAlgo.sname(n.name, s)].wgt
                             )
+                            synapses[NSCLAlgo.sname(n.name, s)].occurs += 1
+                            synapses[NSCLAlgo.sname(n.name, s)].lastspike = eng.tick
                             # ADD TO RE-INFORCE LIST if necessary
                             ## potential decay (leaky for existing neurones)
 
-                    if n.potential < 0.01:
+                    if n.potential < params["ZeroingThreshold"]:
                         n.potential = 0.0
                     else:
                         n.potential *= (  # G1
-                            0.7
+                            params["DecayCoefficient"]
+                            # 0.7
                             # if len(n.fsynapses) == 0
                             # else 0.5 + 0.4 / len(n.fsynapses)
                         )
@@ -202,9 +200,7 @@ class NSCLAlgo:
         # generate neurones and synapses based on tau (spike-time differences)
         # GenerateNeurones() & GenerateSynapses()
         NSCLAlgo.relevel(eng)
-        (rsynapse, downpotentials) = NSCLAlgo.structural_plasticity(
-            eng, time=eng.tick
-        )
+        rsynapse = NSCLAlgo.structural_plasticity(eng, time=eng.tick)
         NSCLAlgo.relevel(eng)
 
         # for d in downpotentials:
@@ -218,9 +214,15 @@ class NSCLAlgo:
 
         # PRUNING
         if prune:
-            for n in neurones:
-                if n.occurs == 1:
-                    eng.remove_neurone(n.name)
+            nlist = [k for k in neurones.keys()]
+            for n in nlist:
+                if (
+                    neurones[n].occurs == 1
+                    and len(neurones[n].rsynapses) > 0
+                    and eng.tick - neurones[n].lastspike > eng.network.params["PruneInterval"]
+                    and eng.network.avg_wgt_r(n) < eng.network.params["FiringThreshold"]
+                ):
+                    eng.remove_neurone(n)
 
         return {
             "trace1": [neurones[n].potential for n in neurones],
