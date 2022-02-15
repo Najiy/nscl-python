@@ -2,6 +2,8 @@
 
 from datetime import date, datetime
 from inspect import trace
+import math
+import hashlib
 
 # from nscl_algo import NSCLAlgo
 # from nscl_algo import NSCLAlgo
@@ -18,7 +20,7 @@ import subprocess
 
 # from subprocess import Popen
 from typing import NewType
-from jinja2.defaults import NEWLINE_SEQUENCE
+# from jinja2.defaults import NEWLINE_SEQUENCE
 
 from networkx.algorithms.planarity import Interval
 from networkx.generators.geometric import random_geometric_graph
@@ -359,19 +361,22 @@ def csvstream(streamfile, trace=False, fname="default"):
 
     del rawdata
 
+
+
+    print(eng.network.hash_id)
     print(start, end)
+    save_range = [x for x in range(start+1, end, int(round((end-start)/10,1)))]
+    print(save_range)
     # print(take(3, data.items()))
-    input("loaded, now processing [enter] ")
+    input("csv dataset loaded, now processing [enter] ")
 
     temp = eng.tick
     eng.tick = start
     maxit = end
 
-    saveit = 0
-    saveat = 604800
-
     # maxit = min(len(inputs) - 1, interv)
     running = True
+    netmeta = open(f"{fname}.netmeta", "w+")
 
     starttime = datetime.now().isoformat(timespec="minutes")
 
@@ -380,20 +385,21 @@ def csvstream(streamfile, trace=False, fname="default"):
             if eng.prune == 0:
                 eng.prune = eng.network.params["PruneInterval"]
             eng.prune -= 1
-            saveit += 1
 
             if eng.tick % 5000 == 0 or eng.tick == maxit or eng.prune == 0:
                 clear()
 
                 print()
                 print(" ###########################")
-                print(f"     NSCL_python \n time = {starttime} ")
-                print(f"tick = {eng.tick}")
+                print(f"     NSCL_python \n {fname}_{eng.tick}")
+                print(f"hashid = {eng.network.hash_id}")
+                print(f"start = {starttime}")
+                print(f"saverange = {save_range}")
                 print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
                 print(f"neurones = {len(eng.network.neurones)}")
                 print(f"synapses = {len(eng.network.synapses)}")
                 print(f"bindings = {eng.network.params['Bindings']}")
-                print(f"levels = {eng.network.params['Levels']}")
+                print(f"proplevel = {eng.network.params['PropagationLevels']}")
                 print(f"npruned = {len(eng.npruned)}")
                 print(f"spruned = {len(eng.spruned)}")
                 print(f"prune_ctick = {eng.prune}")
@@ -408,8 +414,8 @@ def csvstream(streamfile, trace=False, fname="default"):
             if eng.tick == maxit and trace == True:
                 graphout(eng)
 
-            if saveit == saveat or eng.tick == maxit:
-                saveit = 0
+            if eng.tick in save_range:
+                save_range.pop(0)
                 # os.mkdir(f'state{pathdiv}{fname}')
                 # eng.save_state(f'{fname}{pathdiv}{eng.tick}')
                 eng.save_state(f"{fname}_{eng.tick}")
@@ -420,6 +426,7 @@ def csvstream(streamfile, trace=False, fname="default"):
         except KeyboardInterrupt:
             running = False
 
+    netmeta.close()
     eng.tick += temp
 
     print("\n csv streaming done.")
@@ -512,6 +519,18 @@ while True:
         print(f" NSCL.temporal_predict(limits={limits})")
         pp.pprint(npredict.temporal_prediction(eng, inp, limits, verbose=False))
 
+    if command[0] == "prune":
+        ncount = len(eng.network.neurones)
+        scount = len(eng.network.synapses)
+        npcount = len(eng.npruned)
+        spcount = len(eng.spruned)
+        print(f" NSCL.prune()")
+        eng.prune_network()
+        print(f" ncount {ncount} -> {len(eng.network.neurones)}")
+        print(f" scount {scount} -> {len(eng.network.synapses)}")
+        print(f" npcount {npcount} -> {len(eng.npruned)}")
+        print(f" spcount {spcount} -> {len(eng.spruned)}")
+
     if command[0] in ["potsyn", "ptsyn", "struct", "network", "ls"]:
         eng.potsyns()
         print()
@@ -558,7 +577,7 @@ while True:
         print(f"neurones = {len(eng.network.neurones)}")
         print(f"synapses = {len(eng.network.synapses)}")
         print(f"bindings = {eng.network.params['Bindings']}")
-        print(f"levels = {eng.network.params['Levels']}")
+        print(f"PropagationLevels = {eng.network.params['PropagationLevels']}")
         print(f"npruned = {len(eng.npruned)}")
         print(f"spruned = {len(eng.spruned)}")
         print(f"prune_ctick = {eng.prune}")

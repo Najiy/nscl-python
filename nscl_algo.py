@@ -34,6 +34,13 @@ class NSCLAlgo:
         n.potential = potential
         return n
 
+    def new_pruned_NSymbol(eng, name, lastspike="", potential=1.0) -> object:
+        n = nscl.NSCL.NSymbol(name)
+        eng.npruned[name] = n
+        n.lastspike = lastspike
+        n.potential = potential
+        return n
+
     # returns 1 for success, 0 for error, -1 for existed (should be reinforced)
     def new_ssynapse(
         eng, pre_NSymbol, post_NSymbol, wgt=0.01, counter=0, lastspike=""
@@ -61,7 +68,33 @@ class NSCLAlgo:
             post.rsynapses.append(pre_NSymbol)
         return "created"
 
-    def relevel(eng) -> None:
+    def new_pruned_ssynapse(
+        eng, pre_NSymbol, post_NSymbol, wgt=0.01, counter=0, lastspike=""
+    ) -> str:
+        neurones = eng.npruned
+        synapses = eng.spruned
+
+        pre = neurones[pre_NSymbol] if pre_NSymbol in neurones.keys() else None
+        post = neurones[post_NSymbol] if post_NSymbol in neurones.keys() else None
+
+        if not pre or not post or pre_NSymbol == post_NSymbol:
+            print("new synapse error (%s->%s) " % (pre_NSymbol, post_NSymbol))
+            return "error"
+
+        sname = NSCLAlgo.sname(pre_NSymbol, post_NSymbol)
+
+        if sname in synapses:
+            return "reinforce"
+
+        syn = nscl.NSCL.SSynapse(pre_NSymbol, post_NSymbol, wgt, counter, lastspike)
+        eng.network.synapses[syn.name()] = syn
+        if post_NSymbol not in pre.fsynapses:
+            pre.fsynapses.append(post_NSymbol)
+        if pre_NSymbol not in post.rsynapses:
+            post.rsynapses.append(pre_NSymbol)
+        return "created"
+
+    def relevel(eng, clean=True) -> None:
         # print(" Relevel()")
 
         neurones = eng.network.neurones
@@ -76,11 +109,17 @@ class NSCLAlgo:
         for n in neurones:
             if neurones[n].rsynapses == []:
                 neurones[n].level = 0
+            rm = []
             for s in neurones[n].fsynapses:
-                neurones[s].heirarcs.append(1)
+                try:
+                    neurones[s].heirarcs.append(1)
+                except KeyError:
+                    rm.append(s)
+            if len(rm)>0 and clean:
+                neurones[n].fsynapses = [x for x in neurones[n].fsynapses if x not in rm]
 
         # set other levels
-        for i in range(1, eng.network.params["Levels"]):
+        for i in range(1, eng.network.params["PropagationLevels"]):
             for n in neurones:
                 if len(neurones[n].heirarcs) > 0 and neurones[n].level == -1:
                     neurones[n].level = max(neurones[n].heirarcs)
@@ -100,8 +139,8 @@ class NSCLAlgo:
             [
                 n
                 for n in neurones
-                if neurones[n].potential > 0.5
-                and neurones[n].level < eng.network.params["Levels"]  # G2
+                if neurones[n].potential >= eng.network.params["BindingThreshold"]
+                and neurones[n].level < eng.network.params["PropagationLevels"]  # G2
             ],
             eng.network.params["Bindings"],  # G4
         )
@@ -116,7 +155,7 @@ class NSCLAlgo:
                     if post_new not in neurones.keys():
                         n = NSCLAlgo.new_NSymbol(eng, name=post_new, lastspike=time)
                     for pre_active in a_set:
-                        if neurones[pre_active].level == eng.network.params["Levels"]:
+                        if neurones[pre_active].level == eng.network.params["PropagationLevels"]:
                             continue
                         r = NSCLAlgo.new_ssynapse(eng, pre_active, post_new)
                         if r == "reinforce":
@@ -130,7 +169,7 @@ class NSCLAlgo:
         # print(" FunctionalPlasticity()")
 
         synapses = eng.network.synapses
-        reinforce_rate = eng.network.params["ReinforceRate"]
+        reinforce_rate = eng.network.params["ReinforcementRate"]
         reinforce_synapse = []
 
         for s in reinforces:
@@ -172,9 +211,11 @@ class NSCLAlgo:
         # print(" Propagate()")
 
         for n in ns:
-            for l in range(eng.network.params["Levels"]):  # G6
+            for l in range(eng.network.params["PropagationLevels"]):  # G6
                 if n.level == l:
-                    if n.potential >= params["FiringThreshold"]:
+                    if n.potential < params["ZeroingThreshold"]:
+                        n.potential = 0.0
+                    elif n.potential >= params["FiringThreshold"] and n.potential != 1.0:
                         n.potential = 1.0
                         n.occurs += 1
                         for s in n.fsynapses:
@@ -182,20 +223,20 @@ class NSCLAlgo:
                             neurones[s].potential += (
                                 n.potential * synapses[NSCLAlgo.sname(n.name, s)].wgt
                             )
+                            neurones[s].potential = min(n.potential, 1.0)
                             synapses[NSCLAlgo.sname(n.name, s)].occurs += 1
                             synapses[NSCLAlgo.sname(n.name, s)].lastspike = eng.tick
                             # ADD TO RE-INFORCE LIST if necessary
-                            ## potential decay (leaky for existing neurones)
 
-                    if n.potential < params["ZeroingThreshold"]:
-                        n.potential = 0.0
+                    ## potential decay (leaky for existing neurones)
                     else:
                         n.potential *= (  # G1
-                            params["DecayCoefficient"]
-                            # 0.7
-                            # if len(n.fsynapses) == 0
-                            # else 0.5 + 0.4 / len(n.fsynapses)
-                        )
+                        params["DecayCoefficient"]
+                        # 0.7
+                        # if len(n.fsynapses) == 0
+                        # else 0.5 + 0.4 / len(n.fsynapses)
+                    )
+                
 
         # generate neurones and synapses based on tau (spike-time differences)
         # GenerateNeurones() & GenerateSynapses()
@@ -207,26 +248,18 @@ class NSCLAlgo:
         #     neurones[d].potential *= 0.9  # G3 (leaky for new neurones)
 
         # ReinforceSynapses()
-        (reinforce_synapse) = NSCLAlgo.functional_plasticity(eng, rsynapse, eng.tick)
+        reinforce_synapse = NSCLAlgo.functional_plasticity(eng, rsynapse, eng.tick)
         # NSCLAlgo.relevel(eng)
 
         # print("}")
 
         # PRUNING
         if prune:
-            nlist = [k for k in neurones.keys()]
-            for n in nlist:
-                if (
-                    neurones[n].occurs == 1
-                    and len(neurones[n].rsynapses) > 0
-                    and eng.tick - neurones[n].lastspike > eng.network.params["PruneInterval"]
-                    and eng.network.avg_wgt_r(n) < eng.network.params["FiringThreshold"]
-                ):
-                    eng.remove_neurone(n)
+            eng.prune_network()
 
         return {
             "trace1": [neurones[n].potential for n in neurones],
-            "rsynapse": reinforce_synapse,
+            "rsynapse": reinforce_synapse
             # "new_nsymbol": ,
             # "new_syn": ,
         }

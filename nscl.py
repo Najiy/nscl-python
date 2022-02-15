@@ -1,11 +1,15 @@
 # from main import networkx
+from asyncio.windows_events import NULL
+from curses.ascii import NUL
 from genericpath import getsize
 from inspect import trace
 from pickle import NONE
 from nscl_algo import NSCLAlgo
 from datetime import date, datetime
+import copy
 import json
 import os, sys, psutil
+import hashlib
 
 pathdiv = ""
 
@@ -54,6 +58,8 @@ class NSCL:
 
     class Network:
         def __init__(self, params={}) -> None:
+            self.ititialised = datetime.now().isoformat(timespec="minutes")
+            self.hash_id = hashlib.md5(self.ititialised.encode()).hexdigest()
             self.neurones = {}
             self.synapses = {}
             infile = open(f"defparams.json", "r")
@@ -108,6 +114,17 @@ class NSCL:
 
         def params(self) -> dict:
             return self.network.params
+
+        def prune_network(self) -> None:
+            nlist = [k for k in self.network.neurones.keys()]
+            for n in nlist:
+                if (
+                    self.network.neurones[n].occurs == 1
+                    and len(self.network.neurones[n].rsynapses) > 0
+                    and self.tick - self.network.neurones[n].lastspike > self.network.params["PruneInterval"]
+                    and self.network.avg_wgt_r(n) < self.network.params["FiringThreshold"]
+                ):
+                    self.remove_neurone(n)
 
         def algo(self, input, trace, now=None, prune=False) -> list:
             r = self._algo(self, input, now=now, prune=prune)
@@ -166,28 +183,29 @@ class NSCL:
         def new_sneurone(self, name) -> object:
             return NSCLAlgo.new_NSymbol(self, name)
 
+        def new_pruned_sneurone(self, name) -> object:
+            return NSCLAlgo.new_pruned_NSymbol(self, name)
+
         def remove_neurone(self, name) -> object:
             # try:
             n = self.network.neurones[name]
-            rmf = []
-            rmr = []
             for f in n.fsynapses:
-                nf = self.network.neurones[f.fref]
+                nf = self.network.neurones[f]
                 if name in nf.rsynapses:
-                    sn = NSCLAlgo.sname(name, f.fref)
-                    self.spruned[sn] = self.network.synapses.pop(sn)
-                    rmf.append(f)
-            n.fsynapses = [x for x in n.fsynapses if x not in rmf]
+                    sn = NSCLAlgo.sname(name, f)
+                    self.spruned[sn] = copy.deepcopy(self.network.synapses[sn])
+                    del self.network.synapses[sn]
+                    nf.rsynapses.remove(name)
             for r in n.rsynapses:
                 nr = self.network.neurones[r]
-                if name in nr.rsynapses:
+                if name in nr.fsynapses:
                     sn = NSCLAlgo.sname(r, name)
-                    self.spruned[sn] = self.network.synapses.pop(sn)
-                    rmr.append(r)
-            n.rsynapses = [x for x in n.rsynapses if x not in rmr]
-            delneurone = self.network.neurones.pop(name)
-            print(delneurone)
-            self.npruned[delneurone.name] = delneurone
+                    self.spruned[sn] = copy.deepcopy(self.network.synapses[sn])
+                    del self.network.synapses[sn]
+                    nr.fsynapses.remove(name)
+            delneurone = copy.deepcopy(self.network.neurones[name])
+            self.npruned[name] = delneurone
+            del self.network.neurones[name]
             return delneurone
             # except:
             #     input("remove failed")
@@ -196,6 +214,13 @@ class NSCL:
             self, pre_sneurone, post_sneurone, wgt=0.01, counter=0, lastspike=""
         ) -> bool:
             NSCLAlgo.new_ssynapse(
+                self, pre_sneurone, post_sneurone, wgt, counter, lastspike
+            )
+
+        def new_pruned_ssynapse(
+            self, pre_sneurone, post_sneurone, wgt=0.01, counter=0, lastspike=""
+        ) -> bool:
+            NSCLAlgo.new_pruned_ssynapse(
                 self, pre_sneurone, post_sneurone, wgt, counter, lastspike
             )
 
@@ -289,6 +314,14 @@ class NSCL:
             outfile = open(rpath + f"{pathdiv}traces.json", "w+")
             json.dump(otraces, outfile, indent=4)
 
+            timestamp = datetime.now().isoformat(timespec="minutes").replace("T"," ")
+            # netmeta = open(rpath + f"{pathdiv}netmeta.csv", "a")
+            netmeta = open( f"states{pathdiv}netmeta.csv", "a")
+            inputs = len([x for x in self.network.neurones if len(self.network.neurones[x].rsynapses) ==0])
+            composites = len([x for x in self.network.neurones if len(self.network.neurones[x].rsynapses) > 0])
+            netmeta.write(f"{fname},{self.network.hash_id},{timestamp},{self.tick},{len(self.network.neurones)},{len(self.network.synapses)},{len(self.npruned)},{len(self.spruned)},{inputs},{composites}\n")
+            netmeta.close()
+
         def load_state(self, fname) -> None:
 
             rpath = f"states{pathdiv}%s" % fname
@@ -325,8 +358,25 @@ class NSCL:
                     pre, post, sprop["wgt"], sprop["counter"], sprop["lastspike"]
                 )
 
-            self.npruned = load_state["npruned"]
-            self.spruned = load_state["spruned"]
+            for nprop in load_state["npruned"]:
+                self.new_pruned_sneurone(nprop["name"])
+                n = self.network.neurones[nprop["name"]]
+                n.potential = nprop["potential"]
+                n.fsynapses = nprop["fsynapses"]
+                n.rsynapses = nprop["rsynapses"]
+                n.lastspike = nprop["lastspike"]
+                n.occurs = nprop["occurs"]
+                n.heirarcs = nprop["heirarcs"]
+
+            for sprop in load_state["spruned"]:
+                pre = sprop["rref"]
+                post = sprop["fref"]
+                self.new_pruned_ssynapse(
+                    pre, post, sprop["wgt"], sprop["counter"], sprop["lastspike"]
+                )
+
+            # self.npruned = load_state["npruned"]
+            # self.spruned = load_state["spruned"]
 
             # s = eng.network.synapses[NSCLAlgo.sname(pre, post)]
             # self.network.neurones = content["neurones"]

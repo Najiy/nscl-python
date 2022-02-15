@@ -2,7 +2,6 @@
     "neurones": [
         {
             "name": "4~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [
                 "CMP(11~1,4~1,7~1)",
@@ -10,12 +9,11 @@
             ],
             "rsynapses": [],
             "lastspike": 1583883592,
-            "occurs": 12667,
+            "occurs": 6334,
             "heirarcs": []
         },
         {
             "name": "4~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [
                 "CMP(11~0,4~0,7~0)",
@@ -23,24 +21,22 @@
             ],
             "rsynapses": [],
             "lastspike": 1583883594,
-            "occurs": 12649,
+            "occurs": 6325,
             "heirarcs": []
         },
         {
             "name": "11~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [
                 "CMP(11~1,4~1,7~1)"
             ],
             "rsynapses": [],
             "lastspike": 1583883651,
-            "occurs": 11639,
+            "occurs": 5820,
             "heirarcs": []
         },
         {
             "name": "11~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [
                 "CMP(11~0,4~0,7~0)",
@@ -50,12 +46,11 @@
             ],
             "rsynapses": [],
             "lastspike": 1583883654,
-            "occurs": 11615,
+            "occurs": 5808,
             "heirarcs": []
         },
         {
             "name": "7~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [
                 "CMP(11~1,4~1,7~1)",
@@ -65,146 +60,132 @@
             ],
             "rsynapses": [],
             "lastspike": 1583884173,
-            "occurs": 12767,
+            "occurs": 6384,
             "heirarcs": []
         },
         {
             "name": "7~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [
                 "CMP(11~0,4~0,7~0)"
             ],
             "rsynapses": [],
             "lastspike": 1583884176,
-            "occurs": 12751,
+            "occurs": 6376,
             "heirarcs": []
         },
         {
             "name": "14~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583883618,
-            "occurs": 24575,
+            "occurs": 12288,
             "heirarcs": []
         },
         {
             "name": "14~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [
                 "CMP(11~0,14~0,7~1)"
             ],
             "rsynapses": [],
             "lastspike": 1583883620,
-            "occurs": 24495,
+            "occurs": 12248,
             "heirarcs": []
         },
         {
             "name": "13~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583074861,
-            "occurs": 77,
+            "occurs": 39,
             "heirarcs": []
         },
         {
             "name": "13~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583074865,
-            "occurs": 77,
+            "occurs": 39,
             "heirarcs": []
         },
         {
             "name": "22~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583883611,
-            "occurs": 5611,
+            "occurs": 2806,
             "heirarcs": []
         },
         {
             "name": "22~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583883613,
-            "occurs": 5611,
+            "occurs": 2806,
             "heirarcs": []
         },
         {
             "name": "17~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583857212,
-            "occurs": 245,
+            "occurs": 123,
             "heirarcs": []
         },
         {
             "name": "17~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583857236,
-            "occurs": 245,
+            "occurs": 123,
             "heirarcs": []
         },
         {
             "name": "21~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1582827705,
-            "occurs": 5,
+            "occurs": 3,
             "heirarcs": []
         },
         {
             "name": "21~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1582897883,
-            "occurs": 23,
+            "occurs": 12,
             "heirarcs": []
         },
         {
             "name": "1~1",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583014102,
-            "occurs": 39,
+            "occurs": 20,
             "heirarcs": []
         },
         {
             "name": "1~0",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [],
             "lastspike": 1583014119,
-            "occurs": 39,
+            "occurs": 20,
             "heirarcs": []
         },
         {
             "name": "CMP(11~1,4~1,7~1)",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [
@@ -213,7 +194,7 @@
                 "7~1"
             ],
             "lastspike": 1582884431,
-            "occurs": 2,
+            "occurs": 1,
             "heirarcs": [
                 1,
                 1,
@@ -222,7 +203,6 @@
         },
         {
             "name": "CMP(11~0,4~0,7~0)",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [
@@ -231,7 +211,7 @@
                 "7~0"
             ],
             "lastspike": 1582884437,
-            "occurs": 2,
+            "occurs": 1,
             "heirarcs": [
                 1,
                 1,
@@ -240,7 +220,6 @@
         },
         {
             "name": "CMP(11~0,14~0,7~1)",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [
@@ -249,7 +228,7 @@
                 "7~1"
             ],
             "lastspike": 1582900204,
-            "occurs": 2,
+            "occurs": 1,
             "heirarcs": [
                 1,
                 1,
@@ -258,7 +237,6 @@
         },
         {
             "name": "CMP(11~0,4~1,7~1)",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [
@@ -267,7 +245,7 @@
                 "7~1"
             ],
             "lastspike": 1582918646,
-            "occurs": 2,
+            "occurs": 1,
             "heirarcs": [
                 1,
                 1,
@@ -276,7 +254,6 @@
         },
         {
             "name": "CMP(11~0,4~0,7~1)",
-            "counter": 0,
             "potential": 0.0,
             "fsynapses": [],
             "rsynapses": [
@@ -285,7 +262,7 @@
                 "7~1"
             ],
             "lastspike": 1583662104,
-            "occurs": 2,
+            "occurs": 1,
             "heirarcs": [
                 1,
                 1,
@@ -298,147 +275,121 @@
             "fref": "CMP(11~1,4~1,7~1)",
             "rref": "11~1",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~1,4~1,7~1)",
             "rref": "4~1",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~1,4~1,7~1)",
             "rref": "7~1",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~0,7~0)",
             "rref": "11~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~0,7~0)",
             "rref": "4~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~0,7~0)",
             "rref": "7~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,14~0,7~1)",
             "rref": "11~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,14~0,7~1)",
             "rref": "14~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,14~0,7~1)",
             "rref": "7~1",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~1,7~1)",
             "rref": "11~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~1,7~1)",
             "rref": "4~1",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~1,7~1)",
             "rref": "7~1",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~0,7~1)",
             "rref": "11~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~0,7~1)",
             "rref": "4~0",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         },
         {
             "fref": "CMP(11~0,4~0,7~1)",
             "rref": "7~1",
             "wgt": 0.01,
-            "counter": 0,
+            "occurs": 0,
             "lastspike": ""
         }
     ],
+    "npruned": [],
+    "spruned": [],
     "params": {
-        "F1": [
-            0.8,
-            1.0
-        ],
-        "F2": [
-            0.12,
-            6.0
-        ],
-        "A": [
-            0.01,
-            140
-        ],
-        "PTP": [
-            0.01,
-            600
-        ],
-        "LTP": [
-            0.01,
-            30000
-        ],
         "Bindings": 3,
-        "Levels": 2,
-        "TraceLength": 60,
-        "TimeConstant": [
-            3
-        ],
-        "FiringThreshold": [
-            0.5
-        ],
-        "MaxPropagation": [
-            6
-        ],
-        "DecayCoefficient": [
-            0.2
-        ],
-        "PruneInterval": [
-            2592000
-        ]
+        "PropagationLevels": 2,
+        "BindingThreshold": 0.6,
+        "FiringThreshold": 0.8,
+        "ZeroingThreshold": 0.1,
+        "DecayCoefficient": 0.7,
+        "InitialPotential": 0.2,
+        "ReinforcementRate": 0.3,
+        "PruneInterval": 2592000,
+        "TraceLength": 60
     },
     "tick": 1583884800
 }
