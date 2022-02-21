@@ -181,7 +181,7 @@ class NSCLAlgo:
 
         return reinforce_synapse
 
-    def algo1(eng, inputs, verbose=True, now=None, prune=False) -> list:
+    def algo1(eng, inputs, prune=False) -> list:
         # print("Algo {")
         # if now == None:
         #     now = datetime.now().isoformat()
@@ -200,7 +200,7 @@ class NSCLAlgo:
                 gen_nsymbol.append(gen_nsymbol)
             elif i in inp_neurones:
                 neurones[i].potential = 1.0
-                neurones[i].occurs += 1
+                # neurones[i].occurs += 1
                 neurones[i].lastspike = eng.tick  # now
 
         NSCLAlgo.relevel(eng)
@@ -215,8 +215,9 @@ class NSCLAlgo:
                 if n.level == l:
                     if n.potential < params["ZeroingThreshold"]:
                         n.potential = 0.0
-                    elif n.potential >= params["FiringThreshold"] and n.potential != 1.0:
+                    elif n.potential >= params["FiringThreshold"] and n.refractory == 0: # and n.potential != 1.0:
                         n.potential = 1.0
+                        n.refractory = params["RefractoryPeriod"]
                         n.occurs += 1
                         for s in n.fsynapses:
                             ## forwards potentials
@@ -228,14 +229,16 @@ class NSCLAlgo:
                             synapses[NSCLAlgo.sname(n.name, s)].lastspike = eng.tick
                             # ADD TO RE-INFORCE LIST if necessary
 
-                    ## potential decay (leaky for existing neurones)
+                        n.potential *= params["PostSpikeFactor"]
                     else:
                         n.potential *= (  # G1
-                        params["DecayCoefficient"]
+                        params["DecayFactor"]
                         # 0.7
                         # if len(n.fsynapses) == 0
                         # else 0.5 + 0.4 / len(n.fsynapses)
                     )
+                if n.refractory > 0:
+                        n.refractory =- 1
                 
 
         # generate neurones and synapses based on tau (spike-time differences)

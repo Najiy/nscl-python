@@ -317,7 +317,7 @@ def stream(streamfile, trace=True):
             print(" ###########################")
             print()
 
-            eng.algo(inputs[eng.tick], trace)
+            eng.algo(inputs[eng.tick],meta, trace)
 
             if eng.tick == maxit:
                 graphout(eng)
@@ -407,15 +407,15 @@ def csvstream(streamfile, trace=False, fname="default"):
                 print()
 
             if eng.tick not in data:
-                eng.algo([], trace, now=eng.tick, prune=eng.prune == 0)
+                eng.algo([], prune=eng.prune == 0)
             else:
-                eng.algo(data[eng.tick], trace, now=eng.tick, prune=eng.prune == 0)
+                eng.algo(data[eng.tick], prune=eng.prune == 0)
 
             if eng.tick == maxit and trace == True:
                 graphout(eng)
 
             if eng.tick in save_range:
-                save_range.pop(0)
+                save_range.remove(eng.tick)
                 # os.mkdir(f'state{pathdiv}{fname}')
                 # eng.save_state(f'{fname}{pathdiv}{eng.tick}')
                 eng.save_state(f"{fname}_{eng.tick}")
@@ -585,7 +585,7 @@ while True:
         print()
 
     if command[0] in ["tick", "pass", "next"]:
-        r = eng.algo([], False)
+        r = eng.algo([],{}, False)
         print(" reinf %s " % r["rsynapse"])
 
     if command[0] == "exit":

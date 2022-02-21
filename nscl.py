@@ -21,8 +21,9 @@ elif os.name == "nt":
 
 class NSCL:
     class NSymbol:
-        def __init__(self, name, occurs=1, potential=0, lastspike="") -> None:
+        def __init__(self, name, occurs=1, potential=0, refractory=0, lastspike="") -> None:
             self.name = name
+            self.meta = {}
             # self.pot = [0 for i in range(0,NSCL.defparams['TrainLength'])]
             self.potential = potential
             # self.pot2 = 0
@@ -30,6 +31,7 @@ class NSCL:
             self.fsynapses = []
             self.rsynapses = []
             self.lastspike = lastspike
+            self.refractory = refractory
             self.occurs = occurs
             self.heirarcs = []
             # self.level = -1
@@ -126,8 +128,8 @@ class NSCL:
                 ):
                     self.remove_neurone(n)
 
-        def algo(self, input, trace, now=None, prune=False) -> list:
-            r = self._algo(self, input, now=now, prune=prune)
+        def algo(self, inputs, prune=False) -> list:
+            r = self._algo(self, inputs, prune=prune)
             it = self.tick
 
             if trace:
