@@ -1,3 +1,6 @@
+from decimal import DivisionByZero
+from http import server
+from matplotlib import scale
 from numpy import string_
 import nscl
 import math
@@ -115,8 +118,10 @@ class NSCLAlgo:
                     neurones[s].heirarcs.append(1)
                 except KeyError:
                     rm.append(s)
-            if len(rm)>0 and clean:
-                neurones[n].fsynapses = [x for x in neurones[n].fsynapses if x not in rm]
+            if len(rm) > 0 and clean:
+                neurones[n].fsynapses = [
+                    x for x in neurones[n].fsynapses if x not in rm
+                ]
 
         # set other levels
         for i in range(1, eng.network.params["PropagationLevels"]):
@@ -155,7 +160,10 @@ class NSCLAlgo:
                     if post_new not in neurones.keys():
                         n = NSCLAlgo.new_NSymbol(eng, name=post_new, lastspike=time)
                     for pre_active in a_set:
-                        if neurones[pre_active].level == eng.network.params["PropagationLevels"]:
+                        if (
+                            neurones[pre_active].level
+                            == eng.network.params["PropagationLevels"]
+                        ):
                             continue
                         r = NSCLAlgo.new_ssynapse(eng, pre_active, post_new)
                         if r == "reinforce":
@@ -181,10 +189,26 @@ class NSCLAlgo:
 
         return reinforce_synapse
 
-    def algo1(eng, inputs, prune=False) -> list:
+    def normaliser(data, minn, maxx, scaling=1):
+        try:
+            return (data - minn) / (maxx - minn) * scaling
+        except DivisionByZero:
+            return 0
+    
+    def denormaliser(ndata, minn, maxx, scaling):
+        try: 
+            return ndata * (maxx - minn) / scaling + minn
+        except DivisionByZero:
+            return 0
+
+    def algo1(eng, inputs, meta={}, prune=False) -> list:
         # print("Algo {")
         # if now == None:
         #     now = datetime.now().isoformat()
+        if meta != {}:
+            for m in meta:
+                eng.meta[m] = meta[m]
+
         synapses = eng.network.synapses
         neurones = eng.network.neurones
         params = eng.network.params
@@ -193,6 +217,22 @@ class NSCLAlgo:
         gen_nsymbol = []
 
         for i in inputs:
+            # sensor = i.split("~")
+            # name = sensor[0]
+            # value = float(sensor[1])
+
+            # maxx = eng.network.params["DefaultEncoderCeiling"]
+            # minn = eng.network.params["DefaultEncoderFloor"]
+            # res = eng.network.params["DefaultEncoderResolution"]
+
+            # if name in eng.meta:
+            #     maxx = eng.meta[name]["max"]
+            #     minn = eng.meta[name]["min"]
+            #     res = eng.meta[name]["res"]
+
+            # newval = math.floor(NSCLAlgo.normaliser(value, minn, maxx, res))
+            # symb = f"{name}~{newval}-{newval+1}"
+
             if i not in neurones.keys():
                 n = NSCLAlgo.new_NSymbol(eng, i)
                 n.potential = params["InitialPotential"]
@@ -215,7 +255,9 @@ class NSCLAlgo:
                 if n.level == l:
                     if n.potential < params["ZeroingThreshold"]:
                         n.potential = 0.0
-                    elif n.potential >= params["FiringThreshold"] and n.refractory == 0: # and n.potential != 1.0:
+                    elif (
+                        n.potential >= params["FiringThreshold"] and n.refractory == 0
+                    ):  # and n.potential != 1.0:
                         n.potential = 1.0
                         n.refractory = params["RefractoryPeriod"]
                         n.occurs += 1
@@ -232,14 +274,13 @@ class NSCLAlgo:
                         n.potential *= params["PostSpikeFactor"]
                     else:
                         n.potential *= (  # G1
-                        params["DecayFactor"]
-                        # 0.7
-                        # if len(n.fsynapses) == 0
-                        # else 0.5 + 0.4 / len(n.fsynapses)
-                    )
+                            params["DecayFactor"]
+                            # 0.7
+                            # if len(n.fsynapses) == 0
+                            # else 0.5 + 0.4 / len(n.fsynapses)
+                        )
                 if n.refractory > 0:
-                        n.refractory =- 1
-                
+                    n.refractory = -1
 
         # generate neurones and synapses based on tau (spike-time differences)
         # GenerateNeurones() & GenerateSynapses()

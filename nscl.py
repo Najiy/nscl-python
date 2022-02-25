@@ -1,6 +1,7 @@
 # from main import networkx
 from asyncio.windows_events import NULL
 from curses.ascii import NUL
+from email import header
 from genericpath import getsize
 from inspect import trace
 from pickle import NONE
@@ -21,7 +22,9 @@ elif os.name == "nt":
 
 class NSCL:
     class NSymbol:
-        def __init__(self, name, occurs=1, potential=0, refractory=0, lastspike="") -> None:
+        def __init__(
+            self, name, occurs=1, potential=0, refractory=0, lastspike=""
+        ) -> None:
             self.name = name
             self.meta = {}
             # self.pot = [0 for i in range(0,NSCL.defparams['TrainLength'])]
@@ -96,7 +99,7 @@ class NSCL:
             return str(self.structure())
 
     class Engine:
-        def __init__(self, network=None, algorithm=None) -> None:
+        def __init__(self, network=None, meta={}, algorithm=None) -> None:
             self.network = NSCL.Network() if network == None else network
             self.npruned = {}
             self.spruned = {}
@@ -106,7 +109,11 @@ class NSCL:
             self.ncounts = []
             self.nmask = []
             self.tick = 0
+            self.meta = {**meta}
             self.prune = self.network.params["PruneInterval"]
+
+        def params(self) -> object:
+            return self.network.params
 
         def clear_traces(self) -> None:
             self.traces = []
@@ -123,13 +130,15 @@ class NSCL:
                 if (
                     self.network.neurones[n].occurs == 1
                     and len(self.network.neurones[n].rsynapses) > 0
-                    and self.tick - self.network.neurones[n].lastspike > self.network.params["PruneInterval"]
-                    and self.network.avg_wgt_r(n) < self.network.params["FiringThreshold"]
+                    and self.tick - self.network.neurones[n].lastspike
+                    > self.network.params["PruneInterval"]
+                    and self.network.avg_wgt_r(n)
+                    < self.network.params["FiringThreshold"]
                 ):
                     self.remove_neurone(n)
 
-        def algo(self, inputs, prune=False) -> list:
-            r = self._algo(self, inputs, prune=prune)
+        def algo(self, inputs, meta = {}, prune=False) -> list:
+            r = self._algo(self, inputs, meta, prune=prune)
             it = self.tick
 
             if trace:
@@ -316,12 +325,35 @@ class NSCL:
             outfile = open(rpath + f"{pathdiv}traces.json", "w+")
             json.dump(otraces, outfile, indent=4)
 
-            timestamp = datetime.now().isoformat(timespec="minutes").replace("T"," ")
-            # netmeta = open(rpath + f"{pathdiv}netmeta.csv", "a")
-            netmeta = open( f"states{pathdiv}netmeta.csv", "a")
-            inputs = len([x for x in self.network.neurones if len(self.network.neurones[x].rsynapses) ==0])
-            composites = len([x for x in self.network.neurones if len(self.network.neurones[x].rsynapses) > 0])
-            netmeta.write(f"{fname},{self.network.hash_id},{timestamp},{self.tick},{len(self.network.neurones)},{len(self.network.synapses)},{len(self.npruned)},{len(self.spruned)},{inputs},{composites}\n")
+            timestamp = datetime.now().isoformat(timespec="minutes").replace("T", " ")
+            # netmeta = open(rpath + f"{pathdiv}networks.meta", "a")
+            
+            netmetapath = f"states{pathdiv}networks.meta"
+            headers = True
+            if os.path.exists(netmetapath):
+                headers = False
+            netmeta = open(netmetapath, "a")
+
+            if headers:
+                netmeta.write("name,hashid,time,tick,neurones,synapses,npruned,spruned,inputs,composites\n")
+
+            inputs = len(
+                [
+                    x
+                    for x in self.network.neurones
+                    if len(self.network.neurones[x].rsynapses) == 0
+                ]
+            )
+            composites = len(
+                [
+                    x
+                    for x in self.network.neurones
+                    if len(self.network.neurones[x].rsynapses) > 0
+                ]
+            )
+            netmeta.write(
+                f"{fname},{self.network.hash_id},{timestamp},{self.tick},{len(self.network.neurones)},{len(self.network.synapses)},{len(self.npruned)},{len(self.spruned)},{inputs},{composites}\n"
+            )
             netmeta.close()
 
         def load_state(self, fname) -> None:

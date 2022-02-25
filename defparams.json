@@ -1,9 +1,9 @@
 {
-    "Bindings": 4,
-    "PropagationLevels": 4,
-    "PruneInterval": 2592000,
-
+    "Bindings": 2,
+    "PropagationLevels": 3,
+    "PruneInterval": 1209600,
     "BindingThreshold": 0.6,
+    
     "FiringThreshold": 0.8,
     "ZeroingThreshold": 0.1,
     "DecayFactor": 0.7,
@@ -12,7 +12,9 @@
     "RefractoryPeriod": 3,
     "PostSpikeFactor": 1.0,
 
-    "stuff": 0,
+    "DefaultEncoderCeiling": 1024,
+    "DefaultEncoderFloor": 0,
+    "DefaultEncoderResolution": 2,
 
     "TraceLength": 60
 }

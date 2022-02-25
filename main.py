@@ -1,7 +1,10 @@
 #!/usr/bin/python
 
+from curses import meta
 from datetime import date, datetime
+from decimal import DivisionByZero
 from inspect import trace
+from re import search
 import math
 import hashlib
 
@@ -20,6 +23,7 @@ import subprocess
 
 # from subprocess import Popen
 from typing import NewType
+
 # from jinja2.defaults import NEWLINE_SEQUENCE
 
 from networkx.algorithms.planarity import Interval
@@ -317,7 +321,7 @@ def stream(streamfile, trace=True):
             print(" ###########################")
             print()
 
-            eng.algo(inputs[eng.tick],meta, trace)
+            eng.algo(inputs[eng.tick], meta, trace)
 
             if eng.tick == maxit:
                 graphout(eng)
@@ -330,30 +334,68 @@ def stream(streamfile, trace=True):
     print("\n\n test streaming done.")
     print()
 
+def normaliser(data, minn, maxx, scaling=1):
+    try:
+        return (data - minn) / (maxx - minn) * scaling
+    except DivisionByZero:
+        return 0
 
-def csvstream(streamfile, trace=False, fname="default"):
+def csvstream(streamfile, metafile, trace=False, fname="default"):
     def take(n, iterable):
         # "Return first n items of the iterable as a list"
         return list(islice(iterable, n))
 
     data = {}
 
+    metafile = open(metafile, "r")
+    headers = metafile.readline().split(",")
+    metadata = metafile.readlines()
+
+    for line in metadata:
+        row = line.split(",")
+        eng.meta[row[0]] = {
+            "min": float(row[7]),
+            "max": float(row[10]),
+            "res": float(eng.network.params["DefaultEncoderResolution"])
+        }
+        # eng.meta[row[0]] = {
+        #     "min": eng.network.params["DefaultEncoderFloor"],
+        #     "max": eng.network.params["DefaultEncoderCeiling"],
+        #     "res": eng.network.params["DefaultEncoderResolution"],
+        # }
+
     file = open(streamfile, "r")
     sensors = file.readline().split(",")[1:]
     rawdata = file.readlines()
 
+    # for line in rawdata:
+    #     sline = line.replace("\n", "").split(",")
+    #     for i in range(1, 1 + len(sensors)):
+    #         if sline[i] != "": ## filters sensors
+    #             sline[i] = f"{sensors[i-1]}~{sline[i]}"
+    #     data[int(sline[0])] = [x for x in sline[1:] if x != ""]
+
     for line in rawdata:
         sline = line.replace("\n", "").split(",")
         for i in range(1, 1 + len(sensors)):
-            if sline[i] != "":
-                if (
-                    float(sline[i]) != 0.0
-                    and float(sline[i]) != 1.0
-                    and float(sline[i]) != -1.0
-                ):
+            if sline[i] != "": ## filters sensors
+                name = sensors[i-1]
+                value = float(sline[i])
+
+                if search("current", name) or search("humidity", name) or search("temperature", name):
                     sline[i] = ""
                 else:
-                    sline[i] = f"{i}~{sline[i]}"
+                    maxx = eng.network.params["DefaultEncoderCeiling"]
+                    minn = eng.network.params["DefaultEncoderFloor"]
+                    res = eng.network.params["DefaultEncoderResolution"]
+
+                    if name in eng.meta:
+                        maxx = eng.meta[name]["max"]
+                        minn = eng.meta[name]["min"]
+                        res = eng.meta[name]["res"]
+
+                    newval = math.floor(normaliser(value, minn, maxx, res))
+                    sline[i] = f"{name}~{newval}-{newval+1}"
         data[int(sline[0])] = [x for x in sline[1:] if x != ""]
 
     start = int(rawdata[0].split(",")[0])
@@ -361,11 +403,12 @@ def csvstream(streamfile, trace=False, fname="default"):
 
     del rawdata
 
-
+    # for i, v in enumerate(eng.meta):
+    #     print(i, v["min"], v["max"], v["res"])
 
     print(eng.network.hash_id)
     print(start, end)
-    save_range = [x for x in range(start+1, end, int(round((end-start)/10,1)))]
+    save_range = [x for x in range(start + 1, end, int(round((end - start) / 20, 1)))]
     print(save_range)
     # print(take(3, data.items()))
     input("csv dataset loaded, now processing [enter] ")
@@ -376,7 +419,7 @@ def csvstream(streamfile, trace=False, fname="default"):
 
     # maxit = min(len(inputs) - 1, interv)
     running = True
-    netmeta = open(f"{fname}.netmeta", "w+")
+    # netmeta = open(f"{fname}.netmeta", "w+")
 
     starttime = datetime.now().isoformat(timespec="minutes")
 
@@ -426,7 +469,7 @@ def csvstream(streamfile, trace=False, fname="default"):
         except KeyboardInterrupt:
             running = False
 
-    netmeta.close()
+    # netmeta.close()
     eng.tick += temp
 
     print("\n csv streaming done.")
@@ -493,11 +536,11 @@ while True:
 
     if command[0] == "csvstream_traced":
         print(" streaming csv dataset as input - %s" % command[1])
-        csvstream(command[1], True, command[2])
+        csvstream(command[1],command[2], True, command[3])
 
     if command[0] == "csvstream":
         print(" streaming csv dataset as input - %s" % command[1])
-        csvstream(command[1], False, command[2])
+        csvstream(command[1], command[2], False, command[3])
 
     if command[0] in ["tracepaths", "trace", "traces", "paths", "path"]:
         limits = float(command[1])
@@ -573,6 +616,7 @@ while True:
         print(" ###########################")
         print(f"     NSCL_python ")
         print(f"tick = {eng.tick}")
+        print(f"hashid = {eng.network.hash_id}")
         # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
         print(f"neurones = {len(eng.network.neurones)}")
         print(f"synapses = {len(eng.network.synapses)}")
@@ -585,7 +629,7 @@ while True:
         print()
 
     if command[0] in ["tick", "pass", "next"]:
-        r = eng.algo([],{}, False)
+        r = eng.algo([], {}, False)
         print(" reinf %s " % r["rsynapse"])
 
     if command[0] == "exit":

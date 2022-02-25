@@ -168,7 +168,7 @@ def compile_sensor(sensor, t):
 
         elapsed = (time.time() - tstart) / 60
 
-        meta_file = open(sensor_compile_directory + r"\metadata.csv", "a")
+        meta_file = open(sensor_compile_directory + r"\sensors.meta", "a")
 
         meta_file.write(
             "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r"
@@ -212,7 +212,7 @@ with open(sensor_list, "r", newline="") as fhand:
 
         os.mkdir(sensor_compile_directory)
 
-        meta_file = open(sensor_compile_directory + r"\metadata.csv", "w")
+        meta_file = open(sensor_compile_directory + r"\sensors.meta", "w")
         meta_file.write(
             "sensor, records, elapsed, unix_oldest, unix_newest, oldest, newest, minimum, maximum, min2, max2, min3, max3\r"
         )
@@ -243,7 +243,7 @@ with open(sensor_list, "r", newline="") as fhand:
     if data_merge == "y":
 
         meta_data = pd.read_csv(
-            sensor_compile_directory + r"\metadata.csv",
+            sensor_compile_directory + r"\sensors.meta",
             # sep="\r",
             delimiter=",",
             dtype={" unix_oldest": np.float64, " unix_newest": np.int32},

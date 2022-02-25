@@ -93,7 +93,7 @@ def neurone_profile(fname="defparams.json"):
         return (x, y, x_t, y_t, x_z, y_z)  # ,xnew, f_cubic(xnew))
 
 
-def compilenetmetagraph(fname= "states/netmeta.csv", col="neurones", ylabel=NULL):
+def compilenetmetagraph(fname= "states/networks.meta", col="neurones", ylabel=NULL):
     network = {}
     cols = []
 
