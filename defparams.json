@@ -1,12 +1,13 @@
 {
     "Bindings": 2,
-    "PropagationLevels": 3,
-    "PruneInterval": 1209600,
-    "BindingThreshold": 0.6,
+    "PropagationLevels": 1,
+    "PruneInterval": 1814400,
+    "PruningThreshold":0.3,
+    "BindingThreshold": 0.5,
     
-    "FiringThreshold": 0.8,
+    "FiringThreshold": 0.25,
     "ZeroingThreshold": 0.1,
-    "DecayFactor": 0.7,
+    "DecayFactor": 0.8,
     "InitialPotential": 0.2,
     "ReinforcementRate": 0.3,
     "RefractoryPeriod": 3,

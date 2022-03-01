@@ -133,7 +133,7 @@ class NSCL:
                     and self.tick - self.network.neurones[n].lastspike
                     > self.network.params["PruneInterval"]
                     and self.network.avg_wgt_r(n)
-                    < self.network.params["FiringThreshold"]
+                    < self.network.params["PruningThreshold"]
                 ):
                     self.remove_neurone(n)
 
