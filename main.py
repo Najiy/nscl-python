@@ -31,6 +31,7 @@ from networkx.generators.geometric import random_geometric_graph
 from pandas.core.algorithms import take
 from nscl import NSCL
 import matplotlib.pyplot as plt
+from nscl_algo import NSCLAlgo
 import seaborn as sns
 import numpy as np
 import pandas as pd
@@ -530,6 +531,13 @@ while True:
             verbose = bool(command[2])
             print(f"verbose={verbose}")
 
+    if command[0] in ["check", "checkparams"]:
+        eng.network.check_params()
+
+    if command[0] == "params":
+        for p in eng.network.params:
+            print(f"{p} {eng.network.params[p]}")
+
     if command[0] == "stream":
         print(" streaming test dataset as input - %s" % command[1])
         stream(command[1])
@@ -539,6 +547,7 @@ while True:
         csvstream(command[1],command[2], True, command[3])
 
     if command[0] == "csvstream":
+        eng.network.check_params()
         print(" streaming csv dataset as input - %s" % command[1])
         csvstream(command[1], command[2], False, command[3])
 

@@ -1,8 +1,8 @@
 {
     "Bindings": 2,
-    "PropagationLevels": 1,
-    "PruneInterval": 1814400,
-    "PruningThreshold":0.3,
+    "PropagationLevels": 3,
+    "PruneInterval": 2419200,
+    "PruningThreshold": 0.2,
     "BindingThreshold": 0.5,
     
     "FiringThreshold": 0.25,
@@ -10,7 +10,7 @@
     "DecayFactor": 0.8,
     "InitialPotential": 0.2,
     "ReinforcementRate": 0.3,
-    "RefractoryPeriod": 3,
+    "RefractoryPeriod": 7,
     "PostSpikeFactor": 1.0,
 
     "DefaultEncoderCeiling": 1024,

@@ -73,6 +73,7 @@ class NSCL:
             cont = cont.replace("\n", "")
             defparams = json.loads(cont)
             self.params = {**defparams, **params}
+            
 
         def net_struct(self) -> object:
             return {
@@ -97,6 +98,40 @@ class NSCL:
 
         def __repr__(self) -> str:
             return str(self.structure())
+
+        def check_params(self) -> str:
+            firing_threshold = self.params["FiringThreshold"]
+            zeroing_threshold = self.params["ZeroingThreshold"]
+            binding_threshold = self.params["BindingThreshold"]
+            decay_factor = self.params["DecayFactor"]
+            refractory_period = self.params["RefractoryPeriod"]
+
+            potential = 1
+            pots = []
+            reverberating = True
+
+            while (potential != 0):
+                pots.append(potential)
+                potential *= decay_factor
+                if potential < zeroing_threshold:
+                    potential = 0
+
+            binding_window = len([x for x in pots if x >= binding_threshold])
+            reverb_window = len([x for x in pots if x >= firing_threshold])
+            
+            # try:
+            if pots[refractory_period] < firing_threshold:
+                reverberating = False
+            # except IndexError:
+            #     reverberating = False
+
+            print("Binding Window =", binding_window)
+            print("Reverberating Firing (avoid) =", reverberating)
+            print("Suggested Refractoryperiod:", reverb_window)
+            if reverberating:
+                print(" WARNING: consider changing refractory period to avoid reverberating firing")
+                if input(f"     change RefractoryPeriod to {reverb_window}? y/n") == 'y':
+                    self.params['RefractoryPeriod'] = reverb_window
 
     class Engine:
         def __init__(self, network=None, meta={}, algorithm=None) -> None:
@@ -222,17 +257,17 @@ class NSCL:
             #     input("remove failed")
 
         def new_ssynapse(
-            self, pre_sneurone, post_sneurone, wgt=0.01, counter=0, lastspike=""
+            self, pre_sneurone, post_sneurone, wgt=0.01,  lastspike=""
         ) -> bool:
             NSCLAlgo.new_ssynapse(
-                self, pre_sneurone, post_sneurone, wgt, counter, lastspike
+                self, pre_sneurone, post_sneurone, wgt,  lastspike
             )
 
         def new_pruned_ssynapse(
-            self, pre_sneurone, post_sneurone, wgt=0.01, counter=0, lastspike=""
+            self, pre_sneurone, post_sneurone, wgt=0.01, lastspike=""
         ) -> bool:
             NSCLAlgo.new_pruned_ssynapse(
-                self, pre_sneurone, post_sneurone, wgt, counter, lastspike
+                self, pre_sneurone, post_sneurone, wgt, lastspike
             )
 
         def save_state(self, fname) -> None:
@@ -389,12 +424,12 @@ class NSCL:
                 pre = sprop["rref"]
                 post = sprop["fref"]
                 self.new_ssynapse(
-                    pre, post, sprop["wgt"], sprop["counter"], sprop["lastspike"]
+                    pre, post, sprop["wgt"], sprop["lastspike"]
                 )
 
             for nprop in load_state["npruned"]:
                 self.new_pruned_sneurone(nprop["name"])
-                n = self.network.neurones[nprop["name"]]
+                n = self.npruned[nprop["name"]]
                 n.potential = nprop["potential"]
                 n.fsynapses = nprop["fsynapses"]
                 n.rsynapses = nprop["rsynapses"]
@@ -406,7 +441,7 @@ class NSCL:
                 pre = sprop["rref"]
                 post = sprop["fref"]
                 self.new_pruned_ssynapse(
-                    pre, post, sprop["wgt"], sprop["counter"], sprop["lastspike"]
+                    pre, post, sprop["wgt"], sprop["lastspike"]
                 )
 
             # self.npruned = load_state["npruned"]
@@ -417,7 +452,9 @@ class NSCL:
             # self.network.synapses = content["synapses"]
             # self.network.params = content["params"]
 
-            self.defparams = load_state["params"]
+            self.network.params = load_state["params"]
+
+            self.network
 
             self.tick = load_state["tick"]
             self.traces = load_traces["traces"]
@@ -461,6 +498,14 @@ class NSCL:
                 sys.getsizeof(self.network.synapses),
                 get_size(self.network.synapses),
             )
+            np_size = "p_neurones=%db|%db" % (
+                sys.getsizeof(self.npruned),
+                get_size(self.npruned),
+            )
+            sp_size = "p_synapses=%db|%db" % (
+                sys.getsizeof(self.spruned),
+                get_size(self.spruned),
+            )
             p_size = "params=%db|%db" % (
                 sys.getsizeof(self.network.params),
                 get_size(self.network.params),
@@ -472,7 +517,7 @@ class NSCL:
             process_rss = f"process_rss={ int(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().rss}b"
             process_vms = f"process_vms={int(psutil.Process(os.getpid()).memory_info().vms / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().vms}b"
             all = "all=%db|%db" % (sys.getsizeof(self), get_size(self))
-            return (n_size, s_size, p_size, traces, process_rss, process_vms, all)
+            return (n_size, s_size,np_size, sp_size, p_size, traces, process_rss, process_vms, all)
 
         def set_tick(self, tick):
             self.tick = tick

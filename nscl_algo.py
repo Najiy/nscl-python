@@ -72,24 +72,37 @@ class NSCLAlgo:
         return "created"
 
     def new_pruned_ssynapse(
-        eng, pre_NSymbol, post_NSymbol, wgt=0.01, counter=0, lastspike=""
+        eng, pre_NSymbol, post_NSymbol, wgt=0.01, lastspike=""
     ) -> str:
-        neurones = eng.npruned
-        synapses = eng.spruned
 
-        pre = neurones[pre_NSymbol] if pre_NSymbol in neurones.keys() else None
-        post = neurones[post_NSymbol] if post_NSymbol in neurones.keys() else None
+        neurones = eng.network.neurones
+        synapses = eng.network.synapses
+        pneurones = eng.npruned
+        psynapses = eng.spruned
+
+        pre = pneurones[pre_NSymbol] if pre_NSymbol in pneurones.keys() else None
+        post = pneurones[post_NSymbol] if post_NSymbol in pneurones.keys() else None
+
+        if not pre:
+            pre = neurones[pre_NSymbol] if pre_NSymbol in neurones.keys() else None
+        if not post:
+            post = neurones[post_NSymbol] if post_NSymbol in neurones.keys() else None
+
+        # print("pre", pre)
+        # print("post", post)
+        # print("pre_nsymbol", pre_NSymbol)
+        # input(f"post_nsymbol {post_NSymbol}")
 
         if not pre or not post or pre_NSymbol == post_NSymbol:
-            print("new synapse error (%s->%s) " % (pre_NSymbol, post_NSymbol))
+            print("new pruned synapse error (%s->%s) " % (pre_NSymbol, post_NSymbol))
             return "error"
 
         sname = NSCLAlgo.sname(pre_NSymbol, post_NSymbol)
 
-        if sname in synapses:
+        if sname in psynapses:
             return "reinforce"
 
-        syn = nscl.NSCL.SSynapse(pre_NSymbol, post_NSymbol, wgt, counter, lastspike)
+        syn = nscl.NSCL.SSynapse(pre_NSymbol, post_NSymbol, wgt, lastspike)
         eng.network.synapses[syn.name()] = syn
         if post_NSymbol not in pre.fsynapses:
             pre.fsynapses.append(post_NSymbol)
