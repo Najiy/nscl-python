@@ -15,7 +15,7 @@
 
     "DefaultEncoderCeiling": 1024,
     "DefaultEncoderFloor": 0,
-    "DefaultEncoderResolution": 2,
+    "DefaultEncoderResolution": 1,
 
     "TraceLength": 60
 }

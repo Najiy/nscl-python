@@ -624,6 +624,7 @@ while True:
         print()
         print(" ###########################")
         print(f"     NSCL_python ")
+        print()
         print(f"tick = {eng.tick}")
         print(f"hashid = {eng.network.hash_id}")
         # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
@@ -634,8 +635,13 @@ while True:
         print(f"npruned = {len(eng.npruned)}")
         print(f"spruned = {len(eng.spruned)}")
         print(f"prune_ctick = {eng.prune}")
+        print()
+        eng.network.check_params()
+        print()
         print(" ###########################")
         print()
+
+
 
     if command[0] in ["tick", "pass", "next"]:
         r = eng.algo([], {}, False)

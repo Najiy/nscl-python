@@ -126,8 +126,11 @@ class NSCL:
             #     reverberating = False
 
             print("Binding Window =", binding_window)
-            print("Reverberating Firing (avoid) =", reverberating)
+
+            print("Current Refractoryperiod =", refractory_period)
+            print("Reverberating Firing =", reverberating)
             print("Suggested Refractoryperiod:", reverb_window)
+
             if reverberating:
                 print(" WARNING: consider changing refractory period to avoid reverberating firing")
                 if input(f"     change RefractoryPeriod to {reverb_window}? y/n") == 'y':
