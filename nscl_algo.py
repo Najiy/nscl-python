@@ -180,6 +180,7 @@ class NSCLAlgo:
                     post_new = f"CMP({','.join(a_set)})"
                     if post_new not in neurones.keys():
                         n = NSCLAlgo.new_NSymbol(eng, name=post_new, lastspike=time)
+                        n.potential = eng.network.params["InitialPotential"]
                         for d in a_set:
                             neurones_down_potentials.append(d)
                     for pre_active in a_set:
@@ -244,7 +245,7 @@ class NSCLAlgo:
         for i in inputs:
             if i not in neurones.keys():
                 n = NSCLAlgo.new_NSymbol(eng, i)
-                n.potential = params["InitialPotential"]
+                n.potential = 1  ## params["InitialPotential"]
                 n.occurs += 1
                 n.lastspike = eng.tick  # now
                 gen_nsymbol.append(gen_nsymbol)
@@ -272,7 +273,14 @@ class NSCLAlgo:
                 for s in n.fsynapses:
                     # forwards potentials
                     neurones[s].potential += (
-                        n.potential * synapses[NSCLAlgo.sname(n.name, s)].wgt
+                        n.potential
+                        * synapses[NSCLAlgo.sname(n.name, s)].wgt
+                        / params["Bindings"]
+                    )
+                    n.potential -= (
+                        n.potential
+                        * synapses[NSCLAlgo.sname(n.name, s)].wgt
+                        / params["Bindings"]
                     )
                     neurones[s].potential = min(n.potential, 1.0)
                     synapses[NSCLAlgo.sname(n.name, s)].occurs += 1
@@ -296,8 +304,8 @@ class NSCLAlgo:
             eng, time=eng.tick
         )
 
-        for d in neurones_down_potentials:
-            neurones[d].potential *= params["DownPotentialFactor"]
+        # for d in neurones_down_potentials:
+        #     neurones[d].potential *= params["DownPotentialFactor"]
 
         # ReinforceSynapses()
         reinforce_synapse = NSCLAlgo.functional_plasticity(eng, rsynapse, eng.tick)

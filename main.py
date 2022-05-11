@@ -435,10 +435,9 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     skip = False
 
     while running and eng.tick <= maxit:
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
         if not skip:
-            if input(f"\n{eng.tick}") == "s" and skip == False:
-                skip = True
             for n in eng.network.neurones:
                 print(f"{n}", end=" ")
             print()
@@ -491,6 +490,9 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
         except KeyboardInterrupt:
             running = False
+
+        if input(f"\n{eng.tick-1}") == "s" and skip == False:
+            skip = True 
 
     # netmeta.close()
     eng.tick += temp
