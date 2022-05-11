@@ -22,6 +22,21 @@ elif os.name == "nt":
 
 class NSCL:
     class NSymbol:
+        def __neuroneLvl(self,name):
+            arr = list(filter(lambda item: item != "",name.replace("CMP(", "#(#").replace(")", "#)#").replace(",","#").split("#")))
+            lvl = 0
+            maxlvl = 0
+
+            for i in arr:
+                if i == "(":
+                    lvl += 1
+                    if maxlvl < lvl:
+                        maxlvl = lvl
+                elif i == ")":
+                    lvl -= 1
+
+            return maxlvl
+
         def __init__(
             self, name, occurs=1, potential=0, refractory=0, lastspike=""
         ) -> None:
@@ -37,11 +52,11 @@ class NSCL:
             self.refractory = refractory
             self.occurs = occurs
             self.heirarcs = []
-            # self.level = -1
+            self.level = self.__neuroneLvl(name)
 
-        def level(self):
-            self.level = max(self.heirarcs)
-            return self.level
+        # def level(self):
+        #     self.level = max(self.heirarcs)
+        #     return self.level
 
     class SSynapse:
         def __init__(
@@ -163,7 +178,7 @@ class NSCL:
             return self.network.params
 
         def prune_network(self) -> None:
-            nlist = [k for k in self.network.neurones.keys()]
+            nlist = [k for k in self.network.neurones.keys()]   #useless lol
             for n in nlist:
                 if (
                     self.network.neurones[n].occurs == 1
