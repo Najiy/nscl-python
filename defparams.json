@@ -1,6 +1,6 @@
 {
     "Bindings": 2,
-    "PropagationLevels": 3,
+    "PropagationLevels": 2,
     "PruneInterval": 2419200,
     "PruningThreshold": 0.2,
     "BindingThreshold": 0.5,

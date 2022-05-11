@@ -356,7 +356,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
     for line in metadata:
         row = line.split(",")
-        print(row)
+        # print(row)
         eng.meta[row[0]] = {
             "min": float(row[9]),
             "max": float(row[10]),
@@ -437,13 +437,13 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     while running and eng.tick <= maxit:
         print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-        if not skip:
-            for n in eng.network.neurones:
-                print(f"{n}", end=" ")
-            print()
-            for n in eng.network.neurones:
-                print(f"{eng.network.neurones[n].potential:0.2f}", end=" ")
-            print()
+        # if not skip:
+        #     for n in eng.network.neurones:
+        #         print(f"{n}", end=" ")
+        #     print()
+        #     for n in eng.network.neurones:
+        #         print(f"{eng.network.neurones[n].potential:0.2f}", end=" ")
+        #     print()
 
         try:
             if eng.prune == 0:
@@ -491,8 +491,8 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
         except KeyboardInterrupt:
             running = False
 
-        if input(f"\n{eng.tick-1}") == "s" and skip == False:
-            skip = True 
+        # if input(f"\n{eng.tick-1}") == "s" and skip == False:
+        #     skip = True 
 
     # netmeta.close()
     eng.tick += temp

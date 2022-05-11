@@ -55,7 +55,7 @@ class NSCL:
             self.refractory = refractory
             self.occurs = occurs
             self.level = self.__neuroneLvl(name)
-            print(f'generated {name}', end=' ')
+            # print(f'generated {name}', end=' ')
 
         # def level(self):
         #     self.level = max(self.heirarcs)
