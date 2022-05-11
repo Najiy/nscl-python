@@ -335,11 +335,13 @@ def stream(streamfile, trace=True):
     print("\n\n test streaming done.")
     print()
 
+
 def normaliser(data, minn, maxx, scaling=1):
     try:
         return (data - minn) / (maxx - minn) * scaling
     except DivisionByZero:
         return 0
+
 
 def csvstream(streamfile, metafile, trace=False, fname="default"):
     def take(n, iterable):
@@ -354,10 +356,11 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
     for line in metadata:
         row = line.split(",")
+        print(row)
         eng.meta[row[0]] = {
-            "min": float(row[7]),
+            "min": float(row[9]),
             "max": float(row[10]),
-            "res": float(eng.network.params["DefaultEncoderResolution"])
+            "res": float(eng.network.params["DefaultEncoderResolution"]),
         }
         # eng.meta[row[0]] = {
         #     "min": eng.network.params["DefaultEncoderFloor"],
@@ -379,11 +382,15 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     for line in rawdata:
         sline = line.replace("\n", "").split(",")
         for i in range(1, 1 + len(sensors)):
-            if sline[i] != "": ## filters sensors
-                name = sensors[i-1]
+            if sline[i] != "":  ## filters sensors
+                name = sensors[i - 1]
                 value = float(sline[i])
 
-                if search("current", name) or search("humidity", name) or search("temperature", name):
+                if (
+                    search("current", name)
+                    or search("humidity", name)
+                    or search("temperature", name)
+                ):
                     sline[i] = ""
                 else:
                     maxx = eng.network.params["DefaultEncoderCeiling"]
@@ -396,6 +403,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
                         res = eng.meta[name]["res"]
 
                     newval = math.floor(normaliser(value, minn, maxx, res))
+                    # input(f"normaliser({value},{minn},{maxx},{res}) = {newval}")
                     sline[i] = f"{name}~{newval}-{newval+1}"
         data[int(sline[0])] = [x for x in sline[1:] if x != ""]
 
@@ -424,7 +432,20 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
     starttime = datetime.now().isoformat(timespec="minutes")
 
+    skip = False
+
     while running and eng.tick <= maxit:
+
+        if not skip:
+            if input(f"\n{eng.tick}") == "s" and skip == False:
+                skip = True
+            for n in eng.network.neurones:
+                print(f"{n}", end=" ")
+            print()
+            for n in eng.network.neurones:
+                print(f"{eng.network.neurones[n].potential:0.2f}", end=" ")
+            print()
+
         try:
             if eng.prune == 0:
                 eng.prune = eng.network.params["PruneInterval"]
@@ -444,6 +465,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
                 print(f"synapses = {len(eng.network.synapses)}")
                 print(f"bindings = {eng.network.params['Bindings']}")
                 print(f"proplevel = {eng.network.params['PropagationLevels']}")
+                print(f"encres = {eng.network.params['DefaultEncoderResolution']}")
                 print(f"npruned = {len(eng.npruned)}")
                 print(f"spruned = {len(eng.spruned)}")
                 print(f"prune_ctick = {eng.prune}")
@@ -544,7 +566,7 @@ while True:
 
     if command[0] == "csvstream_traced":
         print(" streaming csv dataset as input - %s" % command[1])
-        csvstream(command[1],command[2], True, command[3])
+        csvstream(command[1], command[2], True, command[3])
 
     if command[0] == "csvstream":
         eng.network.check_params()
@@ -640,8 +662,6 @@ while True:
         print()
         print(" ###########################")
         print()
-
-
 
     if command[0] in ["tick", "pass", "next"]:
         r = eng.algo([], {}, False)

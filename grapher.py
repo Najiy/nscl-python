@@ -18,7 +18,8 @@ plt.style.use("seaborn")
 sns.set(font_scale=1.2)
 plt.rcParams["font.size"] = "32"
 
-def smooth(x, y, num=500, capzero = True):
+
+def smooth(x, y, num=500, capzero=True):
     X_Y_Spline = make_interp_spline(x, y)
 
     X_ = np.linspace(min(x), max(x), num)
@@ -84,16 +85,24 @@ def neurone_profile(fname="defparams.json"):
         # xnew = np.linspace(0, 15, num=41, endpoint=True)
 
         # f_cubic = interp1d(x, y, kind='cubic')
-        x, y = smooth(x, y)
+        # x, y = smooth(x, y)
 
         for i in range(0, len(x)):
             if y[i] < defparams["ZeroingThreshold"]:
                 y[i] = 0
 
-        return (x, y, x_t, y_t, x_z, y_z)  # ,xnew, f_cubic(xnew))
+        return (
+            x,
+            y,
+            x_t,
+            y_t,
+            x_z,
+            y_z,
+            defparams["BindingThreshold"],
+        )  # ,xnew, f_cubic(xnew))
 
 
-def compilenetmetagraph(fname= "states/networks.meta", col="neurones", ylabel=NULL):
+def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=NULL):
     network = {}
     cols = []
 
@@ -106,14 +115,14 @@ def compilenetmetagraph(fname= "states/networks.meta", col="neurones", ylabel=NU
                 head = True
                 continue
             if row[1] not in network:
-                network[row[1]] = [[], [], row[0].split("_")[1:-1][0], []]
+                # input(row[0].split("_")[1:-1])
+                network[row[1]] = [[], [], row[0].split("_")[0], []]
+                print(network[row[1]])
             network[row[1]][0].append(datetime.datetime.fromtimestamp(int(row[3])))
             network[row[1]][1].append(int(row[cols.index(col)]))
             network[row[1]][3].append(int(row[3]))
 
     # 1598434227
-
-
 
     xstart = 0
     xend = 0
@@ -130,7 +139,8 @@ def compilenetmetagraph(fname= "states/networks.meta", col="neurones", ylabel=NU
             # "b4l3",
             # "b4l4"
         ]:
-            x, y = smooth(network[key][3], network[key][1])
+            # x, y = smooth(network[key][3], network[key][1])
+            x, y = network[key][3], network[key][1]
             # plt.plot(network[key][3], network[key][1], label=network[key][2], linewidth=2)
             plt.plot(x, y, label=network[key][2], linewidth=2)
             if xstart == 0 and xend == 0:
@@ -154,7 +164,7 @@ def compilenetmetagraph(fname= "states/networks.meta", col="neurones", ylabel=NU
         loc="lower left",
         bbox_to_anchor=(0, 1.02, 1, 0.2),
         mode="expand",
-        ncol=3
+        ncol=3,
     )
     date_ranges = np.linspace(xstart, xend, 6)
     dates = [datetime.datetime.fromtimestamp(x).date() for x in date_ranges]
@@ -163,12 +173,12 @@ def compilenetmetagraph(fname= "states/networks.meta", col="neurones", ylabel=NU
     plt.xticks(date_ranges, dates)
     plt.tight_layout()
     # plt.show()
-    plt.savefig(f'figures/{col}.png', dpi=300)
+    plt.savefig(f"figures/{col}.png", dpi=300)
     plt.show()
 
 
 def compileneuronegraph(fname="defparams.json"):
-    (nprof_x, nprof_y, nthres_x, nthres_y, nzero_x, nzero_y) = neurone_profile(fname)
+    (nprof_x, nprof_y, nthres_x, nthres_y, nzero_x, nzero_y, binding_threshold) = neurone_profile(fname)
 
     # plt.grid()
     xcoords = [x for x in range(-2, 12)]
@@ -179,6 +189,14 @@ def compileneuronegraph(fname="defparams.json"):
     plt.plot(nzero_x, nzero_y, label="Zeroing Threshold", color="blue", linewidth=2)
     plt.plot(nprof_x, nprof_y, label="Action Potential", color="black", linewidth=3)
 
+    plt.plot(
+        [1],
+        binding_threshold,
+        marker="X",
+        markersize=12,
+        markeredgecolor="red",
+        markerfacecolor="blue",
+    )
 
     plt.xlabel("Time")
     plt.ylabel("Action Potential")
@@ -192,12 +210,14 @@ def compileneuronegraph(fname="defparams.json"):
 
     plt.tight_layout()
     # plt.show()
-    plt.savefig(f'figures/neurone_profile.png', dpi=300)
+    plt.savefig(f"figures/neurone_profile.png", dpi=300)
     plt.show()
 
-if not os.path.isdir('figures'):
-    os.mkdir('figures')
-compilenetmetagraph(col='composites', ylabel='Composites Generated')
-compilenetmetagraph(col='npruned', ylabel='Composites Pruned')
-compilenetmetagraph(col='synapses', ylabel='Synapses Formed')
+
+if not os.path.isdir("figures"):
+    os.mkdir("figures")
+
+# compilenetmetagraph(col='composites', ylabel='Composites Generated')
+# compilenetmetagraph(col='npruned', ylabel='Composites Pruned')
+# compilenetmetagraph(col='synapses', ylabel='Synapses Formed')
 compileneuronegraph()

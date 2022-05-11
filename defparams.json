@@ -4,6 +4,7 @@
     "PruneInterval": 2419200,
     "PruningThreshold": 0.2,
     "BindingThreshold": 0.5,
+    "DownPotentialFactor": 0.2,
     
     "FiringThreshold": 0.25,
     "ZeroingThreshold": 0.1,
@@ -15,7 +16,7 @@
 
     "DefaultEncoderCeiling": 1024,
     "DefaultEncoderFloor": 0,
-    "DefaultEncoderResolution": 3,
+    "DefaultEncoderResolution": 2,
 
     "TraceLength": 60
 }

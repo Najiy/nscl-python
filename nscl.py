@@ -9,7 +9,9 @@ from nscl_algo import NSCLAlgo
 from datetime import date, datetime
 import copy
 import json
-import os, sys, psutil
+import os
+import sys
+import psutil
 import hashlib
 
 pathdiv = ""
@@ -22,8 +24,9 @@ elif os.name == "nt":
 
 class NSCL:
     class NSymbol:
-        def __neuroneLvl(self,name):
-            arr = list(filter(lambda item: item != "",name.replace("CMP(", "#(#").replace(")", "#)#").replace(",","#").split("#")))
+        def __neuroneLvl(self, name):
+            arr = list(filter(lambda item: item != "", name.replace(
+                "CMP(", "#(#").replace(")", "#)#").replace(",", "#").split("#")))
             lvl = 0
             maxlvl = 0
 
@@ -51,8 +54,8 @@ class NSCL:
             self.lastspike = lastspike
             self.refractory = refractory
             self.occurs = occurs
-            self.heirarcs = []
             self.level = self.__neuroneLvl(name)
+            print(f'generated {name}', end=' ')
 
         # def level(self):
         #     self.level = max(self.heirarcs)
@@ -88,7 +91,6 @@ class NSCL:
             cont = cont.replace("\n", "")
             defparams = json.loads(cont)
             self.params = {**defparams, **params}
-            
 
         def net_struct(self) -> object:
             return {
@@ -133,7 +135,7 @@ class NSCL:
 
             binding_window = len([x for x in pots if x >= binding_threshold])
             reverb_window = len([x for x in pots if x >= firing_threshold])
-            
+
             # try:
             if pots[refractory_period] < firing_threshold:
                 reverberating = False
@@ -147,7 +149,8 @@ class NSCL:
             print("Suggested Refractoryperiod:", reverb_window)
 
             if reverberating:
-                print(" WARNING: consider changing refractory period to avoid reverberating firing")
+                print(
+                    " WARNING: consider changing refractory period to avoid reverberating firing")
                 if input(f"     change RefractoryPeriod to {reverb_window}? y/n") == 'y':
                     self.params['RefractoryPeriod'] = reverb_window
 
@@ -178,7 +181,7 @@ class NSCL:
             return self.network.params
 
         def prune_network(self) -> None:
-            nlist = [k for k in self.network.neurones.keys()]   #useless lol
+            nlist = [k for k in self.network.neurones.keys()]  # useless lol
             for n in nlist:
                 if (
                     self.network.neurones[n].occurs == 1
@@ -190,7 +193,7 @@ class NSCL:
                 ):
                     self.remove_neurone(n)
 
-        def algo(self, inputs, meta = {}, prune=False) -> list:
+        def algo(self, inputs, meta={}, prune=False) -> list:
             r = self._algo(self, inputs, meta, prune=prune)
             it = self.tick
 
@@ -321,7 +324,8 @@ class NSCL:
                         "rsynapses": n.rsynapses,
                         "lastspike": n.lastspike,
                         "occurs": n.occurs,
-                        "heirarcs": n.heirarcs,
+                        "refractory": n.refractory,
+                        "level": n.level
                     }
                 )
 
@@ -380,7 +384,7 @@ class NSCL:
 
             timestamp = datetime.now().isoformat(timespec="minutes").replace("T", " ")
             # netmeta = open(rpath + f"{pathdiv}networks.meta", "a")
-            
+
             netmetapath = f"states{pathdiv}networks.meta"
             headers = True
             if os.path.exists(netmetapath):
@@ -388,7 +392,8 @@ class NSCL:
             netmeta = open(netmetapath, "a")
 
             if headers:
-                netmeta.write("name,hashid,time,tick,neurones,synapses,npruned,spruned,inputs,composites\n")
+                netmeta.write(
+                    "name,hashid,time,tick,neurones,synapses,npruned,spruned,inputs,composites\n")
 
             inputs = len(
                 [
@@ -535,7 +540,7 @@ class NSCL:
             process_rss = f"process_rss={ int(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().rss}b"
             process_vms = f"process_vms={int(psutil.Process(os.getpid()).memory_info().vms / 1024 ** 2)}MB|{psutil.Process(os.getpid()).memory_info().vms}b"
             all = "all=%db|%db" % (sys.getsizeof(self), get_size(self))
-            return (n_size, s_size,np_size, sp_size, p_size, traces, process_rss, process_vms, all)
+            return (n_size, s_size, np_size, sp_size, p_size, traces, process_rss, process_vms, all)
 
         def set_tick(self, tick):
             self.tick = tick
