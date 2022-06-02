@@ -41,7 +41,7 @@ class NSCL:
             return maxlvl
 
         def __init__(
-            self, name, occurs=1, potential=0, refractory=0, lastspike=""
+            self, name, occurs=1, potential=0, refractory=0, lastspike="", probationary= -1
         ) -> None:
             self.name = name
             self.meta = {}
@@ -55,6 +55,7 @@ class NSCL:
             self.refractory = refractory
             self.occurs = occurs
             self.level = self.__neuroneLvl(name)
+            self.probationary = probationary
             # print(f'generated {name}', end=' ')
 
         # def level(self):
@@ -81,7 +82,7 @@ class NSCL:
 
     class Network:
         def __init__(self, params={}) -> None:
-            self.ititialised = datetime.now().isoformat(timespec="minutes")
+            self.ititialised = datetime.now().isoformat()
             self.hash_id = hashlib.md5(self.ititialised.encode()).hexdigest()
             self.neurones = {}
             self.synapses = {}
@@ -114,7 +115,7 @@ class NSCL:
             return sum(synaptic_weights) / len(synaptic_weights)
 
         def __repr__(self) -> str:
-            return str(self.structure())
+            return str(self.net_struct())
 
         def check_params(self) -> str:
             firing_threshold = self.params["FiringThreshold"]
@@ -143,7 +144,6 @@ class NSCL:
             #     reverberating = False
 
             print("Binding Window =", binding_window)
-
             print("Current Refractoryperiod =", refractory_period)
             print("Reverberating Firing =", reverberating)
             print("Suggested Refractoryperiod:", reverb_window)
@@ -180,21 +180,21 @@ class NSCL:
         def params(self) -> dict:
             return self.network.params
 
-        def prune_network(self) -> None:
-            nlist = [k for k in self.network.neurones.keys()]  # useless lol
-            for n in nlist:
-                if (
-                    self.network.neurones[n].occurs == 1
-                    and len(self.network.neurones[n].rsynapses) > 0
-                    and self.tick - self.network.neurones[n].lastspike
-                    > self.network.params["PruneInterval"]
-                    and self.network.avg_wgt_r(n)
-                    < self.network.params["PruningThreshold"]
-                ):
-                    self.remove_neurone(n)
+        # def prune_network(self) -> None:
+        #     nlist = [k for k in self.network.neurones.keys()]  # useless lol
+        #     for n in nlist:
+        #         if (
+        #             self.network.neurones[n].occurs == 1
+        #             and len(self.network.neurones[n].rsynapses) > 0
+        #             and self.tick - self.network.neurones[n].lastspike
+        #             > self.network.params["PruneInterval"]
+        #             and self.network.avg_wgt_r(n)
+        #             < self.network.params["PruningThreshold"]
+        #         ):
+        #             self.remove_neurone(n)
 
-        def algo(self, inputs, meta={}, prune=False) -> list:
-            r = self._algo(self, inputs, meta, prune=prune)
+        def algo(self, inputs, meta={}) -> list:
+            r = self._algo(self, inputs, meta)
             it = self.tick
 
             if trace:
@@ -319,13 +319,15 @@ class NSCL:
                 content["neurones"].append(
                     {
                         "name": n.name,
+                        "meta": n.meta,
                         "potential": n.potential,
                         "fsynapses": n.fsynapses,
                         "rsynapses": n.rsynapses,
                         "lastspike": n.lastspike,
-                        "occurs": n.occurs,
                         "refractory": n.refractory,
-                        "level": n.level
+                        "occurs": n.occurs,
+                        "level": n.level,
+                        "probationary": n.probationary
                     }
                 )
 
@@ -346,12 +348,15 @@ class NSCL:
                 content["npruned"].append(
                     {
                         "name": n.name,
+                        "meta": n.meta,
                         "potential": n.potential,
                         "fsynapses": n.fsynapses,
                         "rsynapses": n.rsynapses,
                         "lastspike": n.lastspike,
+                        "refractory": n.refractory,
                         "occurs": n.occurs,
-                        "heirarcs": n.heirarcs,
+                        "level": n.level,
+                        "probationary": n.probationary
                     }
                 )
 
@@ -417,7 +422,7 @@ class NSCL:
         def load_state(self, fname) -> None:
 
             rpath = f"states{pathdiv}%s" % fname
-
+            # input(rpath + f"{pathdiv}state.json")
             infile = open(rpath + f"{pathdiv}state.json", "r")
             cont = infile.read()
             cont = cont.replace("\t", "")
@@ -436,12 +441,22 @@ class NSCL:
                 self.new_sneurone(nprop["name"])
 
                 n = self.network.neurones[nprop["name"]]
+                try:
+                    n.meta = nprop["meta"]
+                except:
+                    pass
                 n.potential = nprop["potential"]
                 n.fsynapses = nprop["fsynapses"]
                 n.rsynapses = nprop["rsynapses"]
                 n.lastspike = nprop["lastspike"]
+                n.refractory = nprop["refractory"]
                 n.occurs = nprop["occurs"]
-                n.heirarcs = nprop["heirarcs"]
+                n.level = nprop["level"]
+                try:
+                    n.probationary = nprop["probationary"]
+                except:
+                    pass
+                # n.heirarcs = nprop["heirarcs"]
 
             for sprop in load_state["synapses"]:
                 pre = sprop["rref"]
@@ -453,12 +468,25 @@ class NSCL:
             for nprop in load_state["npruned"]:
                 self.new_pruned_sneurone(nprop["name"])
                 n = self.npruned[nprop["name"]]
+                try:
+                    n.meta = nprop["meta"]
+                except:
+                    pass
                 n.potential = nprop["potential"]
                 n.fsynapses = nprop["fsynapses"]
                 n.rsynapses = nprop["rsynapses"]
                 n.lastspike = nprop["lastspike"]
+                try:
+                    n.refractory = nprop["refractory"]
+                except:
+                    pass
                 n.occurs = nprop["occurs"]
-                n.heirarcs = nprop["heirarcs"]
+                n.level = nprop["level"]
+                try:
+                    n.probationary = nprop["probationary"]
+                except:
+                    pass
+                # n.heirarcs = nprop["heirarcs"]
 
             for sprop in load_state["spruned"]:
                 pre = sprop["rref"]
@@ -485,7 +513,7 @@ class NSCL:
             self.nmask = load_traces["nmask"]
             self.ntime = load_traces["ntime"]
 
-            NSCLAlgo.relevel(self)
+            # NSCLAlgo.relevel(self)
 
             return self.size_stat()
 
@@ -571,3 +599,7 @@ class NSCL:
                 print(
                     f"  {s.name():^20}   wgt: {s.wgt}   cnt: {s.counter}   lspk: {s.lastspike}"
                 )
+
+        def get_actives(self):
+            neurones = [(x.name, x.potential) for x in self.network.neurones.values() if x.potential >= self.params()["BindingThreshold"]]
+            return neurones

@@ -1,13 +1,13 @@
 {
-    "Bindings": 2,
-    "PropagationLevels": 2,
-    "PruneInterval": 2419200,
+    "BindingCount": 2,
+    "PropagationLevels": 4,
+    "PruneInterval": 30,
     "PruningThreshold": 0.2,
     "BindingThreshold": 0.5,
     "DownPotentialFactor": 0.2,
     
     "FiringThreshold": 0.25,
-    "ZeroingThreshold": 0.1,
+    "ZeroingThreshold": 0.05,
     "DecayFactor": 0.8,
     "InitialPotential": 0.2,
     "ReinforcementRate": 0.3,
@@ -16,7 +16,7 @@
 
     "DefaultEncoderCeiling": 1024,
     "DefaultEncoderFloor": 0,
-    "DefaultEncoderResolution": 2,
+    "DefaultEncoderResolution": 10,
 
     "TraceLength": 60
 }

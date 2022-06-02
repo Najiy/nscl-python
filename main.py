@@ -42,6 +42,11 @@ from pyvis.network import Network
 import itertools
 from itertools import islice
 
+
+
+# dt = datetime.now().isoformat(timespec="minutes")
+# input(dt)
+
 # from networkx.drawing.nx_agraph import graphviz_layout
 
 pathdiv = "/" if os.name == "posix" else "\\"
@@ -343,10 +348,13 @@ def normaliser(data, minn, maxx, scaling=1):
         return 0
 
 
+# def feedEncode(eng, inputs):
+
+
 def csvstream(streamfile, metafile, trace=False, fname="default"):
-    def take(n, iterable):
-        # "Return first n items of the iterable as a list"
-        return list(islice(iterable, n))
+    # def take(n, iterable):
+    #     # "Return first n items of the iterable as a list"
+    #     return list(islice(iterable, n))
 
     data = {}
 
@@ -355,6 +363,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     metadata = metafile.readlines()
 
     for line in metadata:
+
         row = line.split(",")
         # print(row)
         eng.meta[row[0]] = {
@@ -362,6 +371,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
             "max": float(row[10]),
             "res": float(eng.network.params["DefaultEncoderResolution"]),
         }
+
         # eng.meta[row[0]] = {
         #     "min": eng.network.params["DefaultEncoderFloor"],
         #     "max": eng.network.params["DefaultEncoderCeiling"],
@@ -435,7 +445,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     skip = False
 
     while running and eng.tick <= maxit:
-        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        # print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
         # if not skip:
         #     for n in eng.network.neurones:
@@ -462,7 +472,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
                 print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
                 print(f"neurones = {len(eng.network.neurones)}")
                 print(f"synapses = {len(eng.network.synapses)}")
-                print(f"bindings = {eng.network.params['Bindings']}")
+                print(f"bindings = {eng.network.params['BindingCount']}")
                 print(f"proplevel = {eng.network.params['PropagationLevels']}")
                 print(f"encres = {eng.network.params['DefaultEncoderResolution']}")
                 print(f"npruned = {len(eng.npruned)}")
@@ -472,9 +482,9 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
                 print()
 
             if eng.tick not in data:
-                eng.algo([], prune=eng.prune == 0)
+                eng.algo([])
             else:
-                eng.algo(data[eng.tick], prune=eng.prune == 0)
+                eng.algo(data[eng.tick])
 
             if eng.tick == maxit and trace == True:
                 graphout(eng)
@@ -582,6 +592,11 @@ while True:
         print(inp)
         pp.pprint(npredict.trace_paths(eng, inp, limits, verbose=True))
 
+    if command[0] == "active":
+        active = eng.get_actives()
+        print(active)
+        # print(eng.size_stat())
+
     if command[0] == "spredict":
         limits = float(command[1])
         inp = command[2].split(",")
@@ -594,6 +609,10 @@ while True:
         inp = command[2].split(",")
         print(f" NSCL.temporal_predict(limits={limits})")
         pp.pprint(npredict.temporal_prediction(eng, inp, limits, verbose=False))
+
+    if command[0] == "feed":
+        feed = [x for x in command[1].split(",") if x != ""]
+        eng.algo(feed)
 
     if command[0] == "prune":
         ncount = len(eng.network.neurones)
@@ -654,7 +673,7 @@ while True:
         # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
         print(f"neurones = {len(eng.network.neurones)}")
         print(f"synapses = {len(eng.network.synapses)}")
-        print(f"bindings = {eng.network.params['Bindings']}")
+        print(f"bindings = {eng.network.params['BindingCount']}")
         print(f"PropagationLevels = {eng.network.params['PropagationLevels']}")
         print(f"npruned = {len(eng.npruned)}")
         print(f"spruned = {len(eng.spruned)}")

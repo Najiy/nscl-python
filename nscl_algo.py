@@ -30,11 +30,12 @@ class NSCLAlgo:
     def sname(pre, post):
         return "%s->%s" % (pre, post)
 
-    def new_NSymbol(eng, name, lastspike="", potential=1.0) -> object:
+    def new_NSymbol(eng, name, lastspike="", potential=1.0, probationary=-1) -> object:
         n = nscl.NSCL.NSymbol(name)
         eng.network.neurones[name] = n
         n.lastspike = lastspike
         n.potential = potential
+        n.probationary = probationary
         return n
 
     def new_pruned_NSymbol(eng, name, lastspike="", potential=1.0) -> object:
@@ -165,11 +166,11 @@ class NSCLAlgo:
 
         active = NSCLAlgo.chunks(
             nses,
-            eng.network.params["Bindings"],  # G4
+            eng.network.params["BindingCount"],  # G4
         )
 
-        print()
-        print(len(active), active)
+        # print()
+        # print(len(active), active)
 
         reinforce_synapse = []  # enchancement list for if neurones already exists
         neurones_down_potentials = []
@@ -179,7 +180,12 @@ class NSCLAlgo:
                 if len(a_set) > 1:
                     post_new = f"CMP({','.join(a_set)})"
                     if post_new not in neurones.keys():
-                        n = NSCLAlgo.new_NSymbol(eng, name=post_new, lastspike=time)
+                        n = NSCLAlgo.new_NSymbol(
+                            eng,
+                            name=post_new,
+                            lastspike=time,
+                            probationary=eng.network.params["PruneInterval"],
+                        )
                         n.potential = eng.network.params["InitialPotential"]
                         for d in a_set:
                             neurones_down_potentials.append(d)
@@ -227,11 +233,11 @@ class NSCLAlgo:
         except DivisionByZero:
             return 0
 
-    def algo1(eng, inputs, meta={}, prune=False) -> list:
+    def algo1(eng, inputs, meta={}) -> list:
         # print("Algo {")
         # if now == None:
         #     now = datetime.now().isoformat()
-        
+
         if meta != {}:
             for m in meta:
                 eng.meta[m] = meta[m]
@@ -261,6 +267,8 @@ class NSCLAlgo:
         # print(" Propagate()")
 
         for n in ns:
+            if n.probationary != -1:
+                n.probationary -= 1
             if n.potential < params["ZeroingThreshold"]:
                 n.potential = 0.0
                 if n.refractory > 0:
@@ -276,12 +284,12 @@ class NSCLAlgo:
                     neurones[s].potential += (
                         n.potential
                         * synapses[NSCLAlgo.sname(n.name, s)].wgt
-                        / params["Bindings"]
+                        / params["BindingCount"]
                     )
                     n.potential -= (
                         n.potential
                         * synapses[NSCLAlgo.sname(n.name, s)].wgt
-                        / params["Bindings"]
+                        / params["BindingCount"]
                     )
                     neurones[s].potential = min(n.potential, 1.0)
                     synapses[NSCLAlgo.sname(n.name, s)].occurs += 1
@@ -315,8 +323,24 @@ class NSCLAlgo:
         # print("}")
 
         # PRUNING
-        if prune:
-            eng.prune_network()
+        # if prune:
+        #     eng.prune_network()
+
+        nlist = [
+            n
+            for n in eng.network.neurones.keys()
+            if (
+                eng.network.neurones[n].occurs == 1
+                and eng.network.neurones[n].probationary == 0
+                and len(eng.network.neurones[n].rsynapses) > 0
+                # and eng.tick - eng.network.neurones[n].lastspike
+                # > eng.network.params["PruneInterval"]
+                and eng.network.avg_wgt_r(n) < eng.network.params["PruningThreshold"]
+            )
+        ]  # useless lol
+
+        for n in nlist:
+            eng.remove_neurone(n)
 
         return {
             "trace1": [neurones[n].potential for n in neurones],
