@@ -1,3 +1,11 @@
+Pattern Discovery Algorithm with Dynamic Structure Networks and Neurosymbolic Spiking Neurones
+
+    CLI mode:
+        run main.py
+
+    (see main.py for options)
+    (save and load takes folder names - not filename)
+
 Input to Spiketrain Encoding (Input datatype transformations):
 
     1. Booleans values to spiketrains
