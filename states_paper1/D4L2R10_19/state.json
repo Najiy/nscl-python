@@ -1,0 +1,148 @@
+{
+    "neurones": [
+        {
+            "name": "S0~0-1",
+            "potential": 0.19465502720000005,
+            "fsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 10,
+            "occurs": 5,
+            "refractory": 1,
+            "level": 0
+        },
+        {
+            "name": "S1~0-1",
+            "potential": 0.24331878400000007,
+            "fsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "CMP(CMP(S0~0-1,S1~0-1),S1~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 12,
+            "occurs": 5,
+            "refractory": 2,
+            "level": 0
+        },
+        {
+            "name": "CMP(S0~0-1,S1~0-1)",
+            "potential": 0.24331878400000007,
+            "fsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+                "CMP(CMP(S0~0-1,S1~0-1),S1~0-1)"
+            ],
+            "rsynapses": [
+                "S0~0-1",
+                "S1~0-1"
+            ],
+            "lastspike": 5,
+            "occurs": 2,
+            "refractory": 2,
+            "level": 1
+        },
+        {
+            "name": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "potential": 0.40960000000000013,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "S0~0-1"
+            ],
+            "lastspike": 12,
+            "occurs": 2,
+            "refractory": 3,
+            "level": 2
+        },
+        {
+            "name": "CMP(CMP(S0~0-1,S1~0-1),S1~0-1)",
+            "potential": 0.08192000000000003,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "S1~0-1"
+            ],
+            "lastspike": 14,
+            "occurs": 1,
+            "refractory": 0,
+            "level": 2
+        },
+        {
+            "name": "fS0~3-4",
+            "potential": 0.5120000000000001,
+            "fsynapses": [],
+            "rsynapses": [],
+            "lastspike": 15,
+            "occurs": 3,
+            "refractory": 4,
+            "level": 0
+        }
+    ],
+    "synapses": [
+        {
+            "fref": "CMP(S0~0-1,S1~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.5149,
+            "occurs": 1,
+            "lastspike": 12
+        },
+        {
+            "fref": "CMP(S0~0-1,S1~0-1)",
+            "rref": "S1~0-1",
+            "wgt": 0.5149,
+            "occurs": 1,
+            "lastspike": 13
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 13
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),S1~0-1)",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),S1~0-1)",
+            "rref": "S1~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        }
+    ],
+    "npruned": [],
+    "spruned": [],
+    "params": {
+        "BindingCount": 2,
+        "PropagationLevels": 2,
+        "PruneInterval": 30,
+        "PruningThreshold": 0.2,
+        "BindingThreshold": 0.5,
+        "DownPotentialFactor": 0.2,
+        "FiringThreshold": 0.25,
+        "ZeroingThreshold": 0.05,
+        "DecayFactor": 0.8,
+        "InitialPotential": 0.2,
+        "ReinforcementRate": 0.3,
+        "RefractoryPeriod": 7,
+        "PostSpikeFactor": 1.0,
+        "DefaultEncoderCeiling": 1024,
+        "DefaultEncoderFloor": 0,
+        "DefaultEncoderResolution": 10,
+        "TraceLength": 60
+    },
+    "tick": 19
+}

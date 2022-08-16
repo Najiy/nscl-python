@@ -1,0 +1,388 @@
+{
+    "neurones": [
+        {
+            "name": "S0~0-1",
+            "potential": 0.34292992,
+            "fsynapses": [
+                "CMP(S0~0-1,S2~0-1)",
+                "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 15,
+            "occurs": 5,
+            "refractory": 4,
+            "level": 0
+        },
+        {
+            "name": "S2~0-1",
+            "potential": 0.535828,
+            "fsynapses": [
+                "CMP(S0~0-1,S2~0-1)",
+                "CMP(CMP(S1~0-1,S3~0-1),S2~0-1)",
+                "CMP(S1~0-1,S2~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 17,
+            "occurs": 5,
+            "refractory": 6,
+            "level": 0
+        },
+        {
+            "name": "CMP(S0~0-1,S2~0-1)",
+            "potential": 0.535828,
+            "fsynapses": [
+                "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+                "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S2~0-1))",
+                "CMP(CMP(S0~0-1,S2~0-1),CMP(S1~0-1,S3~0-1))"
+            ],
+            "rsynapses": [
+                "S0~0-1",
+                "S2~0-1"
+            ],
+            "lastspike": 2,
+            "occurs": 2,
+            "refractory": 5,
+            "level": 1
+        },
+        {
+            "name": "S1~0-1",
+            "potential": 0.6772,
+            "fsynapses": [
+                "CMP(S1~0-1,S3~0-1)",
+                "CMP(S1~0-1,S2~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 17,
+            "occurs": 5,
+            "refractory": 6,
+            "level": 0
+        },
+        {
+            "name": "S3~0-1",
+            "potential": 0.054975581388800036,
+            "fsynapses": [
+                "CMP(S1~0-1,S3~0-1)",
+                "CMP(S3~0-1,S4~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 5,
+            "occurs": 3,
+            "refractory": 0,
+            "level": 0
+        },
+        {
+            "name": "CMP(S1~0-1,S3~0-1)",
+            "potential": 0.995,
+            "fsynapses": [
+                "CMP(CMP(S1~0-1,S3~0-1),S2~0-1)",
+                "CMP(CMP(S0~0-1,S2~0-1),CMP(S1~0-1,S3~0-1))"
+            ],
+            "rsynapses": [
+                "S1~0-1",
+                "S3~0-1"
+            ],
+            "lastspike": 5,
+            "occurs": 2,
+            "refractory": 7,
+            "level": 1
+        },
+        {
+            "name": "S4~0-1",
+            "potential": 0.06871947673600004,
+            "fsynapses": [
+                "CMP(S3~0-1,S4~0-1)",
+                "CMP(S4~0-1,S5~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 6,
+            "occurs": 3,
+            "refractory": 0,
+            "level": 0
+        },
+        {
+            "name": "CMP(S3~0-1,S4~0-1)",
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "S3~0-1",
+                "S4~0-1"
+            ],
+            "lastspike": 7,
+            "occurs": 1,
+            "refractory": 0,
+            "level": 1
+        },
+        {
+            "name": "S5~0-1",
+            "potential": 0.10737418240000006,
+            "fsynapses": [
+                "CMP(S4~0-1,S5~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 8,
+            "occurs": 3,
+            "refractory": 0,
+            "level": 0
+        },
+        {
+            "name": "CMP(S4~0-1,S5~0-1)",
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "S4~0-1",
+                "S5~0-1"
+            ],
+            "lastspike": 9,
+            "occurs": 1,
+            "refractory": 0,
+            "level": 1
+        },
+        {
+            "name": "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+            "potential": 0.796,
+            "fsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S2~0-1))",
+                "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(CMP(S1~0-1,S3~0-1),S2~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S0~0-1,S2~0-1)",
+                "S0~0-1"
+            ],
+            "lastspike": 15,
+            "occurs": 2,
+            "refractory": 6,
+            "level": 2
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S2~0-1))",
+            "potential": 1.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+                "CMP(S0~0-1,S2~0-1)"
+            ],
+            "lastspike": 16,
+            "occurs": 2,
+            "refractory": 7,
+            "level": 3
+        },
+        {
+            "name": "CMP(CMP(S1~0-1,S3~0-1),S2~0-1)",
+            "potential": 0.995,
+            "fsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(CMP(S1~0-1,S3~0-1),S2~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S1~0-1,S3~0-1)",
+                "S2~0-1"
+            ],
+            "lastspike": 17,
+            "occurs": 1,
+            "refractory": 0,
+            "level": 2
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(CMP(S1~0-1,S3~0-1),S2~0-1))",
+            "potential": 0.2,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+                "CMP(CMP(S1~0-1,S3~0-1),S2~0-1)"
+            ],
+            "lastspike": 18,
+            "occurs": 1,
+            "refractory": 0,
+            "level": 3
+        },
+        {
+            "name": "CMP(CMP(S0~0-1,S2~0-1),CMP(S1~0-1,S3~0-1))",
+            "potential": 0.2,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(S0~0-1,S2~0-1)",
+                "CMP(S1~0-1,S3~0-1)"
+            ],
+            "lastspike": 18,
+            "occurs": 1,
+            "refractory": 0,
+            "level": 2
+        },
+        {
+            "name": "CMP(S1~0-1,S2~0-1)",
+            "potential": 0.2,
+            "fsynapses": [],
+            "rsynapses": [
+                "S1~0-1",
+                "S2~0-1"
+            ],
+            "lastspike": 18,
+            "occurs": 1,
+            "refractory": 0,
+            "level": 1
+        }
+    ],
+    "synapses": [
+        {
+            "fref": "CMP(S0~0-1,S2~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.6604300000000001,
+            "occurs": 1,
+            "lastspike": 15
+        },
+        {
+            "fref": "CMP(S0~0-1,S2~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.6604300000000001,
+            "occurs": 1,
+            "lastspike": 17
+        },
+        {
+            "fref": "CMP(S1~0-1,S3~0-1)",
+            "rref": "S1~0-1",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 17
+        },
+        {
+            "fref": "CMP(S1~0-1,S3~0-1)",
+            "rref": "S3~0-1",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(S3~0-1,S4~0-1)",
+            "rref": "S3~0-1",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(S3~0-1,S4~0-1)",
+            "rref": "S4~0-1",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(S4~0-1,S5~0-1)",
+            "rref": "S4~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(S4~0-1,S5~0-1)",
+            "rref": "S5~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+            "rref": "CMP(S0~0-1,S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 16
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S2~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 17
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S2~0-1))",
+            "rref": "CMP(S0~0-1,S2~0-1)",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S3~0-1),S2~0-1)",
+            "rref": "CMP(S1~0-1,S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 18
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S3~0-1),S2~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(CMP(S1~0-1,S3~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S2~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S2~0-1),S0~0-1),CMP(CMP(S1~0-1,S3~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S3~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S2~0-1),CMP(S1~0-1,S3~0-1))",
+            "rref": "CMP(S0~0-1,S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S2~0-1),CMP(S1~0-1,S3~0-1))",
+            "rref": "CMP(S1~0-1,S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(S1~0-1,S2~0-1)",
+            "rref": "S1~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(S1~0-1,S2~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        }
+    ],
+    "npruned": [],
+    "spruned": [],
+    "params": {
+        "BindingCount": 2,
+        "PropagationLevels": 3,
+        "PruneInterval": 30,
+        "PruningThreshold": 0.2,
+        "BindingThreshold": 0.5,
+        "DownPotentialFactor": 0.2,
+        "FiringThreshold": 0.25,
+        "ZeroingThreshold": 0.05,
+        "DecayFactor": 0.8,
+        "InitialPotential": 0.2,
+        "ReinforcementRate": 0.3,
+        "RefractoryPeriod": 7,
+        "PostSpikeFactor": 1.0,
+        "DefaultEncoderCeiling": 1024,
+        "DefaultEncoderFloor": 0,
+        "DefaultEncoderResolution": 4,
+        "TraceLength": 60
+    },
+    "tick": 19
+}

@@ -1,8 +1,8 @@
-from asyncio.windows_events import NULL
+# from asyncio.windows_events import NULL
 from cProfile import label
 import json
 import math
-from msilib.schema import File
+# from msilib.schema import File
 from threading import activeCount
 from tracemalloc import start
 from jinja2 import Undefined
@@ -29,10 +29,11 @@ sns.set_style("ticks")
 plt.rcParams["font.size"] = "32"
 
 
-def getData(data, cols):
+def getData(data, cols=None):
 
     data = pd.read_csv(data)
-    data = data[cols]
+    if cols != None:
+        data = data[cols]
     data = data.fillna(0)
 
     neuralData = []
@@ -177,7 +178,9 @@ def dataset_singly(data="dataset\dataset.csv", data2="dataset\dataset2.csv", dat
     axs.set_ylabel("Event Streams")
     axs.set_xlabel("Timesteps")
 
+    
     flts = [380, 420, 860]
+
     for i, v in enumerate(d4[2]):
         axs.annotate(flts[i], (v, 2),  fontsize=12)
 
@@ -242,7 +245,7 @@ def smooth(x, y, num=500, capzero=True):
     return (X_, Y_)
 
 
-def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=NULL, filterout=[], xres=8, yres=4, reticky=False, smoothed=False, lblreplace=[]):
+def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=None, filterout=[], xres=8, yres=4, reticky=False, smoothed=False, lblreplace=[]):
 
     network = {}
     cols = []
@@ -310,7 +313,7 @@ def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=NUL
                 # print(xstart, xend)
 
     plt.xlabel("Time")
-    if ylabel == NULL:
+    if ylabel == None:
         plt.ylabel(str.title(col))
     else:
         plt.ylabel(str.title(ylabel))
@@ -494,16 +497,19 @@ if not os.path.isdir("figures"):
 
 filtout = ["b2", "D2", "D3", "D4", "D5"]
 
-compilenetmetagraph(col='neurones', ylabel='Neurosymbols Generated',
-                    filterout=filtout, yres=5, lblreplace=["D5", "D4"])
-# compilenetmetagraph(col='composites', ylabel='Composites Generated', filterout=filtout)
-compilenetmetagraph(col='synapses', ylabel='Synapses Formed',
-                    filterout=filtout, yres=5, lblreplace=["D5", "D4"])
-compilenetmetagraph(col='npruned', ylabel='Acc. Prunes',
-                    filterout=filtout, reticky=True, yres=5, lblreplace=["D5", "D4"])
+# compilenetmetagraph(col='neurones', ylabel='Neurosymbols Generated',
+#                     filterout=filtout, yres=5, lblreplace=["D5", "D4"])
+# # compilenetmetagraph(col='composites', ylabel='Composites Generated', filterout=filtout)
+# compilenetmetagraph(col='synapses', ylabel='Synapses Formed',
+#                     filterout=filtout, yres=5, lblreplace=["D5", "D4"])
+# compilenetmetagraph(col='npruned', ylabel='Acc. Prunes',
+#                     filterout=filtout, reticky=True, yres=5, lblreplace=["D5", "D4"])
 
 # compilenetmetagraph(col='npruned', ylabel='Composites Pruned')
 # compilenetmetagraph(col='synapses', ylabel='Synapses Formed')
 # compileneuronegraph(ticks=25, xres=5, yres=5)
 # dataset()
 # dataset_singly(yres=3)
+
+
+

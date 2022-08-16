@@ -4,10 +4,12 @@ import numpy as np
 
 interval = 180
 padding = 4
+int_streams = 10
+float_streams = 0
 
 choices = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-int_array = [f"stream{x}" for x in range(10)]
-float_array = [f"fstream{x}" for x in range(10)]
+int_array = [f"stream{x}" for x in range(int_streams)]
+float_array = [f"fstream{x}" for x in range(float_streams)]
 
 
 randoms_int = [
@@ -42,7 +44,7 @@ for i in range(interval):
     lines.append(str_temp + "\n")
 
 
-f = open("dataset\dataset.csv", "w")
+f = open("./dataset/dataset.csv", "w")
 f.writelines(lines)
 
 
@@ -68,5 +70,5 @@ for h in headers:
 print(meta_content)
 
 
-f = open("dataset\meta.csv", "w")
+f = open("./dataset/meta.csv", "w")
 f.writelines(meta_content)

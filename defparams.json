@@ -1,7 +1,7 @@
 {
     "BindingCount": 2,
-    "PropagationLevels": 4,
-    "PruneInterval": 30,
+    "PropagationLevels": 2,
+    "PruneInterval": 60,
     "PruningThreshold": 0.2,
     "BindingThreshold": 0.5,
     "DownPotentialFactor": 0.2,

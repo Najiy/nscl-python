@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+# from msilib.schema import File
+from cgi import print_environ
+from distutils import errors
+import typing
+
 from curses import meta
 from datetime import date, datetime
 from decimal import DivisionByZero
@@ -23,6 +28,7 @@ import subprocess
 
 # from subprocess import Popen
 from typing import NewType
+from unittest import result
 
 # from jinja2.defaults import NEWLINE_SEQUENCE
 
@@ -41,6 +47,12 @@ from pyvis.network import Network
 
 import itertools
 from itertools import islice
+
+
+
+# test = [None, None, 2, None, None]
+# exists = any(x != None for x in test)
+# input(exists)
 
 
 
@@ -295,8 +307,6 @@ def graphout(eng, flush=True):
     if flush == True:
         eng.clear_traces()
 
-    # npredict.forward_predict(eng, [])
-
 
 def stream(streamfile, trace=True):
 
@@ -346,9 +356,6 @@ def normaliser(data, minn, maxx, scaling=1):
         return (data - minn) / (maxx - minn) * scaling
     except DivisionByZero:
         return 0
-
-
-# def feedEncode(eng, inputs):
 
 
 def csvstream(streamfile, metafile, trace=False, fname="default"):
@@ -429,7 +436,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     print(start, end)
     save_range = [x for x in range(start + 1, end, int(round((end - start) / 20, 1)))]
     print(save_range)
-    # print(take(3, data.items()))
+
     input("csv dataset loaded, now processing [enter] ")
 
     temp = eng.tick
@@ -442,9 +449,8 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
     starttime = datetime.now().isoformat(timespec="minutes")
 
-    skip = False
-
     while running and eng.tick <= maxit:
+
         # print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
         # if not skip:
@@ -484,6 +490,9 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
             if eng.tick not in data:
                 eng.algo([])
             else:
+                # pp.pprint(data[eng.tick])
+                # input()
+                # input(data[eng.tick])
                 eng.algo(data[eng.tick])
 
             if eng.tick == maxit and trace == True:
@@ -502,7 +511,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
             running = False
 
         # if input(f"\n{eng.tick-1}") == "s" and skip == False:
-        #     skip = True 
+        #     skip = True
 
     # netmeta.close()
     eng.tick += temp
@@ -511,15 +520,88 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     print()
 
 
-# def loading():
-#     print("Loading...")
-#     for i in range(0, 100):
-#         time.sleep(0.1)
-#         width = (i + 1) / 4
-#         bar = "[" + "#" * width + " " * (25 - width) + "]"
-#         sys.stdout.write(u"\u001b[1000D" +  bar)
-#         sys.stdout.flush()
-#     print("")
+def load_data(streamfile, metafile, trace=False, fname="default" , exclude_values=["","0"], exclude_headers=["current", "humidity", "temperature"]):
+    # def take(n, iterable):
+    #     # "Return first n items of the iterable as a list"
+    #     return list(islice(iterable, n))
+
+    data = {}
+
+    metafile = open(metafile, "r")
+    headers = metafile.readline().split(",")
+    metadata = metafile.readlines()
+
+    for line in metadata:
+
+        row = line.split(",")
+        eng.meta[row[0]] = {
+            "min": float(row[9]),
+            "max": float(row[10]),
+            "res": float(eng.network.params["DefaultEncoderResolution"])
+        }
+
+    file = open(streamfile, "r")
+    sensors = file.readline().split(",")[1:]
+    rawdata = file.readlines()
+
+    for line in rawdata:
+        sline = line.replace("\n", "").split(",")
+        for i in range(1, 1 + len(sensors)):
+            if sline[i] != "":  ## filters sensors
+                name = sensors[i - 1]
+                value = float(sline[i])
+
+                exclude = all(n != None for n in [search(x, name) for x in exclude_headers])
+
+                if (exclude):
+                    sline[i] = ""
+                else:
+                    maxx = eng.network.params["DefaultEncoderCeiling"]
+                    minn = eng.network.params["DefaultEncoderFloor"]
+                    res = eng.network.params["DefaultEncoderResolution"]
+
+                    if name in eng.meta:
+                        maxx = eng.meta[name]["max"]
+                        minn = eng.meta[name]["min"]
+                        res = eng.meta[name]["res"]
+
+                    newval = math.floor(normaliser(value, minn, maxx, res))
+                    # input(f"normaliser({value},{minn},{maxx},{res}) = {newval}")
+                    sline[i] = f"{name}~{newval}-{newval+1}"
+
+        data[int(sline[0])] = [x for x in sline[1:] if x != ""]
+
+    del rawdata
+    return data
+
+
+def feed_trace(eng, data, ticks=[], pot_threshold= 0.8, reset_potentials= True):
+    
+    if ticks == []:
+        ticks = [t for t in range(max(data.keys()))]
+
+    results = {}
+
+    if reset_potentials:
+        eng.reset_potentials()
+
+    for t in ticks:
+        results[t] = []
+
+        if t not in data.keys():
+            r, e = eng.algo([])
+            print(f"data {t}", [])
+        else:
+            print(f"data {t}", data[t])
+            r, e = eng.algo(data[t])
+
+        results[t] = eng.get_actives(pot_threshold)
+        
+        pp.pprint(results[t])
+        input()
+
+
+    return results
 
 
 args = sys.argv[1:]
@@ -530,166 +612,192 @@ pp = pprint.PrettyPrinter(indent=4)
 
 init = False
 verbose = False
+
 while True:
-    if init == False:
-        print("\n\n########### NSCL (Python) ###########\n")
-        print(f" version: experimental/non-optimised")
-        print(f" os.name: {os.name}")
-        print(f" os.pid: {os.getpid()}")
-        print("")
+    try:
+        if init == False:
+            print("\n\n########### NSCL (Python) ###########\n")
+            print(f" version: experimental/non-optimised")
+            print(f" os.name: {os.name}")
+            print(f" os.pid: {os.getpid()}")
+            print("")
 
-        # subprocess.call(f'top -p {os.getpid()}', shell=True)
-        # os.system(f"top -p {os.getpid()}")
-        # Popen('bash')
+            # subprocess.call(f'top -p {os.getpid()}', shell=True)
+            # os.system(f"top -p {os.getpid()}")
+            # Popen('bash')
 
-    # try:
-    if init == True:
-        if os.name == "posix":
-            command = input(
-                f"\033[1m\033[96m {os.getpid()}: NSCL [{eng.tick}]> \u001b[0m\033[1m"
-            ).split(" ")
+        # try:
+        if init == True:
+            if os.name == "posix":
+                command = input(
+                    f"\033[1m\033[96m {os.getpid()}: NSCL [{eng.tick}]> \u001b[0m\033[1m"
+                ).split(" ")
+            else:
+                command = input(f" {os.getpid()}: NSCL [{eng.tick}]> ").split(" ")
         else:
-            command = input(f" {os.getpid()}: NSCL [{eng.tick}]> ").split(" ")
-    else:
-        init = True
-        command = args
+            init = True
+            command = args
 
-    if len(command) == 0:
-        continue
+        if len(command) == 0:
+            continue
 
-    if command[0] in ["clear", "cls", "clr"]:
-        clear()
+        if command[0] in ["clear", "cls", "clr"]:
+            clear()
 
-    if command[0] in ["param", "set"]:
-        if command[1] in ["verb", "verbose"]:
-            verbose = bool(command[2])
-            print(f"verbose={verbose}")
+        if command[0] in ["param", "set"]:
+            if command[1] in ["verb", "verbose"]:
+                verbose = bool(command[2])
+                print(f"verbose={verbose}")
 
-    if command[0] in ["check", "checkparams"]:
-        eng.network.check_params()
+        if command[0] in ["check", "checkparams"]:
+            eng.network.check_params()
 
-    if command[0] == "params":
-        for p in eng.network.params:
-            print(f"{p} {eng.network.params[p]}")
+        if command[0] == "params":
+            for p in eng.network.params:
+                print(f"{p} {eng.network.params[p]}")
 
-    if command[0] == "stream":
-        print(" streaming test dataset as input - %s" % command[1])
-        stream(command[1])
+        if command[0] == "stream":
+            print(" streaming test dataset as input - %s" % command[1])
+            stream(command[1])
 
-    if command[0] == "csvstream_traced":
-        print(" streaming csv dataset as input - %s" % command[1])
-        csvstream(command[1], command[2], True, command[3])
+        if command[0] == "csvstream_traced":
+            print(" streaming csv dataset as input - %s" % command[1])
+            csvstream(command[1], command[2], True, command[3])
 
-    if command[0] == "csvstream":
-        eng.network.check_params()
-        print(" streaming csv dataset as input - %s" % command[1])
-        csvstream(command[1], command[2], False, command[3])
+        if command[0] == "csvstream":
+            eng.network.check_params()
+            print(" streaming csv dataset as input - %s" % command[1])
+            csvstream(command[1], command[2], False, command[3])
 
-    if command[0] in ["tracepaths", "trace", "traces", "paths", "path"]:
-        limits = float(command[1])
-        inp = command[2].split(",")
-        print(f" NSCL.trace(limits={limits})")
-        print(inp)
-        pp.pprint(npredict.trace_paths(eng, inp, limits, verbose=True))
+        if command[0] in ["tracepaths", "trace", "traces", "paths", "path"]:
+            limits = float(command[1])
+            inp = command[2].split(",")
+            print(f" NSCL.trace(limits={limits})")
+            print(inp)
+            pp.pprint(npredict.trace_paths(eng, inp, limits, verbose=True))
 
-    if command[0] == "active":
-        active = eng.get_actives()
-        print(active)
-        # print(eng.size_stat())
+        if command[0] == "active":
+            active = eng.get_actives()
+            print(active)
 
-    if command[0] == "spredict":
-        limits = float(command[1])
-        inp = command[2].split(",")
-        print(f" NSCL.static_predict(limits={limits})")
-        print(inp)
-        pp.pprint(npredict.static_prediction(eng, inp, limits, verbose=False))
+        if command[0] == "backtrace":
+            propslvl = eng.network.params["PropagationLevels"]  # float(command[1])
+            neurone = command[1]
+            print(f" NSCL.back_trace()")
+            print("propslvl", propslvl)
+            print("composite", neurone)
+            pp.pprint(npredict.back_trace(propslvl, neurone))
 
-    if command[0] == "tpredict":
-        limits = float(command[1])
-        inp = command[2].split(",")
-        print(f" NSCL.temporal_predict(limits={limits})")
-        pp.pprint(npredict.temporal_prediction(eng, inp, limits, verbose=False))
 
-    if command[0] == "feed":
-        feed = [x for x in command[1].split(",") if x != ""]
-        eng.algo(feed)
+        if command[0] == "sinfer":
+            print("sinfer")
 
-    if command[0] == "prune":
-        ncount = len(eng.network.neurones)
-        scount = len(eng.network.synapses)
-        npcount = len(eng.npruned)
-        spcount = len(eng.spruned)
-        print(f" NSCL.prune()")
-        eng.prune_network()
-        print(f" ncount {ncount} -> {len(eng.network.neurones)}")
-        print(f" scount {scount} -> {len(eng.network.synapses)}")
-        print(f" npcount {npcount} -> {len(eng.npruned)}")
-        print(f" spcount {spcount} -> {len(eng.spruned)}")
+            # data = open(command[1]).readlines()
+            # meta = open(command[2]).readlines()
 
-    if command[0] in ["potsyn", "ptsyn", "struct", "network", "ls"]:
-        eng.potsyns()
-        print()
+            command[1] = "./dataset/dataset_sin_S3F3.csv"
+            command[2] = "./dataset/meta_sin_S3F3.csv"
 
-    if command[0] == "new":
-        confirm = input
-        if input(" new network? (y/n)") == "y":
+            data = load_data(command[1], command[2])
+            input(len(data))
+
+            first = int(input("first row in file (stream from): "))
+            last = int(input("last row in file (stream to): "))
+            pthres = float(input("potential threshold: "))
+
+            ticks = [x for x in range(first, last)]
+
+            for i in range(last):
+                print(data[i])
+
+            input(f"range {ticks}")
+
+            results = feed_trace(eng, data, ticks=ticks, pot_threshold=pthres)
+
+            # data = data[first:last]
+
+
+
+        if command[0] == "feed":
+            feed = [x for x in command[1].split(",") if x != ""]
+            eng.algo(feed)
+
+        if command[0] == "prune":
+            ncount = len(eng.network.neurones)
+            scount = len(eng.network.synapses)
+            npcount = len(eng.npruned)
+            spcount = len(eng.spruned)
+            print(f" NSCL.prune()")
+            eng.prune_network()
+            print(f" ncount {ncount} -> {len(eng.network.neurones)}")
+            print(f" scount {scount} -> {len(eng.network.synapses)}")
+            print(f" npcount {npcount} -> {len(eng.npruned)}")
+            print(f" spcount {spcount} -> {len(eng.spruned)}")
+
+        if command[0] in ["potsyn", "ptsyn", "struct", "network", "ls"]:
+            eng.potsyns()
+            print()
+
+        if command[0] == "new":
+            confirm = input
+            if input(" new network? (y/n)") == "y":
+                del eng
+                eng = NSCL.Engine()
+                print("new net")
+
+        if command[0] == "graphout":
+            print(" exporting graphs")
+            graphout(eng)
+
+        if command[0] == "save":
+            print(f" Savestate({command[1]})")
+            eng.save_state(command[1])
+
+        if command[0] == "load":
+            print(f" Loadstate({command[1]})")
             del eng
             eng = NSCL.Engine()
-            print("new net")
+            print(f" memsize={eng.load_state(command[1])}")
 
-    if command[0] == "graphout":
-        print(" exporting graphs")
-        graphout(eng)
+        if command[0] == "memsize":
+            print(f" memsize={eng.size_stat()}")
+            # print(eng.size_stat())
 
-    if command[0] == "save":
-        print(f" Savestate({command[1]})")
-        eng.save_state(command[1])
+        if command[0] == "avg_wgt_r":
+            print(f" neurone {command[1]} = {eng.network.avg_wgt_r(command[1])}")
 
-    if command[0] == "load":
-        print(f" Loadstate({command[1]})")
-        del eng
-        eng = NSCL.Engine()
-        print(f" memsize={eng.load_state(command[1])}")
+        if command[0] == "avg_wgt_f":
+            print(f" neurone {command[1]} = {eng.network.avg_wgt_f(command[1])}")
 
-    if command[0] == "memsize":
-        print(f" memsize={eng.size_stat()}")
-        # print(eng.size_stat())
+        if command[0] == "info":
+            clear()
 
-    if command[0] == "avg_wgt_r":
-        print(f" neurone {command[1]} = {eng.network.avg_wgt_r(command[1])}")
+            print()
+            print(" ########################### ")
+            print(f"     NSCL_python ")
+            print()
+            print(f"tick = {eng.tick}")
+            print(f"hashid = {eng.network.hash_id}")
+            # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
+            print(f"neurones = {len(eng.network.neurones)}")
+            print(f"synapses = {len(eng.network.synapses)}")
+            print(f"bindings = {eng.network.params['BindingCount']}")
+            print(f"PropagationLevels = {eng.network.params['PropagationLevels']}")
+            print(f"npruned = {len(eng.npruned)}")
+            print(f"spruned = {len(eng.spruned)}")
+            print(f"prune_ctick = {eng.prune}")
+            print()
+            eng.network.check_params()
+            print()
+            print(" ########################### ")
+            print()
 
-    if command[0] == "avg_wgt_f":
-        print(f" neurone {command[1]} = {eng.network.avg_wgt_f(command[1])}")
+        if command[0] in ["tick", "pass", "next"]:
+            r,e = eng.algo([], {})
+            print(" reinf %s " % r)
+            print(" errs %s " % e)
 
-    if command[0] == "info":
-        clear()
-
-        print()
-        print(" ###########################")
-        print(f"     NSCL_python ")
-        print()
-        print(f"tick = {eng.tick}")
-        print(f"hashid = {eng.network.hash_id}")
-        # print(f"progress = {(eng.tick - start) / (end - start) * 100 : .1f}%")
-        print(f"neurones = {len(eng.network.neurones)}")
-        print(f"synapses = {len(eng.network.synapses)}")
-        print(f"bindings = {eng.network.params['BindingCount']}")
-        print(f"PropagationLevels = {eng.network.params['PropagationLevels']}")
-        print(f"npruned = {len(eng.npruned)}")
-        print(f"spruned = {len(eng.spruned)}")
-        print(f"prune_ctick = {eng.prune}")
-        print()
-        eng.network.check_params()
-        print()
-        print(" ###########################")
-        print()
-
-    if command[0] in ["tick", "pass", "next"]:
-        r = eng.algo([], {}, False)
-        print(" reinf %s " % r["rsynapse"])
-
-    if command[0] == "exit":
-        sys.exit(0)
-
-    # except Exception as e:
-    #     print(e)
+        if command[0] == "exit":
+            sys.exit(0)
+    except Exception as e:
+        print(str(e))

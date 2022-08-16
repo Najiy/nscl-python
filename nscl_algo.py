@@ -233,10 +233,11 @@ class NSCLAlgo:
         except DivisionByZero:
             return 0
 
-    def algo1(eng, inputs, meta={}) -> list:
+    def algo1(eng, inputs, meta={}) -> tuple:
         # print("Algo {")
         # if now == None:
         #     now = datetime.now().isoformat()
+        errors = []
 
         if meta != {}:
             for m in meta:
@@ -281,20 +282,24 @@ class NSCLAlgo:
                 n.occurs += 1
                 for s in n.fsynapses:
                     # forwards potentials
-                    neurones[s].potential += (
-                        n.potential
-                        * synapses[NSCLAlgo.sname(n.name, s)].wgt
-                        / params["BindingCount"]
-                    )
-                    n.potential -= (
-                        n.potential
-                        * synapses[NSCLAlgo.sname(n.name, s)].wgt
-                        / params["BindingCount"]
-                    )
-                    neurones[s].potential = min(n.potential, 1.0)
-                    synapses[NSCLAlgo.sname(n.name, s)].occurs += 1
-                    synapses[NSCLAlgo.sname(n.name, s)].lastspike = eng.tick
-                    # ADD TO RE-INFORCE LIST if necessary
+                    try:
+                        neurones[s].potential += (
+                            n.potential
+                            * synapses[NSCLAlgo.sname(n.name, s)].wgt
+                            / params["BindingCount"]
+                        )
+                        n.potential -= (
+                            n.potential
+                            * synapses[NSCLAlgo.sname(n.name, s)].wgt
+                            / params["BindingCount"]
+                        )
+                        neurones[s].potential = min(n.potential, 1.0)
+                        synapses[NSCLAlgo.sname(n.name, s)].occurs += 1
+                        synapses[NSCLAlgo.sname(n.name, s)].lastspike = eng.tick
+                        # ADD TO RE-INFORCE LIST if necessary
+                    
+                    except Exception as e:
+                        errors.append(str(e))
 
                 n.potential *= params["PostSpikeFactor"]
             else:
@@ -343,8 +348,9 @@ class NSCLAlgo:
             eng.remove_neurone(n)
 
         return {
-            "trace1": [neurones[n].potential for n in neurones],
-            "rsynapse": reinforce_synapse
+            # "trace1": [neurones[n].potential for n in neurones],
+            "rsynapse": reinforce_synapse,
+            "errors": errors
             # "new_nsymbol": ,
             # "new_syn": ,
         }

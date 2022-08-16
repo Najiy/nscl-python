@@ -1,0 +1,3156 @@
+{
+    "neurones": [
+        {
+            "name": "S0~0-1",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 48,
+            "refractory": 0,
+            "occurs": 11,
+            "level": 0,
+            "probationary": -1
+        },
+        {
+            "name": "S1~0-1",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "CMP(S1~0-1,S2~0-1)",
+                "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 49,
+            "refractory": 0,
+            "occurs": 11,
+            "level": 0,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(S0~0-1,S1~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)"
+            ],
+            "rsynapses": [
+                "S0~0-1",
+                "S1~0-1"
+            ],
+            "lastspike": 3,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 1,
+            "probationary": -1
+        },
+        {
+            "name": "S2~0-1",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(S1~0-1,S2~0-1)",
+                "CMP(S2~0-1,S4~0-1)",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+                "CMP(S2~0-1,S3~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 51,
+            "refractory": 0,
+            "occurs": 11,
+            "level": 0,
+            "probationary": -1
+        },
+        {
+            "name": "S4~0-1",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(S2~0-1,S4~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 6,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 0,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(S1~0-1,S2~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+                "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))"
+            ],
+            "rsynapses": [
+                "S1~0-1",
+                "S2~0-1"
+            ],
+            "lastspike": 6,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 1,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(S2~0-1,S4~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+                "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))"
+            ],
+            "rsynapses": [
+                "S2~0-1",
+                "S4~0-1"
+            ],
+            "lastspike": 7,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 1,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "CMP(S1~0-1,S2~0-1)"
+            ],
+            "lastspike": 11,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+                "CMP(S0~0-1,S1~0-1)"
+            ],
+            "lastspike": 12,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S1~0-1,S2~0-1)",
+                "S0~0-1"
+            ],
+            "lastspike": 12,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "S3~0-1",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(S2~0-1,S3~0-1)",
+                "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)"
+            ],
+            "rsynapses": [],
+            "lastspike": 52,
+            "refractory": 0,
+            "occurs": 9,
+            "level": 0,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))"
+            ],
+            "lastspike": 13,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S3~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S2~0-1,S4~0-1)",
+                "S2~0-1"
+            ],
+            "lastspike": 13,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+                "CMP(S0~0-1,S1~0-1)"
+            ],
+            "lastspike": 14,
+            "refractory": 0,
+            "occurs": 7,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S1~0-1,S2~0-1)",
+                "CMP(S2~0-1,S4~0-1)"
+            ],
+            "lastspike": 14,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(S2~0-1,S3~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(S2~0-1,S3~0-1))",
+                "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S3~0-1))"
+            ],
+            "rsynapses": [
+                "S2~0-1",
+                "S3~0-1"
+            ],
+            "lastspike": 14,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 1,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 15,
+            "refractory": 0,
+            "occurs": 7,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 15,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S2~0-1,S4~0-1)",
+                "S3~0-1"
+            ],
+            "lastspike": 15,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+                "CMP(S2~0-1,S4~0-1)"
+            ],
+            "lastspike": 17,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 18,
+            "refractory": 0,
+            "occurs": 6,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+                "CMP(S0~0-1,S1~0-1)"
+            ],
+            "lastspike": 22,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))"
+            ],
+            "lastspike": 23,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 24,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)"
+            ],
+            "lastspike": 24,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 25,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S2~0-1,S3~0-1)",
+                "CMP(S2~0-1,S4~0-1)"
+            ],
+            "lastspike": 25,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))"
+            ],
+            "lastspike": 26,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 26,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(S2~0-1,S3~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)"
+            ],
+            "lastspike": 26,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S2~0-1,S3~0-1)",
+                "S2~0-1"
+            ],
+            "lastspike": 26,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 27,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)"
+            ],
+            "lastspike": 27,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(S1~0-1,S2~0-1)"
+            ],
+            "lastspike": 27,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 28,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))"
+            ],
+            "lastspike": 28,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(S2~0-1,S4~0-1)"
+            ],
+            "lastspike": 28,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S2~0-1,S3~0-1)",
+                "S3~0-1"
+            ],
+            "lastspike": 28,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))"
+            ],
+            "lastspike": 29,
+            "refractory": 0,
+            "occurs": 5,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))"
+            ],
+            "lastspike": 29,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)"
+            ],
+            "lastspike": 30,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(S2~0-1,S3~0-1)"
+            ],
+            "lastspike": 30,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(S2~0-1,S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(S2~0-1,S3~0-1)"
+            ],
+            "lastspike": 31,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))"
+            ],
+            "lastspike": 34,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)"
+            ],
+            "lastspike": 34,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))"
+            ],
+            "lastspike": 35,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))"
+            ],
+            "lastspike": 35,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)"
+            ],
+            "lastspike": 35,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)"
+            ],
+            "lastspike": 35,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+                "CMP(S0~0-1,S1~0-1)"
+            ],
+            "lastspike": 35,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S2~0-1,S3~0-1)",
+                "S0~0-1"
+            ],
+            "lastspike": 35,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 36,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 36,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 37,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))"
+            ],
+            "lastspike": 37,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))"
+            ],
+            "lastspike": 37,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "lastspike": 37,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)"
+            ],
+            "lastspike": 37,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S1~0-1,S2~0-1)",
+                "S1~0-1"
+            ],
+            "lastspike": 37,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+                "CMP(S0~0-1,S1~0-1)"
+            ],
+            "lastspike": 38,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))"
+            ],
+            "lastspike": 39,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "lastspike": 39,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 39,
+            "refractory": 0,
+            "occurs": 4,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)"
+            ],
+            "lastspike": 39,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 40,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 40,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+                "CMP(S1~0-1,S2~0-1)"
+            ],
+            "lastspike": 40,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 41,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+                "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)"
+            ],
+            "lastspike": 41,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)"
+            ],
+            "lastspike": 41,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "lastspike": 43,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "lastspike": 43,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+                "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)"
+            ],
+            "lastspike": 43,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)"
+            ],
+            "lastspike": 43,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 44,
+            "refractory": 0,
+            "occurs": 3,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 45,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)"
+            ],
+            "lastspike": 45,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))"
+            ],
+            "lastspike": 47,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+                "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)"
+            ],
+            "lastspike": 48,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "rsynapses": [
+                "CMP(S0~0-1,S1~0-1)",
+                "S0~0-1"
+            ],
+            "lastspike": 48,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 2,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+                "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))"
+            ],
+            "lastspike": 49,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 50,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "lastspike": 50,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))"
+            ],
+            "lastspike": 51,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))"
+            ],
+            "lastspike": 51,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "lastspike": 51,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 51,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))"
+            ],
+            "lastspike": 52,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 52,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [
+                "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))"
+            ],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)"
+            ],
+            "lastspike": 52,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 3,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))"
+            ],
+            "lastspike": 53,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 53,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))"
+            ],
+            "lastspike": 53,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": -1
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))"
+            ],
+            "lastspike": 55,
+            "refractory": 0,
+            "occurs": 2,
+            "level": 4,
+            "probationary": 1
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+                "CMP(S2~0-1,S3~0-1)"
+            ],
+            "lastspike": 55,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 3,
+            "probationary": 1
+        }
+    ],
+    "synapses": [
+        {
+            "fref": "CMP(S0~0-1,S1~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.6604300000000001,
+            "occurs": 4,
+            "lastspike": 48
+        },
+        {
+            "fref": "CMP(S0~0-1,S1~0-1)",
+            "rref": "S1~0-1",
+            "wgt": 0.6604300000000001,
+            "occurs": 4,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(S1~0-1,S2~0-1)",
+            "rref": "S1~0-1",
+            "wgt": 0.307,
+            "occurs": 4,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(S1~0-1,S2~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.307,
+            "occurs": 4,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(S2~0-1,S4~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.307,
+            "occurs": 4,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(S2~0-1,S4~0-1)",
+            "rref": "S4~0-1",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.762301,
+            "occurs": 4,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.762301,
+            "occurs": 4,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 4,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 48
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 4,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "rref": "CMP(S2~0-1,S4~0-1)",
+            "wgt": 0.01,
+            "occurs": 4,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 4,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.762301,
+            "occurs": 3,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(S2~0-1,S4~0-1)",
+            "wgt": 0.762301,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(S2~0-1,S3~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(S2~0-1,S3~0-1)",
+            "rref": "S3~0-1",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.9932855915787949,
+            "occurs": 3,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.9932855915787949,
+            "occurs": 6,
+            "lastspike": 58
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "rref": "CMP(S2~0-1,S4~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "rref": "S3~0-1",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(S2~0-1,S4~0-1)",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 5,
+            "lastspike": 58
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.5149,
+            "occurs": 3,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.5149,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.8336107,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "wgt": 0.8336107,
+            "occurs": 2,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.762301,
+            "occurs": 3,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.762301,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.307,
+            "occurs": 4,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(S2~0-1,S4~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.8336107,
+            "occurs": 2,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.8336107,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.6604300000000001,
+            "occurs": 4,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "wgt": 0.6604300000000001,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.6604300000000001,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "rref": "S2~0-1",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.307,
+            "occurs": 4,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 4,
+            "lastspike": 58
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+            "rref": "CMP(S2~0-1,S4~0-1)",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.6604300000000001,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "rref": "S3~0-1",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 4,
+            "lastspike": 58
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.5149,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.5149,
+            "occurs": 3,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.5149,
+            "occurs": 3,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.5149,
+            "occurs": 3,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+            "wgt": 0.5149,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.5149,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 3,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "wgt": 0.5149,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.5149,
+            "occurs": 2,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 48
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 3,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.8336107,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.8336107,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1))",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S1~0-1,S2~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+            "rref": "S1~0-1",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1))",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(S2~0-1,S4~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S1~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.6604300000000001,
+            "occurs": 2,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.307,
+            "occurs": 2,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 2,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S1~0-1,S2~0-1),S0~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 51
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 49
+        },
+        {
+            "fref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "rref": "S0~0-1",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 50
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1))",
+            "wgt": 0.5149,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S2~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.5149,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(S0~0-1,S1~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 52
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 53
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),CMP(S2~0-1,S4~0-1)),CMP(CMP(S2~0-1,S4~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1))",
+            "wgt": 0.307,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(S1~0-1,S2~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.307,
+            "occurs": 1,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.5149,
+            "occurs": 1,
+            "lastspike": 54
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.5149,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S0~0-1,S1~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": 58
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S4~0-1),S2~0-1),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 0,
+            "lastspike": ""
+        }
+    ],
+    "npruned": [
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+                "CMP(S0~0-1,S1~0-1)"
+            ],
+            "lastspike": 50,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 3,
+            "probationary": 0
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+                "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)"
+            ],
+            "lastspike": 51,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 3,
+            "probationary": 0
+        },
+        {
+            "name": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S3~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(S1~0-1,S2~0-1)",
+                "CMP(S2~0-1,S3~0-1)"
+            ],
+            "lastspike": 52,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 2,
+            "probationary": 0
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))"
+            ],
+            "lastspike": 53,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 4,
+            "probationary": 0
+        },
+        {
+            "name": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 53,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 3,
+            "probationary": 0
+        },
+        {
+            "name": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(S1~0-1,S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+                "CMP(S1~0-1,S2~0-1)"
+            ],
+            "lastspike": 53,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 3,
+            "probationary": 0
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))"
+            ],
+            "lastspike": 54,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 4,
+            "probationary": 0
+        },
+        {
+            "name": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "meta": {},
+            "potential": 0.0,
+            "fsynapses": [],
+            "rsynapses": [
+                "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+                "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)"
+            ],
+            "lastspike": 54,
+            "refractory": 0,
+            "occurs": 1,
+            "level": 4,
+            "probationary": 0
+        }
+    ],
+    "spruned": [
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(S0~0-1,S1~0-1))",
+            "rref": "CMP(S0~0-1,S1~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S0~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(S1~0-1,S2~0-1),CMP(S2~0-1,S3~0-1))",
+            "rref": "CMP(S2~0-1,S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S3~0-1),S3~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S3~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(CMP(S0~0-1,S1~0-1),S0~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(S1~0-1,S2~0-1))",
+            "rref": "CMP(S1~0-1,S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S1~0-1,S2~0-1),S1~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1)))",
+            "rref": "CMP(CMP(CMP(S2~0-1,S3~0-1),S2~0-1),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1))",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        },
+        {
+            "fref": "CMP(CMP(CMP(CMP(S0~0-1,S1~0-1),S0~0-1),CMP(CMP(S2~0-1,S3~0-1),S3~0-1)),CMP(CMP(S2~0-1,S4~0-1),S2~0-1))",
+            "rref": "CMP(CMP(S2~0-1,S4~0-1),S2~0-1)",
+            "wgt": 0.01,
+            "occurs": 1,
+            "lastspike": ""
+        }
+    ],
+    "params": {
+        "BindingCount": 2,
+        "PropagationLevels": 4,
+        "PruneInterval": 30,
+        "PruningThreshold": 0.2,
+        "BindingThreshold": 0.5,
+        "DownPotentialFactor": 0.2,
+        "FiringThreshold": 0.25,
+        "ZeroingThreshold": 0.05,
+        "DecayFactor": 0.8,
+        "InitialPotential": 0.2,
+        "ReinforcementRate": 0.3,
+        "RefractoryPeriod": 7,
+        "PostSpikeFactor": 1.0,
+        "DefaultEncoderCeiling": 1024,
+        "DefaultEncoderFloor": 0,
+        "DefaultEncoderResolution": 10,
+        "TraceLength": 60
+    },
+    "tick": 85
+}

@@ -1,0 +1,26 @@
+{
+    "traces": [
+        []
+    ],
+    "ntime": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "ncounts": [
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "nmask": [
+        "reinforced",
+        "input",
+        "composite",
+        "total",
+        "synapses"
+    ]
+}

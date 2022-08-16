@@ -1,5 +1,5 @@
 # from main import networkx
-from asyncio.windows_events import NULL
+# from asyncio.windows_events import NULL
 from curses.ascii import NUL
 from email import header
 from genericpath import getsize
@@ -168,6 +168,9 @@ class NSCL:
             self.meta = {**meta}
             self.prune = self.network.params["PruneInterval"]
 
+        def set_algo(self, algo) -> None:
+            self._algo = algo
+
         def params(self) -> object:
             return self.network.params
 
@@ -193,43 +196,43 @@ class NSCL:
         #         ):
         #             self.remove_neurone(n)
 
-        def algo(self, inputs, meta={}) -> list:
-            r = self._algo(self, inputs, meta)
+        def algo(self, inputs, meta={}) -> tuple:
+            r,errors = self._algo(self, inputs, meta)
             it = self.tick
 
-            if trace:
-                self.traces.append(r["trace1"])
-                self.ntime.append(it)
-                self.ncounts.append(len(r["trace1"]))
-                self.nmask.append("reinforced")
+            # if self.trace:
+            #     self.traces.append(r["trace1"])
+            #     self.ntime.append(it)
+            #     self.ncounts.append(len(r["trace1"]))
+            #     self.nmask.append("reinforced")
 
-                self.ntime.append(it)
-                self.ncounts.append(len(self.ineurones()))
-                self.nmask.append("input")
+            #     self.ntime.append(it)
+            #     self.ncounts.append(len(self.ineurones()))
+            #     self.nmask.append("input")
 
-                self.ntime.append(it)
-                self.ncounts.append(len(self.gneurones()))
-                self.nmask.append("composite")
+            #     self.ntime.append(it)
+            #     self.ncounts.append(len(self.gneurones()))
+            #     self.nmask.append("composite")
 
-                self.ntime.append(it)
-                self.ncounts.append(len(self.neurones()))
-                self.nmask.append("total")
+            #     self.ntime.append(it)
+            #     self.ncounts.append(len(self.neurones()))
+            #     self.nmask.append("total")
 
-                self.ntime.append(it)
-                self.ncounts.append(len(self.synapses()))
-                self.nmask.append("synapses")
+            #     self.ntime.append(it)
+            #     self.ncounts.append(len(self.synapses()))
+            #     self.nmask.append("synapses")
 
-                while len(self.traces) > self.network.params["TraceLength"]:
-                    self.traces.pop(0)
-                while len(self.ntime) * 5 > self.network.params["TraceLength"] * 5:
-                    self.ntime.pop(0)
-                while len(self.ncounts) * 5 > self.network.params["TraceLength"] * 5:
-                    self.ncounts.pop(0)
-                while len(self.nmask) * 5 > self.network.params["TraceLength"] * 5:
-                    self.nmask.pop(0)
+            #     while len(self.traces) > self.network.params["TraceLength"]:
+            #         self.traces.pop(0)
+            #     while len(self.ntime) * 5 > self.network.params["TraceLength"] * 5:
+            #         self.ntime.pop(0)
+            #     while len(self.ncounts) * 5 > self.network.params["TraceLength"] * 5:
+            #         self.ncounts.pop(0)
+            #     while len(self.nmask) * 5 > self.network.params["TraceLength"] * 5:
+            #         self.nmask.pop(0)
 
             self.tick += 1
-            return r
+            return r, errors
 
         def neurones(self) -> dict:
             return self.network.neurones
@@ -274,8 +277,10 @@ class NSCL:
             self.npruned[name] = delneurone
             del self.network.neurones[name]
             return delneurone
-            # except:
-            #     input("remove failed")
+            
+        def reset_potentials(self):
+            for n in self.network.neurones:
+                self.network.neurones[n].potential = 0
 
         def new_ssynapse(
             self, pre_sneurone, post_sneurone, wgt=0.01,  lastspike=""
@@ -600,6 +605,8 @@ class NSCL:
                     f"  {s.name():^20}   wgt: {s.wgt}   cnt: {s.counter}   lspk: {s.lastspike}"
                 )
 
-        def get_actives(self):
-            neurones = [(x.name, x.potential) for x in self.network.neurones.values() if x.potential >= self.params()["BindingThreshold"]]
+        def get_actives(self, threshold = -1):
+            if threshold == -1:
+                threshold = self.params()["BindingThreshold"]
+            neurones = [(x.name, x.potential) for x in self.network.neurones.values() if x.potential >= threshold]
             return neurones

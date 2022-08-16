@@ -1,4 +1,8 @@
+from copy import deepcopy
 from datetime import date, datetime
+import math
+
+from numpy import SHIFT_OVERFLOW
 from nscl_algo import NSCLAlgo
 import nscl
 from collections import Counter
@@ -95,10 +99,81 @@ class NSCLPredict:
 
         return result
 
-    def static_prediction(eng, inputs, limits=0, verbose=True):
-        result = NSCLPredict.trace_paths(eng, inputs, limits, verbose)
-        return result
+    # def static_prediction(eng, inputs, limits=0, verbose=True):
+    #     result = NSCLPredict.trace_paths(eng, inputs, limits, verbose)
+    #     return result
 
-    def temporal_prediction(eng, inputs, limits=0, verbose=True):
-        result = NSCLPredict.trace_paths(eng, inputs, limits, verbose)
-        return result
+    # def temporal_prediction(eng, inputs, limits=0, verbose=True):
+    #     result = NSCLPredict.trace_paths(eng, inputs, limits, verbose)
+    #     return result
+
+    def back_trace(propsLvl, neurone) -> object:
+        struct = ""
+
+        if type(neurone) is str:
+            struct = neurone
+        else:
+            struct = neurone.name
+
+        struct = struct.replace("CMP(", "#(#")
+        struct = struct.replace(")", "#)#")
+        struct = struct.replace(",", "#")
+        struct = [x for x in struct.split("#") if x != ""]
+        infers = [[] for x in range(propsLvl + 1)]
+
+        lvl = 0
+        for i, v in enumerate(struct):
+            if struct[i] == "(":
+                lvl += 1
+            elif struct[i] == ")":
+                lvl -= 1
+            else:
+                infers[lvl].append(struct[i])
+        infers.reverse()
+
+        while len(infers[0]) == 0:
+            infers.pop(0)
+            infers.append([])
+        counts = []
+
+        for i, v in enumerate(infers):
+            coll = dict(Counter(infers[i]))
+            coll = dict((k, v) for k,v in coll.items() if k is not None and k != '"')
+            maxx = 0
+
+            try:
+                maxx = max(coll.values())
+            except:
+                maxx = 0
+
+            ncoll = {}
+            # ncoll['"'] = 5.0
+            # del ncoll['"']
+
+            for k, v in coll.items():
+                ncoll[k] = v / maxx
+            
+            counts.append(ncoll)
+
+        infers = counts
+
+        return infers
+
+
+    def feed_forward_infer(eng, inputs, use_current_ctx=False) -> object:
+
+        cp_eng = deepcopy(eng)
+        cp_eng.set_algo(NSCLAlgo.algo1)
+
+        res = []
+
+        if not use_current_ctx:
+            for nkey in cp_eng.network.neurones.keys():
+                cp_eng.network.neurones[nkey].potential = 0.0
+
+        for i in range(len(inputs)):
+            eng.algo([inputs[i]])
+            cluster = [{k:v.potential} for k, v in cp_eng.network.neurones.items() if v.potential > cp_eng.network.params['FiringThreshold']]
+            res.append(cluster)
+        
+        return res
