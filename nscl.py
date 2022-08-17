@@ -1,9 +1,9 @@
 # from main import networkx
 # from asyncio.windows_events import NULL
-from curses.ascii import NUL
-from email import header
-from genericpath import getsize
-from inspect import trace
+# from curses.ascii import NUL
+# from email import header
+# from genericpath import getsize
+# from inspect import trace
 from pickle import NONE
 from nscl_algo import NSCLAlgo
 from datetime import date, datetime
@@ -40,6 +40,27 @@ class NSCL:
 
             return maxlvl
 
+        def heirarchies(self, name):
+            arr = list(filter(lambda item: item != "", name.replace(
+                "CMP(", "#(#").replace(")", "#)#").replace(",", "#").split("#")))
+            lvl = 0
+            maxlvl = 0
+            heirarcs = {}
+
+            for i in arr:
+                if i == "(":
+                    lvl -= 1
+                    if maxlvl > lvl:
+                        maxlvl = lvl
+                elif i == ")":
+                    lvl += 1
+                else:
+                    if lvl not in heirarcs.keys():
+                        heirarcs[lvl] = []
+                    heirarcs[lvl].append(i)
+
+            return maxlvl, heirarcs
+
         def __init__(
             self, name, occurs=1, potential=0, refractory=0, lastspike="", probationary= -1
         ) -> None:
@@ -54,7 +75,7 @@ class NSCL:
             self.lastspike = lastspike
             self.refractory = refractory
             self.occurs = occurs
-            self.level = self.__neuroneLvl(name)
+            self.level, self.heirarcs = self.heirarchies(name)
             self.probationary = probationary
             # print(f'generated {name}', end=' ')
 
