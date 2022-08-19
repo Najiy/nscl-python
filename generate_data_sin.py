@@ -7,9 +7,9 @@ import os
 
 
 interval = 180
-int_streams = 5
-float_streams = 5
-f_tagname= "S5F50"
+int_streams = 10
+float_streams = 10
+f_tagname= "S10F10"
 
 total_streams = int_streams + float_streams
 
