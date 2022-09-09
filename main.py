@@ -503,6 +503,8 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
                 # input(data[eng.tick])
                 eng.algo(data[eng.tick])
 
+            print(eng.tick)
+
             if eng.tick == maxit and trace == True:
                 graphout(eng)
 
@@ -930,3 +932,8 @@ while True:
         sys.exit(0)
     # except Exception as e:
     #     print(str(e))
+
+
+
+
+# cd /mnt/Data/Dropbox/PhD Stuff/Najiy/sourcecodes/nscl-python

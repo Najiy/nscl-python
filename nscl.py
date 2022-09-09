@@ -77,6 +77,7 @@ class NSCL:
             self.refractory = refractory
             self.occurs = occurs
             self.level, self.heirarcs = self.heirarchies(name)
+            self.level = self.__neuroneLvl(name)
             self.probationary = probationary
             # print(f'generated {name}', end=' ')
 
