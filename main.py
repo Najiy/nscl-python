@@ -586,6 +586,7 @@ def load_data(streamfile, metafile, trace=False, fname="default", exclude_values
 
 def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_potentials=True):
 
+    binding_window, refractory_period, reverberating, reverb_window =  eng.network.check_params(prompt_fix = False)
     tick = tfirst
 
     if ticks == []:
@@ -593,6 +594,8 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
 
     results = {}
     tscores = {}
+    datainputs = {}
+    refract_suppress = {}
 
     if reset_potentials:
         eng.reset_potentials()
@@ -617,14 +620,28 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
     for t in ticks:
 
         # print('#####################################')
+        activated = []
+
+        # refract_suppress[t]
+
+        for n in refract_suppress:
+            refract_suppress[n] -= 1
+            if refract_suppress[n] == 0:
+                del refract_suppress[n]
 
         if t not in data.keys():
-            r, e = eng.algo([])
+            r, e, activated = eng.algo([])
             # print(f"{tick} data", [])
         else:
             # print(f"{tick} data", data[t])
-            r, e = eng.algo(data[t])
+            datainputs[t] = data[t]
+            r, e, activated = eng.algo(data[t])
 
+        for n in activated:
+            if n not in refract_suppress.keys():
+                refract_suppress[n] = refractory_period
+
+        # print(activated)
         actives = eng.get_actives(pot_threshold)
         results[tick] = []
         tscores[tick] = {}
@@ -641,7 +658,7 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
                     tscores[tick][s] = 0
                 tscores[tick][s] += scores[s]
 
-        tscores[tick] = [(x, tscores[tick][x]) for x in tscores[tick]]
+        tscores[tick] = [(x, tscores[tick][x]) for x in tscores[tick] if x.split('@')[0] not in refract_suppress.keys()]
         tscores[tick].sort(reverse=True, key=lambda x: x[1])
         results[tick].sort(reverse=True, key=lambda x: x[0])
 
@@ -655,7 +672,7 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
 
         # print('#####################################')
 
-        r, e = eng.algo([])
+        r, e, a = eng.algo([])
         # print(f"{tick} ptick", [])
 
         actives = eng.get_actives(pot_threshold)
@@ -686,7 +703,7 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
 
     # pp.pprint(results)
 
-    return tscores, results
+    return tscores, results, datainputs
 
 
 args = sys.argv[1:]
@@ -735,7 +752,13 @@ while True:
             print(f"verbose={verbose}")
 
     if command[0] in ["check", "checkparams"]:
-        eng.network.check_params()
+        
+        binding_window, refractory_period, reverberating, reverb_window =  eng.network.check_params()
+
+        print("Binding Window =", binding_window)
+        print("Current Refractoryperiod =", refractory_period)
+        print("Reverberating Firing =", reverberating)
+        print("Suggested Refractoryperiod:", reverb_window)
 
     if command[0] == "params":
         for p in eng.network.params:
@@ -795,22 +818,32 @@ while True:
 
         ticks = [x for x in range(first, last)]
 
-        for i in range(first, last):
-            print(i, data[i])
+        # for i in range(first, last):
+        #     print(i, data[i])
 
-        input(f"len {len(data)}  range {ticks}\n")
+        input(f"\nStream Length: {len(data)}  \nStream Range: {ticks}\n")
 
-        tscores, results = feed_trace(deepcopy(eng), first, data, ticks=ticks, p_ticks=pticks,
+        tscores, results, datainputs = feed_trace(deepcopy(eng), first, data, ticks=ticks, p_ticks=pticks,
                                       pot_threshold=pthres, reset_potentials=reset_potentials)
 
+        print("Params")
         pp.pprint(eng.network.params)
+
+        print("\nInputs")
+        pp.pprint(datainputs)
+
+        print("\nTScores")
         pp.pprint(tscores)
+
+        # print("\nHTraces")
+        # pp.pprint(results)
+
 
         save = input("save results in filename (nosave, leave empty): ")
 
         if save != "":
             jsondump("feedtraces", f"{save}.json", {
-                     "params": eng.network.params,"meta": eng.meta, "tscores_sum": tscores, "htraces": results})
+                     "params": eng.network.params,"meta": eng.meta,"datainputs": datainputs, "tscores_sum": tscores, "htraces": results})
 
         # data = data[first:last]
 

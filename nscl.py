@@ -4,6 +4,7 @@
 # from email import header
 # from genericpath import getsize
 # from inspect import trace
+
 from pickle import NONE
 from nscl_algo import NSCLAlgo
 from datetime import date, datetime
@@ -87,11 +88,13 @@ class NSCL:
         def __init__(
             self, r_neurone, f_neurone, wgt=0.01, occurs=1, lastspike=""
         ) -> None:
+            
             self.fref = f_neurone
             self.rref = r_neurone
             self.wgt = wgt
             self.occurs = occurs
             self.lastspike = lastspike
+            
             # self.f1 = 0
             # self.f2 = 0
             # self.aug = 0
@@ -138,7 +141,7 @@ class NSCL:
         def __repr__(self) -> str:
             return str(self.net_struct())
 
-        def check_params(self) -> str:
+        def check_params(self, prompt_fix=  True) -> str:
             firing_threshold = self.params["FiringThreshold"]
             zeroing_threshold = self.params["ZeroingThreshold"]
             binding_threshold = self.params["BindingThreshold"]
@@ -164,16 +167,17 @@ class NSCL:
             # except IndexError:
             #     reverberating = False
 
-            print("Binding Window =", binding_window)
-            print("Current Refractoryperiod =", refractory_period)
-            print("Reverberating Firing =", reverberating)
-            print("Suggested Refractoryperiod:", reverb_window)
-
-            if reverberating:
+            if prompt_fix and reverberating:
+                print("Binding Window =", binding_window)
+                print("Current Refractoryperiod =", refractory_period)
+                print("Reverberating Firing =", reverberating)
+                print("Suggested Refractoryperiod:", reverb_window)
                 print(
                     " WARNING: consider changing refractory period to avoid reverberating firing")
                 if input(f"     change RefractoryPeriod to {reverb_window}? y/n") == 'y':
                     self.params['RefractoryPeriod'] = reverb_window
+
+            return binding_window, refractory_period, reverberating, reverb_window
 
     class Engine:
         def __init__(self, network=None, meta={}, algorithm=None) -> None:
@@ -218,7 +222,7 @@ class NSCL:
         #             self.remove_neurone(n)
 
         def algo(self, inputs, meta={}) -> tuple:
-            r,errors = self._algo(self, inputs, meta)
+            r,errors,activated = self._algo(self, inputs, meta)
             it = self.tick
 
             # if self.trace:
@@ -253,7 +257,7 @@ class NSCL:
             #         self.nmask.pop(0)
 
             self.tick += 1
-            return r, errors
+            return r, errors, activated
 
         def neurones(self) -> dict:
             return self.network.neurones
@@ -623,7 +627,7 @@ class NSCL:
 
             for s in syn:
                 print(
-                    f"  {s.name():^20}   wgt: {s.wgt}   cnt: {s.counter}   lspk: {s.lastspike}"
+                    f"  {s.name():^20}   wgt: {s.wgt}"
                 )
 
         def get_actives(self, threshold = -1):

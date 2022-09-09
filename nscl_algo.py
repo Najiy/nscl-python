@@ -238,6 +238,7 @@ class NSCLAlgo:
         # if now == None:
         #     now = datetime.now().isoformat()
         errors = []
+        activated = []
 
         if meta != {}:
             for m in meta:
@@ -278,6 +279,7 @@ class NSCLAlgo:
                 n.potential >= params["FiringThreshold"] and n.refractory == 0
             ):  # and n.potential != 1.0:
                 n.potential = 1.0
+                activated.append(n.name)
                 n.refractory = params["RefractoryPeriod"]
                 n.occurs += 1
                 for s in n.fsynapses:
@@ -347,10 +349,11 @@ class NSCLAlgo:
         for n in nlist:
             eng.remove_neurone(n)
 
-        return {
+        return (
             # "trace1": [neurones[n].potential for n in neurones],
-            "rsynapse": reinforce_synapse,
-            "errors": errors
+            reinforce_synapse,
+            errors,
+            activated
             # "new_nsymbol": ,
             # "new_syn": ,
-        }
+        )
