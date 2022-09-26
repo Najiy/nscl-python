@@ -1,3 +1,4 @@
+from audioop import reverse
 from decimal import DivisionByZero
 from http import server
 from matplotlib import scale
@@ -162,7 +163,7 @@ class NSCLAlgo:
             and neurones[n].level < eng.network.params["PropagationLevels"]
         ]
 
-        nses.sort(key=lambda n: neurones[n].level, reverse=True)
+        nses.sort(key=lambda n: neurones[n].level, reverse=False)
 
         active = NSCLAlgo.chunks(
             nses,
@@ -175,9 +176,15 @@ class NSCLAlgo:
         reinforce_synapse = []  # enchancement list for if neurones already exists
         neurones_down_potentials = []
 
+        def sortbypotentials(nset):
+            if eng.network.params["CompNameSortByPotential"]:
+                nset.sort(key=lambda n: neurones[n].potential, reverse = True)
+            return nset
+
         if len(active) >= 1:
             for a_set in active:
                 if len(a_set) > 1:
+                    a_set = sortbypotentials(a_set)
                     post_new = f"CMP({','.join(a_set)})"
                     if post_new not in neurones.keys():
                         n = NSCLAlgo.new_NSymbol(
@@ -278,7 +285,7 @@ class NSCLAlgo:
             elif (
                 n.potential >= params["FiringThreshold"] and n.refractory == 0
             ):  # and n.potential != 1.0:
-                n.potential = 1.0
+                n.potential = 1.0           # SET ACTIVATED
                 activated.append(n.name)
                 n.refractory = params["RefractoryPeriod"]
                 n.occurs += 1

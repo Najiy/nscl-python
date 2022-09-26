@@ -363,7 +363,7 @@ def normaliser(data, minn, maxx, scaling=1):
         return 0
 
 
-def csvstream(streamfile, metafile, trace=False, fname="default"):
+def csvstream(streamfile, metafile, trace=False, fname="default", iterations=1):
     # def take(n, iterable):
     #     # "Return first n items of the iterable as a list"
     #     return list(islice(iterable, n))
@@ -392,7 +392,25 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
     file = open(streamfile, "r")
     sensors = file.readline().split(",")[1:]
-    rawdata = file.readlines()
+    rawdata = []
+    rawcp = deepcopy(file.readlines())
+
+    # print(len(rawdata))
+    for i in range(iterations):
+        rawdata += deepcopy(rawcp)
+    # print(len(rawdata))
+    # input()
+
+    for i in range(len(rawdata)):
+        # print(i, rawdata[i])
+        entry = rawdata[i].split(',')
+        entry[0] = str(i)
+        rawdata[i] = ",".join(entry)
+
+        # input(entry)
+
+    # print(len(rawdata), rawdata[-1])
+    # pp.pprint(rawdata[595: 615])
 
     # for line in rawdata:
     #     sline = line.replace("\n", "").split(",")
@@ -402,32 +420,35 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
     #     data[int(sline[0])] = [x for x in sline[1:] if x != ""]
 
     for line in rawdata:
-        sline = line.replace("\n", "").split(",")
-        for i in range(1, 1 + len(sensors)):
-            if sline[i] != "":  # filters sensors
-                name = sensors[i - 1]
-                value = float(sline[i])
+        try:
+            sline = line.replace("\n", "").split(",")
+            for i in range(1, 1 + len(sensors)):
+                if sline[i] != "":  # filters sensors
+                    name = sensors[i - 1]
+                    value = float(sline[i])
 
-                if (
-                    search("current", name)
-                    or search("humidity", name)
-                    or search("temperature", name)
-                ):
-                    sline[i] = ""
-                else:
-                    maxx = eng.network.params["DefaultEncoderCeiling"]
-                    minn = eng.network.params["DefaultEncoderFloor"]
-                    res = eng.network.params["DefaultEncoderResolution"]
+                    if (
+                        search("current", name)
+                        or search("humidity", name)
+                        or search("temperature", name)
+                    ):
+                        sline[i] = ""
+                    else:
+                        maxx = eng.network.params["DefaultEncoderCeiling"]
+                        minn = eng.network.params["DefaultEncoderFloor"]
+                        res = eng.network.params["DefaultEncoderResolution"]
 
-                    if name in eng.meta:
-                        maxx = eng.meta[name]["max"]
-                        minn = eng.meta[name]["min"]
-                        res = eng.meta[name]["res"]
+                        if name in eng.meta:
+                            maxx = eng.meta[name]["max"]
+                            minn = eng.meta[name]["min"]
+                            res = eng.meta[name]["res"]
 
-                    newval = math.floor(normaliser(value, minn, maxx, res))
-                    # input(f"normaliser({value},{minn},{maxx},{res}) = {newval}")
-                    sline[i] = f"{name}~{newval}-{newval+1}"
-        data[int(sline[0])] = [x for x in sline[1:] if x != ""]
+                        newval = math.floor(normaliser(value, minn, maxx, res))
+                        # input(f"normaliser({value},{minn},{maxx},{res}) = {newval}")
+                        sline[i] = f"{name}~{newval}-{newval+1}"
+            data[int(sline[0])] = [x for x in sline[1:] if x != ""]
+        except:
+            print(line)
 
     start = int(rawdata[0].split(",")[0])
     end = int(rawdata[-1].split(",")[0])
@@ -455,6 +476,8 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
     starttime = datetime.now().isoformat(timespec="minutes")
 
+    next_prompt = True
+
     while running and eng.tick <= maxit:
 
         # print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -477,7 +500,8 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
                 print()
                 print(" ###########################")
-                print(f"     NSCL_python \n {fname}_{eng.tick}")
+                print(
+                    f"     NSCL_python \n streming file {fname} at t(eng) {eng.tick}")
                 print(f"hashid = {eng.network.hash_id}")
                 print(f"start = {starttime}")
                 print(f"saverange = {save_range}")
@@ -495,15 +519,22 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
                 print(" ###########################")
                 print()
 
+            print('\n', eng.tick)
+
             if eng.tick not in data:
                 eng.algo([])
+                print('input', [])
             else:
                 # pp.pprint(data[eng.tick])
                 # input()
                 # input(data[eng.tick])
                 eng.algo(data[eng.tick])
+                print('input', data[eng.tick-1])
 
-            print(eng.tick)
+            pp.pprint(eng.network.neurones.keys())
+
+            if next_prompt and input("[enter] for next step ('r' for no-prompt): ") == 'r':
+                next_prompt = False
 
             if eng.tick == maxit and trace == True:
                 graphout(eng)
@@ -522,6 +553,7 @@ def csvstream(streamfile, metafile, trace=False, fname="default"):
 
         # if input(f"\n{eng.tick-1}") == "s" and skip == False:
         #     skip = True
+
 
     # netmeta.close()
     eng.tick += temp
@@ -586,15 +618,16 @@ def load_data(streamfile, metafile, trace=False, fname="default", exclude_values
     return data
 
 
-def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_potentials=True):
+def feed_trace_old(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_potentials=True):
 
-    binding_window, refractory_period, reverberating, reverb_window =  eng.network.check_params(prompt_fix = False)
+    binding_window, refractory_period, reverberating, reverb_window = eng.network.check_params(
+        prompt_fix=False)
     tick = tfirst
 
     if ticks == []:
         ticks = [t for t in range(max(data.keys()))]
 
-    results = {}
+    htraces = {}
     tscores = {}
     datainputs = {}
     refract_suppress = {}
@@ -616,6 +649,7 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
             for hns in heirarcs[lvls]:
                 if hns not in scores:
                     scores[f"{hns}@{lvls+1}"] = potential / ncount
+                    # scoring based on composites potential over number of connected synapses.
 
         return scores
 
@@ -645,7 +679,7 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
 
         # print(activated)
         actives = eng.get_actives(pot_threshold)
-        results[tick] = []
+        htraces[tick] = []
         tscores[tick] = {}
 
         for n in actives:
@@ -653,18 +687,19 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
             ncounts = sum(neurones_levels(n[0]).values())
             scores = score(n[1], ncounts, eng.network.neurones[n[0]].heirarcs)
             entry = (n[1], n[0], scores)
-            results[tick].append(entry)
+            htraces[tick].append(entry)
 
             for s in scores:
                 if s not in tscores[tick]:
                     tscores[tick][s] = 0
                 tscores[tick][s] += scores[s]
 
-        tscores[tick] = [(x, tscores[tick][x]) for x in tscores[tick] if x.split('@')[0] not in refract_suppress.keys()]
+        tscores[tick] = [(x, tscores[tick][x]) for x in tscores[tick] if x.split(
+            '@')[0] not in refract_suppress.keys()]
         tscores[tick].sort(reverse=True, key=lambda x: x[1])
-        results[tick].sort(reverse=True, key=lambda x: x[0])
+        htraces[tick].sort(reverse=True, key=lambda x: x[0])
 
-        # pp.pprint(results[t])
+        # pp.pprint(htraces[t])
         # pp.pprint(tscores[t])
         # input()
 
@@ -678,7 +713,7 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
         # print(f"{tick} ptick", [])
 
         actives = eng.get_actives(pot_threshold)
-        results[tick] = []
+        htraces[tick] = []
         tscores[tick] = {}
 
         for n in actives:
@@ -686,7 +721,7 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
             ncounts = sum(neurones_levels(n[0]).values())
             scores = score(n[1], ncounts, eng.network.neurones[n[0]].heirarcs)
             entry = (n[1], n[0], scores)
-            results[tick].append(entry)
+            htraces[tick].append(entry)
 
             for s in scores:
                 if s not in tscores[tick]:
@@ -695,17 +730,103 @@ def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, pot_threshold=0.8, reset_
 
         tscores[tick] = [(x, tscores[tick][x]) for x in tscores[tick]]
         tscores[tick].sort(reverse=True, key=lambda x: x[1])
-        results[tick].sort(reverse=True, key=lambda x: x[0])
+        htraces[tick].sort(reverse=True, key=lambda x: x[0])
 
-        # pp.pprint(results[t])
+        # pp.pprint(htraces[t])
         # pp.pprint(tscores[tick])
         # input()
 
         tick += 1
 
-    # pp.pprint(results)
+    # pp.pprint(htraces)
 
-    return tscores, results, datainputs
+    return tscores, htraces, datainputs
+
+
+def feed_trace(eng, tfirst, data, ticks=[], p_ticks=0, reset_potentials=True):
+
+    binding_window, refractory_period, reverberating, reverb_window = eng.network.check_params(
+        prompt_fix=False)
+
+    tick = tfirst
+
+    if ticks == []:
+        ticks = [t for t in range(max(data.keys()))]
+
+    pscores = {}
+    datainputs = {}
+    templist = []
+
+    if reset_potentials:
+        eng.reset_potentials()
+
+    # propagate & capture
+    for t in ticks:
+
+        if t not in data.keys():
+            r, e, a = eng.algo([])
+            for i in a:
+                templist.append((tick, i, eng.network.neurones[i].potential))
+        else:
+            datainputs[t] = data[t]
+            r, e, a = eng.algo(data[t])
+            for i in a:
+                templist.append((tick, i, eng.network.neurones[i].potential))
+        tick += 1
+
+    for t in range(p_ticks):
+        r, e, a = eng.algo([])
+        for i in a:
+            templist.append((tick, i, eng.network.neurones[i].potential))
+        tick += 1
+
+    # pp.pprint(templist)
+    # input()
+
+    for i in templist:
+        # print(i[0], ' prime for ', i[1],
+        #       npredict.primeProductWeights(i[1], eng))
+        # input()
+
+        if 'CMP' not in i[1]:
+            if i[0] not in pscores:
+                pscores[i[0]] = {}
+            if i[1] not in pscores[i[0]]:
+                pscores[i[0]][i[1]] = round(i[2], 4)
+            else:
+                pscores[i[0]][i[1]] += round(i[2], 4)
+        else:
+            s = npredict.primeProductWeights(i[1], eng)
+            stotal = i[2]
+            # print('s is ', s, ' total is ', i[2])
+
+            for j in s:
+                # print('t is ', i[0], 'offset is ', s[j][1])
+                # k = s[j][1]+i[0]
+                try:
+                    if s[j][1]+i[0] not in pscores:
+                        pscores[s[j][1] + i[0]] = {}
+                    if j not in pscores[s[j][1]+i[0]]:
+                        pscores[s[j][1]+i[0]][j] = s[j][0] * stotal
+                    else:
+                        print(pscores[s[j][1]+i[0]][j])
+                        pscores[s[j][1]+i[0]][j] += s[j][0] * stotal
+                except:
+                    continue
+
+        # pp.pprint(pscores)
+        # input()
+    
+    vals = [x for x in pscores]
+    lowest = min(vals)
+    highest = max(vals)
+    # input(f'{lowest} {highest}')
+
+    for i in range(lowest, highest):
+        if i not in pscores:
+            pscores[i] = {}
+
+    return pscores, datainputs
 
 
 args = sys.argv[1:]
@@ -754,8 +875,8 @@ while True:
             print(f"verbose={verbose}")
 
     if command[0] in ["check", "checkparams"]:
-        
-        binding_window, refractory_period, reverberating, reverb_window =  eng.network.check_params()
+
+        binding_window, refractory_period, reverberating, reverb_window = eng.network.check_params()
 
         print("Binding Window =", binding_window)
         print("Current Refractoryperiod =", refractory_period)
@@ -776,8 +897,9 @@ while True:
 
     if command[0] == "csvstream":
         eng.network.check_params()
-        print(" streaming csv dataset as input - %s" % command[1])
-        csvstream(command[1], command[2], False, command[3])
+        epoch = int(input('Epoch: '))
+        print(" streaming csv dataset as input - %s" % (command[1]))
+        csvstream(command[1], command[2], False, command[3], epoch)
 
     if command[0] in ["tracepaths", "trace", "traces", "paths", "path"]:
         limits = float(command[1])
@@ -798,7 +920,7 @@ while True:
         print("composite", neurone)
         pp.pprint(npredict.back_trace(propslvl, neurone))
 
-    if command[0] == "sinfer":
+    if command[0] == "sinfer_old":
         print("sinfer")
 
         # data = open(command[1]).readlines()
@@ -825,8 +947,8 @@ while True:
 
         input(f"\nStream Length: {len(data)}  \nStream Range: {ticks}\n")
 
-        tscores, results, datainputs = feed_trace(deepcopy(eng), first, data, ticks=ticks, p_ticks=pticks,
-                                      pot_threshold=pthres, reset_potentials=reset_potentials)
+        tscores, htraces, datainputs = feed_trace(deepcopy(eng), first, data, ticks=ticks, p_ticks=pticks,
+                                                  pot_threshold=pthres, reset_potentials=reset_potentials)
 
         print("Params")
         pp.pprint(eng.network.params)
@@ -837,17 +959,110 @@ while True:
         print("\nTScores")
         pp.pprint(tscores)
 
-        # print("\nHTraces")
-        # pp.pprint(results)
-
+        print("\nHTraces")
+        pp.pprint(htraces)
 
         save = input("save results in filename (nosave, leave empty): ")
 
         if save != "":
             jsondump("feedtraces", f"{save}.json", {
-                     "params": eng.network.params,"meta": eng.meta,"datainputs": datainputs, "tscores_sum": tscores, "htraces": results})
+                     "params": eng.network.params, "meta": eng.meta, "datainputs": datainputs, "tscores_sum": tscores, "htraces": htraces})
 
         # data = data[first:last]
+
+    if command[0] == "sinfer":
+        print("sinfer2")
+
+        # data = open(command[1]).readlines()
+        # meta = open(command[2]).readlines()
+
+        # c1 = input()
+
+        file_data = f"./dataset/dataset_{command[1]}_{command[2]}.csv"
+        file_meta = f"./dataset/meta_{command[1]}_{command[2]}.csv"
+
+        data = load_data(file_data, file_meta)
+
+        reset_potentials = True if input(
+            "reset potentials (y/n): ") == 'y' else False
+        first = int(input("first row in file (stream from): "))
+        last = int(input("last row in file (stream to): "))
+        pticks = int(input("post ticks after stream: "))
+
+        ticks = [x for x in range(first, last)]
+
+        # for i in range(first, last):
+        #     print(i, data[i])
+
+        input(f"\nStream Length: {len(data)}  \nStream Range: {ticks}\n")
+
+        tscores, datainputs = feed_trace(deepcopy(
+            eng), first, data, ticks=ticks, p_ticks=pticks, reset_potentials=reset_potentials)
+
+        print("Params")
+        pp.pprint(eng.network.params)
+
+        print("\nInputs")
+        pp.pprint(datainputs)
+
+        print("\nPScores")
+        pp.pprint(tscores)
+
+        save = input("\nsave results in filename (nosave, leave empty): ")
+
+        if save != "":
+            jsondump("feedtraces2", f"{save}.json", {
+                     "params": eng.network.params, "meta": eng.meta, "datainputs": datainputs, "tscores_prod": tscores})
+
+        # data = data[first:last]
+
+    if command[0] == "sinferm":
+        print("sinfer2m")
+
+        for i in range(int(command[4]),int(command[5])):
+
+            file_data = f"./dataset/dataset_{command[1]}_{command[2]}.csv"
+            file_meta = f"./dataset/meta_{command[1]}_{command[2]}.csv"
+
+            data = load_data(file_data, file_meta)
+
+            reset_potentials = True 
+            # first = int(input("first row in file (stream from): "))
+            # last = int(input("last row in file (stream to): "))
+            # pticks = int(input("post ticks after stream: "))
+
+            first = int(command[4])
+            last = int(command[5])
+            pticks = 10
+
+            ticks = [x for x in range(first, i)]
+
+            # for i in range(first, last):
+            #     print(i, data[i])
+
+            # input(f"\nStream Length: {len(data)}  \nStream Range: {ticks}\n")
+
+            tscores, datainputs = feed_trace(deepcopy(
+                eng), first, data, ticks=ticks, p_ticks=pticks, reset_potentials=reset_potentials)
+
+            print("Params")
+            pp.pprint(eng.network.params)
+
+            print("\nInputs")
+            pp.pprint(datainputs)
+
+            print("\nPScores")
+            pp.pprint(tscores)
+
+            save = f"{command[3]}_{command[4]}_{i}"
+
+            if save != "":
+                jsondump("feedtraces2", f"{save}.json", {
+                        "params": eng.network.params, "meta": eng.meta, "datainputs": datainputs, "tscores_prod": tscores})
+
+            # data = data[first:last]
+            print('done')
+
 
     if command[0] == "feed":
         feed = [x for x in command[1].split(",") if x != ""]
@@ -881,8 +1096,11 @@ while True:
         graphout(eng)
 
     if command[0] == "save":
+        # if len(command) > 1:
         print(f" Savestate({command[1]})")
         eng.save_state(command[1])
+        # else:
+        #     eng.save_state(eng.network.)
 
     if command[0] == "load":
         print(f" Loadstate({command[1]})")
@@ -920,6 +1138,8 @@ while True:
         print()
         eng.network.check_params()
         print()
+        pp.pprint(eng.network.params)
+        print()
         print(" ########################### ")
         print()
 
@@ -928,12 +1148,17 @@ while True:
         print(" reinf %s " % r)
         print(" errs %s " % e)
 
+    if command[0] == "test":
+        del eng
+        eng = NSCL.Engine()
+        print(f" memsize={eng.load_state('DSB2L2_S10F10_DW2')}")
+        testcode = NSCL.Test.CompName()
+        pp.pprint(NSCL.Test.primeProductWeights(testcode.name, eng))
+
     if command[0] == "exit":
         sys.exit(0)
     # except Exception as e:
     #     print(str(e))
-
-
 
 
 # cd /mnt/Data/Dropbox/PhD Stuff/Najiy/sourcecodes/nscl-python

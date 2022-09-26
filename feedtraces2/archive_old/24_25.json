@@ -1,0 +1,154 @@
+{
+    "params": {
+        "BindingCount": 2,
+        "PropagationLevels": 2,
+        "PruneInterval": 180,
+        "PruningThreshold": 0.2,
+        "BindingThreshold": 0.5,
+        "DownPotentialFactor": 0.2,
+        "CompNameSortByPotential": true,
+        "FiringThreshold": 0.25,
+        "ZeroingThreshold": 0.05,
+        "DecayFactor": 0.6,
+        "InitialPotential": 0.2,
+        "ReinforcementRate": 0.3,
+        "RefractoryPeriod": 7,
+        "PostSpikeFactor": 1.0,
+        "DefaultEncoderCeiling": 1024,
+        "DefaultEncoderFloor": 0,
+        "DefaultEncoderResolution": 10,
+        "TraceLength": 60
+    },
+    "meta": {
+        "S0": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S1": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S2": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S3": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S4": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S5": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S6": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S7": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S8": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "S9": {
+            "min": 0.0,
+            "max": 1.0,
+            "res": 10.0
+        },
+        "F0": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F1": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F2": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F3": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F4": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F5": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F6": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F7": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F8": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        },
+        "F9": {
+            "min": 0.0,
+            "max": 1024.0,
+            "res": 10.0
+        }
+    },
+    "datainputs": {
+        "24": [
+            "F5~1-2"
+        ],
+        "25": [
+            "F4~1-2"
+        ]
+    },
+    "tscores_prod": {
+        "24": {
+            "F5~1-2": 3.73406950879835,
+            "F4~1-2": 3.1923326828988867,
+            "F6~1-2": 1.227361679867289,
+            "F7~0-1": 1.0,
+            "F3~2-3": 0.3038259200863518
+        },
+        "23": {
+            "F4~1-2": 0.09129020601684557
+        },
+        "25": {
+            "F4~1-2": 2.4233935085475413,
+            "F3~2-3": 1.7762531305514166,
+            "F6~1-2": 0.9803921568627451,
+            "F2~2-3": 0.019051247856734614
+        },
+        "26": {
+            "F2~2-3": 0.9853187506158243,
+            "F3~2-3": 0.4926593753079121
+        }
+    }
+}

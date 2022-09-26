@@ -6,14 +6,16 @@ import os
 
 
 
-interval = 180
+interval = 600
 int_streams = 10
 float_streams = 10
 f_tagname= "S10F10"
 
 total_streams = int_streams + float_streams
 
-xs = [int((math.sin(x/5) + 1) * total_streams/2) for x in range(interval)]
+
+
+xs = [int((math.sin(x/19*2) + 1) * total_streams/2) for x in range(interval)]
 
 for i in xs:
     print(i)
@@ -26,7 +28,6 @@ input()
 int_array = [f"S{x}" for x in range(int_streams)]
 float_array = [f"F{x}" for x in range(float_streams)]
 float_masks = [int(random.uniform(20, 256)) for x in range(total_streams)]
-
 
 
 headers = int_array + float_array

@@ -119,7 +119,7 @@ def getData(data, cols=None):
 #     c = ["S0", "S1"]
 
 
-def dataset_one(data=["./dataset/dataset_sin.csv", "./dataset/dataset_sin_float.csv"], colls=None, maxx=60, xres=16, yres=6, color=None):
+def dataset_one(data=["./dataset/dataset_sin.csv", "./dataset/dataset_sin_float.csv"], colls=None, maxx=80, xres=16, yres=6, color=None):
 
     # fig, axs = plt.subplots(1, 1)
 
@@ -137,7 +137,7 @@ def dataset_one(data=["./dataset/dataset_sin.csv", "./dataset/dataset_sin_float.
         for i,v in enumerate(headers):
             if "F" in v:
                 # input(headersValues[sensors_headers[i]])
-                sensors_headers[i] = f"({headersValues[sensors_headers[i]]}) " + sensors_headers[i]
+                sensors_headers[i] = f"({int(headersValues[sensors_headers[i]])}) " + sensors_headers[i]
         
         # input(sensors_headers)
 
@@ -147,7 +147,7 @@ def dataset_one(data=["./dataset/dataset_sin.csv", "./dataset/dataset_sin_float.
             else:
                 return color
 
-        xcoords = [x for x in range(0, 90)]
+        xcoords = [x for x in range(0, maxx)]
         for xc in xcoords:
             axs.axvline(x=xc, color="grey", linestyle="dotted", alpha=0.2)
         axs.eventplot(d1, colors=colors1(), linelengths=0.8)
@@ -166,7 +166,7 @@ def dataset_one(data=["./dataset/dataset_sin.csv", "./dataset/dataset_sin_float.
         plt.tight_layout()
         plt.subplots_adjust(hspace=0.4)
         plt.savefig(f'./figures_paper2/{file_title}')
-        # plt.show()
+        plt.show()
 
 
 def smooth(x, y, num=500, capzero=True):
@@ -203,8 +203,13 @@ if not os.path.isdir("figures"):
 # dataset_singly(yres=3)
 
 
-dataset_one(data=["./dataset/dataset_sin_S3F3.csv",
-            "./dataset/dataset_sin_S5F5.csv", "./dataset/dataset_sin_S10F10.csv","./dataset/dataset_sin_S6.csv",
-            "./dataset/dataset_sin_S10.csv", "./dataset/dataset_sin_S20.csv" ])
+# dataset_one(data=["./dataset/dataset_sin_S3F3.csv",
+#             "./dataset/dataset_sin_S5F5.csv", "./dataset/dataset_sin_S10F10.csv","./dataset/dataset_sin_S6.csv",
+#             "./dataset/dataset_sin_S10.csv", "./dataset/dataset_sin_S20.csv" ])
+
+
+dataset_one(data=["./dataset/dataset_sin_S10F10.csv" ])
+
+
 # dataset_one("./dataset/dataset_sin_float.csv", colls=["S0","S1","S2","S3","S4","F0","F1","F2","F3","F4" ])
 # print(getData('./dataset/dataset_sin.csv', cols=None))

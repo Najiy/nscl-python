@@ -1,6 +1,8 @@
 from copy import deepcopy
 from datetime import date, datetime
+from decimal import DivisionByZero
 import math
+import pprint as pp
 
 from numpy import SHIFT_OVERFLOW
 from nscl_algo import NSCLAlgo
@@ -8,6 +10,14 @@ import nscl
 from collections import Counter
 import os
 import json
+
+
+def mergeDictionary(dict_1, dict_2):
+    dict_3 = {**dict_1, **dict_2}
+    for key, value in dict_3.items():
+        if key in dict_1 and key in dict_2:
+            dict_3[key] = [value, dict_1[key]]
+    return dict_3
 
 
 class NSCLPredict:
@@ -138,7 +148,8 @@ class NSCLPredict:
 
         for i, v in enumerate(infers):
             coll = dict(Counter(infers[i]))
-            coll = dict((k, v) for k,v in coll.items() if k is not None and k != '"')
+            coll = dict((k, v)
+                        for k, v in coll.items() if k is not None and k != '"')
             maxx = 0
 
             try:
@@ -152,13 +163,12 @@ class NSCLPredict:
 
             for k, v in coll.items():
                 ncoll[k] = v / maxx
-            
+
             counts.append(ncoll)
 
         infers = counts
 
         return infers
-
 
     def feed_forward_infer(eng, inputs, use_current_ctx=False) -> object:
 
@@ -173,7 +183,70 @@ class NSCLPredict:
 
         for i in range(len(inputs)):
             eng.algo([inputs[i]])
-            cluster = [{k:v.potential} for k, v in cp_eng.network.neurones.items() if v.potential > cp_eng.network.params['FiringThreshold']]
+            cluster = [{k: v.potential} for k, v in cp_eng.network.neurones.items(
+            ) if v.potential > cp_eng.network.params['FiringThreshold']]
             res.append(cluster)
-        
+
         return res
+
+    def traceProductWeights(name, eng,  primes={}, acc=[], level=0):
+        neurones = eng.network.neurones
+        synapses = eng.network.synapses
+
+        primes = {}
+        levels = {}
+
+        # for i in neurones.values():
+        #     print(i.name)
+
+        for rsyn in neurones[name].rsynapses:
+            mapping = f'{rsyn}->{name}'
+            wgt = eng.network.synapses[mapping].wgt
+            tacc = deepcopy(acc)
+            tacc.append(wgt)
+            primes[mapping] = tacc
+            levels[mapping] = level-1
+
+            nprimes, nlevels = NSCLPredict.traceProductWeights(
+                rsyn, eng, primes, tacc, level-1)
+
+            primes = mergeDictionary(primes, nprimes)
+            levels = mergeDictionary(levels, nlevels)
+
+        return primes, levels
+
+
+    def flatten(list_of_lists):
+        if len(list_of_lists) == 0:
+            return list_of_lists
+        if isinstance(list_of_lists[0], list):
+            return NSCLPredict.flatten(list_of_lists[0]) + NSCLPredict.flatten(list_of_lists[1:])
+        return list_of_lists[:1] + NSCLPredict.flatten(list_of_lists[1:])
+
+
+    def myprod(list1):
+        try:
+            return math.prod(list1)
+        except:
+            return math.prod(NSCLPredict.flatten(list1))
+
+    def primeProductWeights(name, eng, ratio=True):
+        traceWeights, traceLevels = NSCLPredict.traceProductWeights(name, eng)
+        primeProducts = [(x.split('->')[0], NSCLPredict.myprod(traceWeights[x]), traceLevels[x])
+                         for x in traceWeights if 'CMP' not in x.split('->')[0]]
+        result = {}
+
+        sumv = 0
+
+        for p in primeProducts:
+            result[p[0]] = (p[1], p[2])
+            sumv += p[1]
+
+        if ratio:
+            for r in result:
+                try:
+                    result[r] = (result[r][0] / sumv, result[r][1])
+                except ZeroDivisionError:
+                    result[r] = (0, result[r][1])
+
+        return result

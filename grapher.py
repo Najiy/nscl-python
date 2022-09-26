@@ -119,7 +119,7 @@ def dataset_singly(data="dataset\dataset.csv", data2="dataset\dataset2.csv", dat
     axs.set_xlim([0, maxx])
     axs.set_yticklabels(colls)
     axs.set_ylabel("Event Stream")
-    axs.set_xlabel("Timesteps")
+    axs.set_xlabel("Timestep")
 
     fig.set_size_inches(xres, yres)
     plt.tight_layout()
@@ -136,7 +136,7 @@ def dataset_singly(data="dataset\dataset.csv", data2="dataset\dataset2.csv", dat
     axs.set_xlim([0, maxx])
     axs.set_yticklabels(colls)
     axs.set_ylabel("Event Streams")
-    axs.set_xlabel("Timesteps")
+    axs.set_xlabel("Timestep")
 
     fig.set_size_inches(xres, yres)
     plt.tight_layout()
@@ -155,7 +155,7 @@ def dataset_singly(data="dataset\dataset.csv", data2="dataset\dataset2.csv", dat
     axs.set_xlim([0, maxx])
     axs.set_yticklabels(colls)
     axs.set_ylabel("Event Streams")
-    axs.set_xlabel("Timesteps")
+    axs.set_xlabel("Timestep")
 
     fig.set_size_inches(xres, yres)
     plt.tight_layout()
@@ -176,7 +176,7 @@ def dataset_singly(data="dataset\dataset.csv", data2="dataset\dataset2.csv", dat
     axs.set_xlim([0, maxx])
     axs.set_yticklabels(c)
     axs.set_ylabel("Event Streams")
-    axs.set_xlabel("Timesteps")
+    axs.set_xlabel("Timestep")
 
     
     flts = [380, 420, 860]
@@ -206,7 +206,7 @@ def dataset_singly(data="dataset\dataset.csv", data2="dataset\dataset2.csv", dat
     axs.set_xlim([0, maxx])
     axs.set_yticklabels(c)
     axs.set_ylabel("Event Streams")
-    axs.set_xlabel("Timesteps")
+    axs.set_xlabel("Timestep")
 
     flts = [400, 420, 860]
     flts2 = [220, 880, 300]
@@ -245,7 +245,7 @@ def smooth(x, y, num=500, capzero=True):
     return (X_, Y_)
 
 
-def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=None, filterout=[], xres=8, yres=4, reticky=False, smoothed=False, lblreplace=[]):
+def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=None, filterout=[], xres=10, yres=4, reticky=False, smoothed=False, lblreplace=[], graphlabels=None):
 
     network = {}
     cols = []
@@ -312,7 +312,7 @@ def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=Non
                 xend = network[key][3][-1]
                 # print(xstart, xend)
 
-    plt.xlabel("Time")
+    plt.xlabel("Timestep")
     if ylabel == None:
         plt.ylabel(str.title(col))
     else:
@@ -324,6 +324,13 @@ def compilenetmetagraph(fname="states/networks.meta", col="neurones", ylabel=Non
 
     if len(lblreplace) == 2:
         labels = tuple(i.replace(lblreplace[0], lblreplace[1]) for i in labels)
+
+
+    print('handles', handles)
+    print('labels', labels)
+
+    if graphlabels != None:
+        labels = graphlabels
 
     plt.legend(
         handles,
@@ -358,9 +365,10 @@ def compileneuronegraph(fname="defparams.json", ticks=15, xres=8, yres=4):
     def neurone_profile(fname="defparams.json", start=0.30, ticks=15):
         with open(fname) as jsonfile:
             defparams = json.loads("\n".join(jsonfile.readlines()))
+            start = defparams["FiringThreshold"] + 0.02
 
             x = [-4, -3, -2, -1]
-            y = [0.11, 0.12, 0.15, 0.17]
+            y = [start-19, start-17, start/2, start-13]
 
             x_t = [-2, -1]
             y_t = [
@@ -441,26 +449,30 @@ def compileneuronegraph(fname="defparams.json", ticks=15, xres=8, yres=4):
 
     # plt.grid()
     xcoords = [x for x in range(-2, ticks)]
-    active = [x+1 for x in xcoords if nprof_x[x]
-              < defparams["BindingThreshold"]]
-    active.pop()
+    active = [x-4 for x in xcoords if nprof_y[x]
+              >= defparams["BindingThreshold"]]
+    # print(nprof_x)
+    print(nprof_y)
+    # print(active)
+    # active.pop()
+    input(active)
     inactive = [x for x in xcoords if x not in active]
 
     for xc in active:
-        plt.axvline(x=xc, color="green", linestyle="--", alpha=0.6)
+        plt.axvline(x=xc, color="grey", linestyle="--", alpha=0.4)
 
     for xc in inactive:
-        plt.axvline(x=xc, color="grey", linestyle="dotted", alpha=0.2)
+        plt.axvline(x=xc, color="grey", linestyle="dotted", alpha=0.1)
 
     # for xc in xcoords:
     #     plt.axvline(x=xc, color="grey", linestyle="--")
 
-    plt.plot(nthres_x, nthres_y, label="Firing Threshold",
-             color="orange", linewidth=1.5)
-    plt.plot(nzero_x, nzero_y, label="Zeroing Threshold",
-             color="blue", linewidth=1.5)
-    plt.plot(binding_x, binding_y, label="Binding Threshold",
-             color="green", linewidth=1.5)
+    plt.plot(nthres_x, nthres_y,'--', label="Firing Threshold",
+             color="black", linewidth=1.5)
+    plt.plot(nzero_x, nzero_y,':', label="Zeroing Threshold",
+             color="black", linewidth=1.5)
+    plt.plot(binding_x, binding_y,'-.', label="Binding Threshold",
+             color="black", linewidth=1.5)
     plt.plot(nprof_x, nprof_y, label="Action Potential",
              color="black", linewidth=2)
 
@@ -497,13 +509,16 @@ if not os.path.isdir("figures"):
 
 filtout = ["b2", "D2", "D3", "D4", "D5"]
 
-# compilenetmetagraph(col='neurones', ylabel='Neurosymbols Generated',
-#                     filterout=filtout, yres=5, lblreplace=["D5", "D4"])
-# # compilenetmetagraph(col='composites', ylabel='Composites Generated', filterout=filtout)
-# compilenetmetagraph(col='synapses', ylabel='Synapses Formed',
-#                     filterout=filtout, yres=5, lblreplace=["D5", "D4"])
-# compilenetmetagraph(col='npruned', ylabel='Acc. Prunes',
-#                     filterout=filtout, reticky=True, yres=5, lblreplace=["D5", "D4"])
+
+compilenetmetagraph(col='neurones', ylabel='Neurosymbols Generated',
+                    filterout=filtout, lblreplace=["D5", "D4"], graphlabels=["SINE", "SAW"])
+compilenetmetagraph(col='composites', ylabel='Composites Generated', filterout=filtout, graphlabels=["SINE", "SAW"])
+compilenetmetagraph(col='synapses', ylabel='Synapses Formed',
+                    filterout=filtout,lblreplace=["D5", "D4"], graphlabels=["SINE", "SAW"])
+compilenetmetagraph(col='npruned', ylabel='Acc. Prunes',
+                    filterout=filtout, reticky=True, lblreplace=["D5", "D4"], graphlabels=["SINE", "SAW"])
+
+
 
 # compilenetmetagraph(col='npruned', ylabel='Composites Pruned')
 # compilenetmetagraph(col='synapses', ylabel='Synapses Formed')

@@ -1,14 +1,15 @@
 {
     "BindingCount": 2,
-    "PropagationLevels": 2,
-    "PruneInterval": 60,
+    "PropagationLevels": 3,
+    "PruneInterval": 600,
     "PruningThreshold": 0.2,
     "BindingThreshold": 0.5,
     "DownPotentialFactor": 0.2,
-    
+    "CompNameSortByPotential": true,
+
     "FiringThreshold": 0.25,
     "ZeroingThreshold": 0.05,
-    "DecayFactor": 0.8,
+    "DecayFactor": 0.6,
     "InitialPotential": 0.2,
     "ReinforcementRate": 0.3,
     "RefractoryPeriod": 7,

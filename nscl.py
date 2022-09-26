@@ -5,6 +5,7 @@
 # from genericpath import getsize
 # from inspect import trace
 
+from heapq import merge
 from pickle import NONE
 from nscl_algo import NSCLAlgo
 from datetime import date, datetime
@@ -14,6 +15,9 @@ import os
 import sys
 import psutil
 import hashlib
+import pprint as pp
+import math
+from collections import Counter
 
 pathdiv = ""
 
@@ -23,7 +27,56 @@ elif os.name == "nt":
     pathdiv = "\\"
 
 
+
 class NSCL:
+    class Test:
+        class CompName:
+            def __init__(self) -> None:
+                self.name = 'CMP(CMP(S0~10-11,S6~10-11),S0~0-1)'
+                # self.name = "CMP(CMP(CMP(F8~0-1,F9~0-1),CMP(S1~10-11,S6~10-11)),S0~0-1)"
+                self.potential = 1.0
+                
+                print(f'\ngenerated name {self.name}')
+
+                # a = {'Malaysia': [1]}
+                # b = {'Malaysia': [2,2]}
+                # c = mergeDictionary(a,b)
+                # print(c)
+            
+            
+
+
+        # def childProductWeights(name, eng, cweight= 1, primes={}):
+        #     neurones = eng.network.neurones
+        #     synapses = eng.network.synapses
+
+        #     primes = {}
+
+        #     # pp.pprint(eng.network.synapses)
+        #     # pp.pprint(neurones[name].rsynapses)
+
+        #     for rsyn in neurones[name].rsynapses:
+
+                
+        #         mapping = f'{rsyn}->{name}'
+        #         wgt = eng.network.synapses[mapping].wgt
+
+        #         if 'CMP' not in rsyn:
+        #             if rsyn not in primes:
+        #                 primes[rsyn] = [rsyn,wgt]
+                
+        #         ps = NSCL.Test.childProductWeights(rsyn, eng, cweight * wgt, primes)
+
+        #         for p in ps:
+        #             primes[p] = (p, mapping, wgt, 'pass')
+
+        #         print('rsyn is ', rsyn, mapping, wgt, 'pass')
+        #         # newAcc[mapping] = wgt
+                
+        #     # return dict(Counter(acc) + Counter(newAcc))
+        #     return primes
+
+
     class NSymbol:
         def __neuroneLvl(self, name):
             arr = list(filter(lambda item: item != "", name.replace(
@@ -79,11 +132,6 @@ class NSCL:
             self.level, self.heirarcs = self.heirarchies(name)
             self.level = self.__neuroneLvl(name)
             self.probationary = probationary
-            # print(f'generated {name}', end=' ')
-
-        # def level(self):
-        #     self.level = max(self.heirarcs)
-        #     return self.level
 
     class SSynapse:
         def __init__(
@@ -162,11 +210,11 @@ class NSCL:
             binding_window = len([x for x in pots if x >= binding_threshold])
             reverb_window = len([x for x in pots if x >= firing_threshold])
 
-            # try:
-            if pots[refractory_period] < firing_threshold:
+            try:
+                if pots[refractory_period] < firing_threshold:
+                    reverberating = False
+            except IndexError:
                 reverberating = False
-            # except IndexError:
-            #     reverberating = False
 
             if prompt_fix and reverberating:
                 print("Binding Window =", binding_window)
@@ -634,5 +682,6 @@ class NSCL:
         def get_actives(self, threshold = -1):
             if threshold == -1:
                 threshold = self.params()["BindingThreshold"]
-            neurones = [(x.name, x.potential) for x in self.network.neurones.values() if x.potential >= threshold]
+            rperiod  = self.params()["RefractoryPeriod"]
+            neurones = [(x.name, x.potential) for x in self.network.neurones.values() if x.potential >= threshold and x.refractory == rperiod]
             return neurones

@@ -135,11 +135,12 @@ def convert_traces(filename, scount, fcount, annot={'F3': 14, 'F1': 15}):
 
     for col in df_labels:
         df_labels[col].values[df_labels[col].values < 0.4] = 0
+        # df_labels[col].values[df_labels[col].values > 1.0] = 1
         df_labels[col] = df_labels[col].apply(str)
         df_labels[col].values[df_labels[col].values == '0.0'] = ''
 
     # flights = flights.pivot("month", "year", "passengers")
-    ax = sns.heatmap(df_data, xticklabels=tkeys, annot_kws={"size": 10}, annot=df_labels, fmt='')
+    ax = sns.heatmap(df_data, xticklabels=tkeys, annot_kws={"size": 10}, annot=df_labels, fmt='', vmax=1.0)
     plt.show()
 
     # print(flights)
@@ -261,5 +262,6 @@ def smooth(x, y, num=500, capzero=True):
 if not os.path.isdir("figures"):
     os.mkdir("figures")
 
-convert_traces('DSB2L2_S10F10_W4_non_directional.json', 10, 10)
+# convert_traces('DSB2L2_S10F10_NW2.json', 10, 10)
+convert_traces('DSB2L2_S10F10_W3Tb0.6D0.8.json', 10, 10)
 # load_data('DSB2L2_S10F10_W4.json')
