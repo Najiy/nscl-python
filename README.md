@@ -1,4 +1,6 @@
-Pattern Discovery Algorithm with structurally dynamic networks (Neuro-symbolic Spiking Network, NSSN) 
+NSSN - Neuro-symbolic Spiking Network, NSSN
+
+A pattern discovery algorithm with structurally dynamic networks.
 
     CLI mode:
         run main.py
