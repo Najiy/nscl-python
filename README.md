@@ -1,4 +1,4 @@
-THIS REPO HAS BEEN MIGRATED TO NSSN @ https://github.com/Najiy/nssn-python
+OBSOLETE, THIS REPO HAS BEEN MIGRATED TO NSSN @ https://github.com/Najiy/nssn-python
 
 Pattern Discovery Algorithm with structurally dynamic networks. NSCL, Neuro-symbolic concept learner.
 
