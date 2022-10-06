@@ -1,4 +1,6 @@
-Pattern Discovery Algorithm with structurally dynamic networks (Neuro-symbolic Spiking Network, NSSN) 
+THIS REPO HAS BEEN MIGRATED TO NSSN @ https://github.com/Najiy/nssn-python
+
+Pattern Discovery Algorithm with structurally dynamic networks. NSCL, Neuro-symbolic concept learner.
 
     CLI mode:
         run main.py
