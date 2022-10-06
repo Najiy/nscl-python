@@ -8,8 +8,8 @@ Pattern Discovery Algorithm with Dynamic Structure Networks and Neurosymbolic Sp
 
 Input to Spiketrain Encoding (Input datatype transformations):
 
-    1. Booleans values to spiketrains
-    2. Integers and Floating values to class-range spiketrains (k-ranges encoding)
+    1. Booleans values to spiketrains 🗸
+    2. Integers and Floating values to class-range spiketrains (k-ranges encoding) 🗸
 
 Follow algorithm process flow:
 
@@ -49,4 +49,4 @@ Hyperparameters:
 Forward and Backwards Prediction:
 
     1. static back-trace 🗸
-    2. feed-forward prediction
+    2. feed-forward unfolding prediction 🗸

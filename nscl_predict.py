@@ -21,6 +21,176 @@ def mergeDictionary(dict_1, dict_2):
 
 
 class NSCLPredict:
+    def feed_trace_unfold(eng, datainputs, pticks=10, reset_potentials=True, propagation_count=20, divergence=3, refractoryperiod=2):
+
+        tick = min(list(datainputs.keys()))
+
+        def feed_all(datainputs, tick=tick, pscores={}, propagation_count=propagation_count):
+
+            # propagate & capture
+            times = list(datainputs.keys())
+            times.sort()
+            templist = []
+
+            for t in datainputs:
+                if len(datainputs[t]) == 0:
+                    r, e, a = eng.algo([])
+                    for i in a:
+                        templist.append(
+                            (t, i, eng.network.neurones[i].potential))
+                else:
+                    r, e, a = eng.algo(datainputs[t])
+                    for i in a:
+                        templist.append(
+                            (t, i, eng.network.neurones[i].potential))
+                print(f'processing all, at {t}')
+                tick += 1
+
+            for t in range(propagation_count):
+                r, e, a = eng.algo([])
+                for i in a:
+                    templist.append((tick, i, eng.network.neurones[i].potential))
+
+            # collect pscores
+            for i in templist:
+                if 'CMP' not in i[1]:
+                    if i[0] not in pscores:
+                        pscores[i[0]] = {}
+                    if i[1] not in pscores[i[0]]:
+                        pscores[i[0]][i[1]] = round(i[2], 4)
+                    else:
+                        pscores[i[0]][i[1]] += round(i[2], 4)
+                else:
+                    s = NSCLPredict.primeProductWeights(i[1], eng)
+                    stotal = i[2]
+
+                    for j in s:
+                        try:
+                            if s[j][1]+i[0] not in pscores:
+                                pscores[s[j][1] + i[0]] = {}
+                            if j not in pscores[s[j][1]+i[0]]:
+                                pscores[s[j][1]+i[0]][j] = s[j][0] * stotal
+                            else:
+                                pscores[s[j][1]+i[0]][j] += s[j][0] * stotal
+                        except:
+                            continue
+
+            return pscores, datainputs, tick
+
+        def feed_once(datainputs, tick, pscores={}, propagation_count=propagation_count, divergence=1, refractoryperiod=2):
+
+            times = list(datainputs.keys())
+            times.sort()
+            templist = []
+
+            print('##############################')
+            print('\npscores before')
+            pp.pprint(pscores)
+            print('datainput before', datainputs, '\n')
+            # print(templist)
+
+            if len(datainputs[tick-1]) == 0:
+                r, e, a = eng.algo([])
+                for i in a:
+                    templist.append(
+                        (tick, i, eng.network.neurones[i].potential))
+            else:
+                r, e, a = eng.algo(datainputs[tick-1])
+                for i in a:
+                    templist.append(
+                        (tick, i, eng.network.neurones[i].potential))
+            print(f'processing once, at {tick}')
+            # tick += 1
+
+            for t in range(propagation_count):
+                r, e, a = eng.algo([])
+                for i in a:
+                    templist.append((tick, i, eng.network.neurones[i].potential))
+
+            # collect pscores
+            for i in templist:
+                if 'CMP' not in i[1]:
+                    if i[0] not in pscores:
+                        pscores[i[0]] = {}
+                    if i[1] not in pscores[i[0]]:
+                        pscores[i[0]][i[1]] = round(i[2], 4)
+                    else:
+                        pscores[i[0]][i[1]] += round(i[2], 4)
+                else:
+                    s = NSCLPredict.primeProductWeights(i[1], eng)
+                    stotal = i[2]
+
+                    for j in s:
+                        try:
+                            if s[j][1]+i[0] not in pscores:
+                                pscores[s[j][1] + i[0]] = {}
+                            if j not in pscores[s[j][1]+i[0]]:
+                                pscores[s[j][1]+i[0]][j] = s[j][0] * stotal
+                            else:
+                                pscores[s[j][1]+i[0]][j] += s[j][0] * stotal
+                        except:
+                            continue
+
+            ptimes = [x for x in pscores.keys() if x >= tick-1]
+            ptimes.sort(reverse=True)
+
+            # pscorewindow = {}
+            pscorewindowunfied = []
+            refracorywindow = [x for x in range(
+                max(ptimes)-1, max(ptimes)-1-refractoryperiod, -1)]
+            exclusioninputs = []
+
+            for rw in refracorywindow:
+                if rw in datainputs:
+                    for i in datainputs[rw]:
+                        exclusioninputs.append(i)
+
+            print('\nexclusions', exclusioninputs)
+            print('\npscores after')
+            pp.pprint(pscores)
+
+            for t in ptimes:
+                # pscorewindow[t] = []
+                for s in pscores[t]:
+                    if s not in exclusioninputs:
+                        # pscorewindow[t].append((s, pscores[t][s]))
+                        pscorewindowunfied.append((s, pscores[t][s]))
+
+            pscorewindowunfied.sort(key=lambda x: x[1], reverse=True)
+            print('divergence', divergence)
+            input()
+            pscorewindowunfied = pscorewindowunfied[:divergence]
+            # print('pscorewindow', pscorewindow)
+            print('pscoreunified', pscorewindowunfied)
+            # print('ptimes', ptimes)
+            datainputs[max(ptimes)] = [x[0] for x in pscorewindowunfied]
+
+            print('datainput times after', datainputs)
+            input()
+
+            tick += 1
+
+            return pscores, datainputs, tick
+
+        if reset_potentials:
+            eng.reset_potentials()
+
+        pscores, datainputs, tick = feed_all(
+            datainputs, pscores={}, propagation_count=propagation_count)
+        # pp.pprint(datainputs)
+        # pp.pprint(pscores)
+
+        for i in range(len(datainputs), pticks):
+            try:
+                _pscores, _datainputs, _tick = feed_once(
+                    datainputs, tick, pscores, propagation_count=propagation_count, divergence=divergence, refractoryperiod=refractoryperiod)
+                pscores, datainputs, tick = (_pscores, _datainputs, _tick)
+            except:
+                break
+
+        return pscores, datainputs, tick
+
+
     def save_predictions(fname, content):
 
         str(datetime.now().replace(microsecond=0)).replace(":", "_")
