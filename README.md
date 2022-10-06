@@ -1,4 +1,4 @@
-NSSN - Neuro-symbolic Spiking Network
+NSSN - Neuro-symbolic Spiking Network.
 
 A pattern discovery algorithm with structurally dynamic networks.
 
