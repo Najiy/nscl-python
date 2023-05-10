@@ -1,4 +1,6 @@
-NSSN - Neuro-symbolic Spiking Network (UNDER FURTHER DEVELOPMENTS - MAY 2023).
+(CURRENTLY UNDER FURTHER DEVELOPMENTS - MAY 2023)
+
+NSSN - Neuro-symbolic Spiking Network .
 
 A pattern discovery algorithm with structurally dynamic networks.
 
